@@ -22,3 +22,19 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Ignore all .gradle folders and their contents
+**/.gradle/
+
+# Ignore all .idea folders and their contents
+**/.idea/
+
+# Ignore all build folders and their contents
+**/build/
+
+# Ignore all gradle folders and their contents
+**/gradle/
+
+# Ignore all gradlew and gradlew.bat files
+**/gradlew
+**/gradlew.bat
