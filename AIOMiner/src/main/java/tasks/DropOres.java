@@ -30,13 +30,13 @@ public class DropOres  extends Task {
             return true;
         }
 
-        boolean inventoryHasOres = Inventory.contains(oreTypeInt, 10);
+        boolean inventoryHasOres = Inventory.contains(oreTypeInt, 0.60);
         Logger.log("Do we have the ores? " + inventoryHasOres);
 
         // Drop the items
         if (inventoryHasOres && isTapToDropEnabled) {
             Logger.log("Dropping ores");
-            Inventory.tapAllItems(oreTypeInt, 10);
+            Inventory.tapAllItems(oreTypeInt, 0.60);
             return true;
         }
 
