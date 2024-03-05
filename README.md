@@ -4,4 +4,4 @@
 I encourage anyone to feel free to contribute with fixes and or additions
 
 **Scripts currently in the making:** 
-- [X] AIO Miner - Goal is to support every useful mining location with dropping & banking support. Initial testing is done on f2p spots
+- [ ] AIO Miner - Goal is to support every useful mining location with dropping & banking support. Initial testing is done on f2p spots
