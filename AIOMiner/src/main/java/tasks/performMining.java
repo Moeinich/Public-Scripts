@@ -26,6 +26,7 @@ public class performMining extends Task {
             Logger.log("Stepping to vein spot");
             Walker.step(locationInfo.getStepLocation(), regionInfo.getWorldRegion());
             Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 200, 30);
+            return true;
         }
 
         //perform mining
@@ -33,7 +34,8 @@ public class performMining extends Task {
             Logger.debugLog("Mining...");
             return doMining();
         }
-        return false;
+
+        return false; // Nothing to do
     }
 
     private boolean doMining() {
