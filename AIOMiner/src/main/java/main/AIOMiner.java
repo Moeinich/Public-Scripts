@@ -16,7 +16,7 @@ import static helpers.Interfaces.*;
 
 @ScriptManifest(
         name = "AIO Miner",
-        description = "Mines ores in different places",
+        description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "0.1",
         guideLink = "https://wiki.mufasaclient.com/docs/aiominer/",
         categories = {ScriptCategory.Mining}
