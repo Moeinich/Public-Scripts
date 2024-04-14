@@ -11,8 +11,6 @@ import static helpers.Interfaces.*;
 import static main.AIOMiner.*;
 
 public class DropOres  extends Task {
-    Rectangle tapToDropRect = new Rectangle(17, 192, 29, 19);
-    Color tapToDropActiveColor = new Color(0xfecb65);
     int[] clueIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
             ItemList.CLUE_GEODE_BEGINNER_23442,
             ItemList.CLUE_GEODE_EASY_20358,
@@ -30,6 +28,7 @@ public class DropOres  extends Task {
     }
     @Override
     public boolean execute() {
+        Logger.log("dropping...");
         boolean isTapToDropEnabled = Game.isTapToDropEnabled();
 
         if (!isTapToDropEnabled) {
