@@ -48,7 +48,7 @@ public class MiningHelper {
                 if (isValidRect(locationInfo.getClickLocation1())) {
                     Logger.log("Tapping vein 1");
                     Client.tap(locationInfo.getClickLocation1());
-                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation1(), 5), 200, 30);
+                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation1(), 5), 50, 200);
                     Logger.debugLog("Succesfully mined vein 1");
                     XpBar.getXP();
                 }
@@ -57,7 +57,7 @@ public class MiningHelper {
                 if (isValidRect(locationInfo.getClickLocation2())) {
                     Logger.log("Tapping vein 2");
                     Client.tap(locationInfo.getClickLocation2());
-                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation2(), 5), 200, 30);
+                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation2(), 5), 50, 200);
                     Logger.debugLog("Succesfully mined vein 2");
                     XpBar.getXP();
                 }
@@ -66,7 +66,7 @@ public class MiningHelper {
                 if (isValidRect(locationInfo.getClickLocation3())) {
                     Logger.log("Tapping vein 3");
                     Client.tap(locationInfo.getClickLocation3());
-                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation3(), 5), 200, 30);
+                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation3(), 5), 50, 200);
                     Logger.debugLog("Succesfully mined vein 3");
                     XpBar.getXP();
                 }

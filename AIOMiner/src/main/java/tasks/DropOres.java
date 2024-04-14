@@ -1,8 +1,11 @@
 package tasks;
 
+import helpers.utils.ItemList;
 import utils.Task;
 
 import java.awt.*;
+import java.sql.Array;
+import java.util.ArrayList;
 
 import static helpers.Interfaces.*;
 import static main.AIOMiner.*;
@@ -10,6 +13,13 @@ import static main.AIOMiner.*;
 public class DropOres  extends Task {
     Rectangle tapToDropRect = new Rectangle(17, 192, 29, 19);
     Color tapToDropActiveColor = new Color(0xfecb65);
+    int[] clueIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
+            ItemList.CLUE_GEODE_BEGINNER_23442,
+            ItemList.CLUE_GEODE_EASY_20358,
+            ItemList.CLUE_GEODE_MEDIUM_20360,
+            ItemList.CLUE_GEODE_HARD_20362,
+            ItemList.CLUE_GEODE_ELITE_20364
+    };
 
     public boolean activate() {
         // Early exit if banking is enabled!
@@ -20,21 +30,34 @@ public class DropOres  extends Task {
     }
     @Override
     public boolean execute() {
-        boolean isTapToDropEnabled = Client.isColorInRect(tapToDropActiveColor, tapToDropRect, 5);
+        boolean isTapToDropEnabled = Game.isTapToDropEnabled();
 
         if (!isTapToDropEnabled) {
             Logger.log("Enabling tap to drop");
-            Client.tap(tapToDropRect);
+            Game.enableTapToDrop();
             Condition.wait(() -> isTapToDropEnabled, 50, 10);
             Logger.log("Tap to drop enabled");
             return true;
         }
 
-        boolean inventoryHasOres = Inventory.contains(oreTypeInt, 0.60);
-        Logger.log("Do we have the ores? " + inventoryHasOres);
+        if (dropClues) {
+            boolean inventoryHasClues = Inventory.containsAny(clueIDs, 0.60);
+            if (inventoryHasClues) {
+                Logger.log("Dropping clues");
+                Inventory.tapItem(ItemList.CLUE_GEODE_BEGINNER_23442, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_EASY_20358, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_MEDIUM_20360, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_HARD_20362, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_ELITE_20364, false, 0.60);
 
+                Condition.wait(() -> !Inventory.containsAny(clueIDs, 0.60), 100, 20);
+                return true;
+            }
+        }
+
+        boolean inventoryHasOres = Inventory.contains(oreTypeInt, 0.60);
         // Drop the items
-        if (inventoryHasOres && isTapToDropEnabled) {
+        if (isTapToDropEnabled && inventoryHasOres) {
             Logger.log("Dropping ores");
             Inventory.tapAllItems(oreTypeInt, 0.60);
             return true;

@@ -18,7 +18,7 @@ import static helpers.Interfaces.*;
         name = "AIO Miner",
         description = "Mines ores in different places",
         version = "0.1",
-        guideLink = "",
+        guideLink = "https://wiki.mufasaclient.com/docs/aiominer/",
         categories = {ScriptCategory.Mining}
 )
 @ScriptConfiguration.List(
@@ -57,6 +57,12 @@ import static helpers.Interfaces.*;
                         defaultValue = "false",
                         optionType = OptionType.BOOLEAN
                 ),
+                @ScriptConfiguration(
+                        name = "Drop clues",
+                        description = "Toggle this if you would like to drop clues",
+                        defaultValue = "true",
+                        optionType =  OptionType.BOOLEAN
+                ),
                 @ScriptConfiguration( // Worldhopper config
                         name =  "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings? The script will only worldhop during mining",
@@ -82,6 +88,7 @@ public class AIOMiner extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
     public static Boolean useWDH;
+    public static Boolean dropClues;
 
     public static LocationInfo locationInfo;
     public static RegionInfo regionInfo;
@@ -98,6 +105,7 @@ public class AIOMiner extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
+        dropClues = Boolean.valueOf(configs.get("Drop clues"));
 
         //Check and cache STARTING mining level (just to make sure people dont fuck up)
         //if (!GameTabs.isStatsTabOpen()) {

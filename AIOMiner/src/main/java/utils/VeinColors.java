@@ -29,7 +29,12 @@ public enum VeinColors {
                     new Color(0x36221b),
                     new Color(0x40271e),
                     new Color(0x4c2e24),
-                    new Color(0x482c22))
+                    new Color(0x482c22),
+                    new Color(0x4d2f24),
+                    new Color(0x3c261f),
+                    new Color(0x462c21),
+                    new Color(0x4d2f24),
+                    new Color(0x553428))
     ),
     CLAY(
             Arrays.asList(new Color(0x6f5932))
