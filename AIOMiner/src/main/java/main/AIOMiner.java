@@ -3,6 +3,7 @@ package main;
 import helpers.*;
 import helpers.utils.ItemList;
 import helpers.utils.OptionType;
+import helpers.utils.Skills;
 import tasks.Bank;
 import tasks.CheckPickaxe;
 import tasks.DropOres;
@@ -121,7 +122,7 @@ public class AIOMiner extends AbstractScript {
             GameTabs.openStatsTab();
         }
         if (GameTabs.isStatsTabOpen()) {
-            miningLevel = Stats.getRealLevel("Mining");
+            miningLevel = Stats.getRealLevel(Skills.MINING);
         }
 
         //Setup enum values
