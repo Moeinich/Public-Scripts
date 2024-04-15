@@ -17,10 +17,6 @@ public class performMining extends Task {
     }
     @Override
     public boolean execute() {
-        if (hopEnabled) {
-            hopActions();
-        }
-
         //Move to spot
         if (!Player.tileEquals(locationInfo.getStepLocation(), location)) {
             Logger.log("Stepping to vein spot");
@@ -40,9 +36,5 @@ public class performMining extends Task {
 
     private boolean doMining() {
         return miningHelper.checkPositionsAndPerformActions(locationInfo, veinColors);
-    }
-
-    private void hopActions() {
-        Game.hop(hopProfile, useWDH, false);
     }
 }
