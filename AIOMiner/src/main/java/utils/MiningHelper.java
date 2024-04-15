@@ -15,7 +15,7 @@ public class MiningHelper {
     public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
         while (!Inventory.isFull()) {
             for (int i = 1; i <= 3; i++) {
-                Game.hop(hopProfile, useWDH, false); // Check if we should worldhop
+                Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
 
                 Rectangle checkLocation = getCheckLocation(locationInfo, i);
                 if (isValidRect(checkLocation)) {
