@@ -117,12 +117,12 @@ public class AIOMiner extends AbstractScript {
         dropClues = Boolean.valueOf(configs.get("Drop clues"));
 
         //Check and cache STARTING mining level (just to make sure people dont fuck up)
-//        if (!GameTabs.isStatsTabOpen()) {
-//            GameTabs.openStatsTab();
-//        }
-//        if (GameTabs.isStatsTabOpen()) {
-//            miningLevel = Stats.getRealLevel("Mining");
-//        }
+        if (!GameTabs.isStatsTabOpen()) {
+            GameTabs.openStatsTab();
+        }
+        if (GameTabs.isStatsTabOpen()) {
+            miningLevel = Stats.getRealLevel("Mining");
+        }
 
         //Setup enum values
         setupRegionInfo();
