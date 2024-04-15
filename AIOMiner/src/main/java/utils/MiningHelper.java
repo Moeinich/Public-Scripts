@@ -6,17 +6,23 @@ import java.awt.*;
 import java.util.Random;
 
 import static helpers.Interfaces.*;
+import static main.AIOMiner.hopProfile;
+import static main.AIOMiner.useWDH;
 
 public class MiningHelper {
     private final Random random = new Random();
 
     public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
-        for (int i = 1; i <= 3; i++) {
-            Rectangle checkLocation = getCheckLocation(locationInfo, i);
-            if (isValidRect(checkLocation)) {
-                Logger.log("Checking vein " + i);
-                if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 5)) {
-                    clickPositions(locationInfo, i, veinColors);
+        while (!Inventory.isFull()) {
+            for (int i = 1; i <= 3; i++) {
+                Game.hop(hopProfile, useWDH, false); // Check if we should worldhop
+
+                Rectangle checkLocation = getCheckLocation(locationInfo, i);
+                if (isValidRect(checkLocation)) {
+                    Logger.log("Checking vein " + i);
+                    if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 5)) {
+                        clickPositions(locationInfo, i, veinColors);
+                    }
                 }
             }
         }
