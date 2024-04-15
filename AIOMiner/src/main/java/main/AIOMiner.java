@@ -96,7 +96,7 @@ public class AIOMiner extends AbstractScript {
     public static VeinColors veinColors;
     public static PathsToBanks pathsToBanks;
 
-    public static int[] clueIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
+    public static int[] clueIDs = {
             ItemList.CLUE_GEODE_BEGINNER_23442,
             ItemList.CLUE_GEODE_EASY_20358,
             ItemList.CLUE_GEODE_MEDIUM_20360,
