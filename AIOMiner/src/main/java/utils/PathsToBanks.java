@@ -23,6 +23,17 @@ public enum PathsToBanks {
             new Tile[] {
                     new Tile(2702, 978), new Tile(2700, 975), new Tile(2698, 969), new Tile(2696, 963), new Tile(2694, 959), new Tile(2693, 954), new Tile(2692, 948), new Tile(2692, 941), new Tile(2693, 935), new Tile(2693, 930), new Tile(2694, 925), new Tile(2694, 921), new Tile(2695, 916), new Tile(2701, 914), new Tile(2707, 908)
             }
+    ),
+    SOUL_ISLES(
+            new Tile[] {
+                    new Tile(1503, 1755), new Tile(1501, 1752), new Tile(1499, 1747), new Tile(1498, 1738), new Tile(1500, 1735), new Tile(1507, 1730), new Tile(1515, 1725), new Tile(1521, 1722), new Tile(1524, 1718), new Tile(1528, 1711), new Tile(1529, 1704), new Tile(1529, 1697), new Tile(1529, 1688), new Tile(1530, 1683), new Tile(1530, 1677), new Tile(1532, 1671)
+            },
+            new Tile[] {
+                    new Tile(1507, 1753), new Tile(1504, 1751), new Tile(1501, 1750), new Tile(1499, 1746), new Tile(1499, 1740), new Tile(1499, 1735), new Tile(1506, 1731), new Tile(1511, 1727), new Tile(1515, 1724), new Tile(1521, 1720), new Tile(1525, 1714), new Tile(1529, 1707), new Tile(1529, 1702), new Tile(1530, 1694), new Tile(1529, 1687), new Tile(1530, 1680), new Tile(1532, 1671)
+            },
+            new Tile[] {
+                    new Tile(1503, 1757), new Tile(1502, 1753), new Tile(1498, 1746), new Tile(1498, 1739), new Tile(1505, 1730), new Tile(1514, 1726), new Tile(1525, 1720), new Tile(1529, 1711), new Tile(1530, 1701), new Tile(1529, 1690), new Tile(1530, 1679), new Tile(1532, 1672)
+            }
     );
 
     // Enum setup

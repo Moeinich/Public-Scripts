@@ -11,66 +11,46 @@ public class MiningHelper {
     private final Random random = new Random();
 
     public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
-        // Check location 1
-        if (isValidRect(locationInfo.getCheckLocation1())) {
-            Logger.log("Checking first vein");
-            if (Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation1(), 5)) {
-                clickPositions(locationInfo, 1, veinColors);
-                return true;
+        for (int i = 1; i <= 3; i++) {
+            Rectangle checkLocation = getCheckLocation(locationInfo, i);
+            if (isValidRect(checkLocation)) {
+                Logger.log("Checking vein " + i);
+                if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 5)) {
+                    clickPositions(locationInfo, i, veinColors);
+                }
             }
         }
-
-        // Check location 2
-        if (isValidRect(locationInfo.getCheckLocation2())) {
-            Logger.log("Checking second vein");
-            if (Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation2(), 5)) {
-                clickPositions(locationInfo, 2, veinColors);
-                return true;
-            }
-        }
-
-        // Check location 3
-        if (isValidRect(locationInfo.getCheckLocation3())) {
-            Logger.log("Checking third vein");
-            if (Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation3(), 5)) {
-                clickPositions(locationInfo, 3, veinColors);
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 
     private void clickPositions(LocationInfo locationInfo, int position, VeinColors veinColors) {
-        // Assuming Client has a tap method
-        switch (position) {
-            case 1:
-                if (isValidRect(locationInfo.getClickLocation1())) {
-                    Logger.log("Tapping vein 1");
-                    Client.tap(locationInfo.getClickLocation1());
-                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation1(), 5), 50, 200);
-                    Logger.debugLog("Succesfully mined vein 1");
-                    XpBar.getXP();
-                }
-                break;
-            case 2:
-                if (isValidRect(locationInfo.getClickLocation2())) {
-                    Logger.log("Tapping vein 2");
-                    Client.tap(locationInfo.getClickLocation2());
-                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation2(), 5), 50, 200);
-                    Logger.debugLog("Succesfully mined vein 2");
-                    XpBar.getXP();
-                }
-                break;
-            case 3:
-                if (isValidRect(locationInfo.getClickLocation3())) {
-                    Logger.log("Tapping vein 3");
-                    Client.tap(locationInfo.getClickLocation3());
-                    Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation3(), 5), 50, 200);
-                    Logger.debugLog("Succesfully mined vein 3");
-                    XpBar.getXP();
-                }
-                break;
+        Rectangle clickLocation = getClickLocation(locationInfo, position);
+        if (isValidRect(clickLocation)) {
+            Logger.log("Tapping vein " + position);
+            Client.tap(clickLocation);
+            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5), 50, 200);
+            Logger.debugLog("Successfully mined vein " + position);
+            XpBar.getXP();
+        }
+    }
+
+    private Rectangle getCheckLocation(LocationInfo locationInfo, int locationNumber) {
+        switch (locationNumber) {
+            case 1: return locationInfo.getCheckLocation1();
+            case 2: return locationInfo.getCheckLocation2();
+            case 3: return locationInfo.getCheckLocation3();
+            default:
+                throw new IllegalArgumentException("Invalid check location number: " + locationNumber);
+        }
+    }
+
+    private Rectangle getClickLocation(LocationInfo locationInfo, int locationNumber) {
+        switch (locationNumber) {
+            case 1: return locationInfo.getClickLocation1();
+            case 2: return locationInfo.getClickLocation2();
+            case 3: return locationInfo.getClickLocation3();
+            default:
+                throw new IllegalArgumentException("Invalid click location number: " + locationNumber);
         }
     }
 

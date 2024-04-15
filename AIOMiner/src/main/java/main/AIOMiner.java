@@ -1,6 +1,7 @@
 package main;
 
 import helpers.*;
+import helpers.utils.ItemList;
 import helpers.utils.OptionType;
 import tasks.Bank;
 import tasks.CheckPickaxe;
@@ -30,8 +31,8 @@ import static helpers.Interfaces.*;
                         allowedValues = {
                                 @AllowedValue(optionName = "Varrock East"),
                                 @AllowedValue(optionName = "Varrock West"),
-                                //@AllowedValue(optionName = "Soul isles"),
-                                //@AllowedValue(optionName = "Al kharid South"),
+                                @AllowedValue(optionName = "Soul Isles"),
+                                //@AllowedValue(optionName = "Al kharid East"),
                                 //@AllowedValue(optionName = "Mining Guild"),
                         },
                         optionType = OptionType.STRING
@@ -95,6 +96,14 @@ public class AIOMiner extends AbstractScript {
     public static VeinColors veinColors;
     public static PathsToBanks pathsToBanks;
 
+    public static int[] clueIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
+            ItemList.CLUE_GEODE_BEGINNER_23442,
+            ItemList.CLUE_GEODE_EASY_20358,
+            ItemList.CLUE_GEODE_MEDIUM_20360,
+            ItemList.CLUE_GEODE_HARD_20362,
+            ItemList.CLUE_GEODE_ELITE_20364
+    };
+
     @Override
     public void onStart(){
         //Setup configs
@@ -108,12 +117,12 @@ public class AIOMiner extends AbstractScript {
         dropClues = Boolean.valueOf(configs.get("Drop clues"));
 
         //Check and cache STARTING mining level (just to make sure people dont fuck up)
-        //if (!GameTabs.isStatsTabOpen()) {
-        //    GameTabs.openStatsTab();
-        //}
-        //if (GameTabs.isStatsTabOpen()) {
-        //    miningLevel = Stats.getRealLevel("Mining");
-        //}
+//        if (!GameTabs.isStatsTabOpen()) {
+//            GameTabs.openStatsTab();
+//        }
+//        if (GameTabs.isStatsTabOpen()) {
+//            miningLevel = Stats.getRealLevel("Mining");
+//        }
 
         //Setup enum values
         setupRegionInfo();
@@ -147,6 +156,9 @@ public class AIOMiner extends AbstractScript {
             case "Varrock West":
                 regionInfo = RegionInfo.VARROCK_WEST;
                 break;
+            case "Soul Isles":
+                regionInfo = RegionInfo.SOUL_ISLES;
+                break;
         }
     }
 
@@ -154,9 +166,6 @@ public class AIOMiner extends AbstractScript {
         Logger.debugLog("Setting up location info");
         if (regionInfo.equals(RegionInfo.VARROCK_EAST)) {
             switch (oreType) {
-                case "Tin ore":
-                    locationInfo = LocationInfo.VARROCK_EAST_TIN;
-                    break;
                 case "Copper ore":
                     locationInfo = LocationInfo.VARROCK_EAST_COPPER;
                     break;
@@ -182,6 +191,8 @@ public class AIOMiner extends AbstractScript {
                     Logger.log("Incorrect setup configuration");
                     break;
             }
+        } else if (regionInfo.equals(RegionInfo.SOUL_ISLES)) {
+            locationInfo = LocationInfo.SOUL_ISLES;
         }
     }
 
@@ -214,6 +225,9 @@ public class AIOMiner extends AbstractScript {
                 break;
             case "Varrock West":
                 pathsToBanks = PathsToBanks.VARROCK_WEST_BANKPATHS;
+                break;
+            case "Soul Isles":
+                pathsToBanks = PathsToBanks.SOUL_ISLES;
                 break;
         }
     }

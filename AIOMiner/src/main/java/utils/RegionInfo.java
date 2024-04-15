@@ -14,6 +14,11 @@ public enum RegionInfo {
             new RegionBox("VARROCK_WEST", 7830, 2538, 8292, 3135),
             new Area(new Tile(2690, 975), new Tile(2712, 1002)),
             new Area(new Tile(2704, 886), new Tile(2718, 906))
+    ),
+    SOUL_ISLES(
+            new RegionBox("SOUL_ISLES", 4440, 4938, 4707, 5355),
+            new Area(new Tile(1498, 1745), new Tile(1522, 1769)),
+            new Area(new Tile(1518, 1663), new Tile(1544, 1675))
     );
 
     private final RegionBox worldRegion;

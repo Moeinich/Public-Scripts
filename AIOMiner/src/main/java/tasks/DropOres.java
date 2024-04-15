@@ -3,22 +3,10 @@ package tasks;
 import helpers.utils.ItemList;
 import utils.Task;
 
-import java.awt.*;
-import java.sql.Array;
-import java.util.ArrayList;
-
 import static helpers.Interfaces.*;
 import static main.AIOMiner.*;
 
 public class DropOres  extends Task {
-    int[] clueIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
-            ItemList.CLUE_GEODE_BEGINNER_23442,
-            ItemList.CLUE_GEODE_EASY_20358,
-            ItemList.CLUE_GEODE_MEDIUM_20360,
-            ItemList.CLUE_GEODE_HARD_20362,
-            ItemList.CLUE_GEODE_ELITE_20364
-    };
-
     public boolean activate() {
         // Early exit if banking is enabled!
         if (bankOres) {

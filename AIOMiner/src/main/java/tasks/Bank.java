@@ -1,5 +1,6 @@
 package tasks;
 
+import helpers.utils.ItemList;
 import helpers.utils.Tile;
 import utils.MiningHelper;
 import utils.Task;
@@ -30,8 +31,24 @@ public class Bank extends Task {
     }
     @Override
     public boolean execute() {
-        Logger.log("Banking ores!");
+        // Check for clues first, if we have drop clues enabled
+        if (dropClues) {
+            boolean inventoryHasClues = Inventory.containsAny(clueIDs, 0.60);
+            if (inventoryHasClues) {
+                Logger.log("Dropping clues");
+                Inventory.tapItem(ItemList.CLUE_GEODE_BEGINNER_23442, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_EASY_20358, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_MEDIUM_20360, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_HARD_20362, false, 0.60);
+                Inventory.tapItem(ItemList.CLUE_GEODE_ELITE_20364, false, 0.60);
 
+                Condition.wait(() -> !Inventory.containsAny(clueIDs, 0.60), 100, 20);
+                return true;
+            }
+        }
+
+        // Bank
+        Logger.log("Banking ores!");
         // Walk to bank
         if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Not at the bank, walking there");
@@ -60,6 +77,19 @@ public class Bank extends Task {
 
                 if (Bank.isSelectedQuantityAllButton()) {
                     Inventory.tapItem(oreTypeInt, 0.60);
+
+                    // Bank clues!
+                    boolean inventoryHasClues = Inventory.containsAny(clueIDs, 0.60);
+                    if (inventoryHasClues) {
+                        Inventory.tapItem(ItemList.CLUE_GEODE_BEGINNER_23442, false, 0.60);
+                        Inventory.tapItem(ItemList.CLUE_GEODE_EASY_20358, false, 0.60);
+                        Inventory.tapItem(ItemList.CLUE_GEODE_MEDIUM_20360, false, 0.60);
+                        Inventory.tapItem(ItemList.CLUE_GEODE_HARD_20362, false, 0.60);
+                        Inventory.tapItem(ItemList.CLUE_GEODE_ELITE_20364, false, 0.60);
+
+                        Condition.wait(() -> !Inventory.containsAny(clueIDs, 0.60), 100, 20);
+                    }
+
                     Condition.wait(() -> !Inventory.isFull(), 100, 10);
                     Bank.close();
                 }
