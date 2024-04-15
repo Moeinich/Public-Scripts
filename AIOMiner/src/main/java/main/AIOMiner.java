@@ -28,7 +28,7 @@ import static helpers.Interfaces.*;
                 @ScriptConfiguration( // Location config
                         name =  "Location",
                         description = "Which location would you like to use? be sure to read the script guide for which ores are supported in specific locations",
-                        defaultValue = "Varrock East",
+                        defaultValue = "Soul Isles",
                         allowedValues = {
                                 @AllowedValue(optionName = "Varrock East"),
                                 @AllowedValue(optionName = "Varrock West"),
@@ -59,16 +59,22 @@ import static helpers.Interfaces.*;
                         defaultValue = "false",
                         optionType = OptionType.BOOLEAN
                 ),
-                @ScriptConfiguration(
+                @ScriptConfiguration( // Boolean to drop clues or not
                         name = "Drop clues",
                         description = "Toggle this if you would like to drop clues",
+                        defaultValue = "true",
+                        optionType =  OptionType.BOOLEAN
+                ),
+                @ScriptConfiguration( // Boolean to drop clues or not
+                        name = "Drop gems",
+                        description = "Toggle this if you would like to drop gems",
                         defaultValue = "true",
                         optionType =  OptionType.BOOLEAN
                 ),
                 @ScriptConfiguration( // Worldhopper config
                         name =  "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings? The script will only worldhop during mining",
-                        defaultValue = "false",
+                        defaultValue = "true",
                         optionType = OptionType.WORLDHOPPER
                 ),
         }
@@ -91,6 +97,7 @@ public class AIOMiner extends AbstractScript {
     public static Boolean hopEnabled;
     public static Boolean useWDH;
     public static Boolean dropClues;
+    public static Boolean dropGems;
 
     public static LocationInfo locationInfo;
     public static RegionInfo regionInfo;
@@ -104,6 +111,16 @@ public class AIOMiner extends AbstractScript {
             ItemList.CLUE_GEODE_HARD_20362,
             ItemList.CLUE_GEODE_ELITE_20364
     };
+    public static int[] gemIDs = {
+            ItemList.UNCUT_OPAL_1625,
+            ItemList.UNCUT_JADE_1627,
+            ItemList.UNCUT_RED_TOPAZ_1629,
+            ItemList.UNCUT_SAPPHIRE_1623,
+            ItemList.UNCUT_SAPPHIRE_1623,
+            ItemList.UNCUT_EMERALD_1621,
+            ItemList.UNCUT_RUBY_1619,
+            ItemList.UNCUT_DIAMOND_1617
+    };
 
     @Override
     public void onStart(){
@@ -116,6 +133,7 @@ public class AIOMiner extends AbstractScript {
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
         dropClues = Boolean.valueOf(configs.get("Drop clues"));
+        dropGems = Boolean.valueOf(configs.get("Drop gems"));
 
         //Check and cache STARTING mining level (just to make sure people dont fuck up)
         if (!GameTabs.isStatsTabOpen()) {

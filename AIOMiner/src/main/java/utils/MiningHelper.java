@@ -13,14 +13,23 @@ public class MiningHelper {
     private final Random random = new Random();
 
     public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull()) {
+        while (!Inventory.isFull() && !Script.isScriptStopping()) {
             for (int i = 1; i <= 3; i++) {
-                Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
+
+                if (useWDH) {
+                    Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
+                }
 
                 Rectangle checkLocation = getCheckLocation(locationInfo, i);
                 if (isValidRect(checkLocation)) {
                     Logger.log("Checking vein " + i);
-                    if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 5)) {
+                    if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 2)) {
+
+                        if (useWDH) {
+                            Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
+                            continue;
+                        }
+
                         clickPositions(locationInfo, i, veinColors);
                     }
                 }
@@ -34,8 +43,8 @@ public class MiningHelper {
         if (isValidRect(clickLocation)) {
             Logger.log("Tapping vein " + position);
             Client.tap(clickLocation);
-            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5), 50, 200);
-            Logger.debugLog("Successfully mined vein " + position);
+            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5) || shouldHop() || Inventory.isFull(), 100, 100);
+            Logger.debugLog("Successfully mined vein or timed out " + position);
             XpBar.getXP();
         }
     }
@@ -105,5 +114,12 @@ public class MiningHelper {
             }
         }
         return path;
+    }
+
+    private boolean shouldHop() {
+        if (useWDH) {
+            return Game.isPlayersUnderUs();
+        }
+        return false;
     }
 }

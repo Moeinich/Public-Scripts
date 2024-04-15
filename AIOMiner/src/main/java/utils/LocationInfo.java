@@ -61,12 +61,12 @@ public enum LocationInfo {
     ),
     SOUL_ISLES(
             new Rectangle(386, 265, 30, 33), //Check 1
-            new Rectangle(431, 227, 30, 25), //Check 2
+            new Rectangle(432, 217, 32, 17), //Check 2
             new Rectangle(475, 267, 33, 25), //Check 3
             new Rectangle(386, 265, 30, 33), //Click 1
             new Rectangle(431, 227, 30, 25), //Click 2
-            new Rectangle(475, 267, 33, 25), //Click 3
-            new Tile(1511, 1757) //Step
+            new Rectangle(475, 265, 32, 15), //Click 3
+            new Tile(1510, 1758) //Step
     );
     // ...
 

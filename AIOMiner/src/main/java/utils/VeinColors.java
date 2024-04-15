@@ -23,18 +23,10 @@ public enum VeinColors {
                     new Color(0x554f4f))
     ),
     IRON_VEIN(
-            Arrays.asList(new Color(0x8d8181),
-                    new Color(0x543327),
-                    new Color(0x2c1e16),
-                    new Color(0x36221b),
-                    new Color(0x40271e),
-                    new Color(0x4c2e24),
-                    new Color(0x482c22),
-                    new Color(0x4d2f24),
-                    new Color(0x3c261f),
-                    new Color(0x462c21),
-                    new Color(0x4d2f24),
-                    new Color(0x553428))
+            Arrays.asList(
+                    new Color(0x4e2f25),
+                    new Color(0x3d261f)
+            )
     ),
     CLAY(
             Arrays.asList(new Color(0x6f5932))
