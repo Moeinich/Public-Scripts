@@ -6,7 +6,7 @@ import utils.MiningHelper;
 import utils.Task;
 
 import static helpers.Interfaces.*;
-import static main.AIOMiner.*;
+import static main.PublicMiner.*;
 
 public class Bank extends Task {
     MiningHelper miningHelper = new MiningHelper();

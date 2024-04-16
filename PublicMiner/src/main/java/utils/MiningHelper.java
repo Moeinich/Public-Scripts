@@ -6,8 +6,8 @@ import java.awt.*;
 import java.util.Random;
 
 import static helpers.Interfaces.*;
-import static main.AIOMiner.hopProfile;
-import static main.AIOMiner.useWDH;
+import static main.PublicMiner.hopProfile;
+import static main.PublicMiner.useWDH;
 
 public class MiningHelper {
     private final Random random = new Random();

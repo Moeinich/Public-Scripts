@@ -5,7 +5,7 @@ import helpers.utils.ItemList;
 import utils.Task;
 
 import static helpers.Interfaces.*;
-import static main.AIOMiner.*;
+import static main.PublicMiner.*;
 
 public class handleCluesAndGems extends Task {
     public boolean activate() {

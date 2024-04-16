@@ -17,10 +17,10 @@ import java.util.Map;
 import static helpers.Interfaces.*;
 
 @ScriptManifest(
-        name = "AIO Miner",
+        name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "0.1",
-        guideLink = "https://wiki.mufasaclient.com/docs/aiominer/",
+        guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
 @ScriptConfiguration.List(
@@ -80,7 +80,7 @@ import static helpers.Interfaces.*;
         }
 )
 
-public class AIOMiner extends AbstractScript {
+public class PublicMiner extends AbstractScript {
     List<Task> miningTasks = Arrays.asList(
             new CheckPickaxe(),
             new Bank(),

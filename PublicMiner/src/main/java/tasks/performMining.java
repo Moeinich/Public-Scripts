@@ -5,7 +5,7 @@ import utils.MiningHelper;
 import utils.Task;
 
 import static helpers.Interfaces.*;
-import static main.AIOMiner.*;
+import static main.PublicMiner.*;
 
 public class performMining extends Task {
     MiningHelper miningHelper = new MiningHelper();

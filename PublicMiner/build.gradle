@@ -23,7 +23,7 @@ dependencies {
 }
 
 jar {
-    archiveFileName = 'AIOMiner.jar'
+    archiveFileName = 'PublicMiner.jar'
     destinationDirectory = file('jar/')
 
     manifest {
