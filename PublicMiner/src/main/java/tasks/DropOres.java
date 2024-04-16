@@ -15,7 +15,6 @@ public class DropOres  extends Task {
     }
     @Override
     public boolean execute() {
-        Logger.log("dropping...");
         boolean isTapToDropEnabled = Game.isTapToDropEnabled();
 
         if (!isTapToDropEnabled) {

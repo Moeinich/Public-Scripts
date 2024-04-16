@@ -13,7 +13,6 @@ public class performMining extends Task {
 
     public boolean activate() {
         location = Walker.getPlayerPosition(regionInfo.getWorldRegion()); // Cache our position so we only need to check once per loop
-        Logger.log("Location: " + location.x() + "," + location.y());
         return Player.isTileWithinArea(location, regionInfo.getMineArea());
     }
     @Override
