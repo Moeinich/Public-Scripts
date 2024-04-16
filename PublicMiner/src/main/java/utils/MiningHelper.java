@@ -23,7 +23,7 @@ public class MiningHelper {
 
                 Rectangle checkLocation = getCheckLocation(locationInfo, i);
                 if (isValidRect(checkLocation)) {
-                    Logger.log("Checking vein " + i);
+//                    Logger.log("Checking vein " + i);
                     if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 2)) {
 
                         if (useWDH) {
@@ -45,7 +45,7 @@ public class MiningHelper {
             Logger.log("Tapping vein " + position);
             Client.tap(clickLocation);
             Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5) || shouldHop() || Inventory.isFull(), 100, 100);
-            Logger.debugLog("Successfully mined vein or timed out " + position);
+            Logger.debugLog("Successfully mined vein " + position);
             XpBar.getXP();
         }
     }

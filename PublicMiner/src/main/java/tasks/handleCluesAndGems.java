@@ -9,7 +9,7 @@ import static main.PublicMiner.*;
 
 public class handleCluesAndGems extends Task {
     public boolean activate() {
-        if (!dropClues || dropGems) {
+        if (!dropCluesAndGems) {
             return false;
         }
 
@@ -21,15 +21,7 @@ public class handleCluesAndGems extends Task {
 
     @Override
     public boolean execute() {
-        if (dropClues && dropCluesIfNeeded()) {
-            return true;
-        }
-
-        if (dropGems && dropGemsIfNeeded()) {
-            return true;
-        }
-
-        return false;
+        return dropCluesAndGems && (dropCluesIfNeeded() || dropGemsIfNeeded());
     }
 
     private boolean dropGemsIfNeeded() {

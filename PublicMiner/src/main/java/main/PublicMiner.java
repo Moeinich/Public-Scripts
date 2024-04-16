@@ -6,11 +6,7 @@ import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.ItemList;
 import helpers.utils.OptionType;
-import helpers.utils.Skills;
-import tasks.Bank;
-import tasks.CheckPickaxe;
-import tasks.DropOres;
-import tasks.performMining;
+import tasks.*;
 import utils.*;
 
 import java.util.Arrays;
@@ -64,14 +60,8 @@ import static helpers.Interfaces.*;
                         optionType = OptionType.BOOLEAN
                 ),
                 @ScriptConfiguration( // Boolean to drop clues or not
-                        name = "Drop clues",
-                        description = "Toggle this if you would like to drop clues",
-                        defaultValue = "true",
-                        optionType =  OptionType.BOOLEAN
-                ),
-                @ScriptConfiguration( // Boolean to drop clues or not
-                        name = "Drop gems",
-                        description = "Toggle this if you would like to drop gems",
+                        name = "Drop clues and gems",
+                        description = "Toggle this if you would like to drop clues and gems",
                         defaultValue = "true",
                         optionType =  OptionType.BOOLEAN
                 ),
@@ -88,6 +78,7 @@ public class PublicMiner extends AbstractScript {
     List<Task> miningTasks = Arrays.asList(
             new CheckPickaxe(),
             new Bank(),
+            new handleCluesAndGems(),
             new DropOres(),
             new performMining()
     );
@@ -100,9 +91,7 @@ public class PublicMiner extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
     public static Boolean useWDH;
-    public static Boolean dropClues;
-    public static Boolean dropGems;
-
+    public static Boolean dropCluesAndGems;
     public static LocationInfo locationInfo;
     public static RegionInfo regionInfo;
     public static VeinColors veinColors;
@@ -136,8 +125,7 @@ public class PublicMiner extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
-        dropClues = Boolean.valueOf(configs.get("Drop clues"));
-        dropGems = Boolean.valueOf(configs.get("Drop gems"));
+        dropCluesAndGems = Boolean.valueOf(configs.get("Drop clues and gems"));
 
 //        //Check and cache STARTING mining level (just to make sure people dont fuck up)
 //        if (!GameTabs.isStatsTabOpen()) {
