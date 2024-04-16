@@ -18,6 +18,7 @@ public class MiningHelper {
 
                 if (useWDH) {
                     Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
+                    return true;
                 }
 
                 Rectangle checkLocation = getCheckLocation(locationInfo, i);
@@ -27,7 +28,7 @@ public class MiningHelper {
 
                         if (useWDH) {
                             Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
-                            continue;
+                            return true;
                         }
 
                         clickPositions(locationInfo, i, veinColors);

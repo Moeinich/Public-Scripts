@@ -77,7 +77,6 @@ public enum LocationInfo {
             new Rectangle(1, 1, 1, 1), //Click 3
             new Tile(3000, 1258) //Step
     );
-    // ...
 
     private final Rectangle checkLocation1;
     private final Rectangle checkLocation2;
