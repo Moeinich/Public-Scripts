@@ -59,7 +59,7 @@ public enum LocationInfo {
             new Rectangle(1, 1, 1, 1), //Click 3 (only 2 ores)
             new Tile(2700, 996) //Step
     ),
-    SOUL_ISLES(
+    ISLE_OF_SOULS(
             new Rectangle(386, 265, 30, 33), //Check 1
             new Rectangle(432, 217, 32, 17), //Check 2
             new Rectangle(475, 267, 33, 25), //Check 3
@@ -67,6 +67,15 @@ public enum LocationInfo {
             new Rectangle(431, 227, 30, 25), //Click 2
             new Rectangle(475, 265, 32, 15), //Click 3
             new Tile(1510, 1758) //Step
+    ),
+    AL_KHARID_EAST(
+            new Rectangle(429, 313, 10, 13), //Check 1
+            new Rectangle(500, 282, 8, 10), //Check 2
+            new Rectangle(1, 1, 1, 1), //Check 3
+            new Rectangle(429, 310, 20, 17), //Click 1
+            new Rectangle(478, 276, 22, 21), //Click 2
+            new Rectangle(1, 1, 1, 1), //Click 3
+            new Tile(3000, 1258) //Step
     );
     // ...
 

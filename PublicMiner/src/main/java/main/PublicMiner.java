@@ -1,6 +1,9 @@
 package main;
 
 import helpers.*;
+import helpers.annotations.AllowedValue;
+import helpers.annotations.ScriptConfiguration;
+import helpers.annotations.ScriptManifest;
 import helpers.utils.ItemList;
 import helpers.utils.OptionType;
 import helpers.utils.Skills;
@@ -28,13 +31,14 @@ import static helpers.Interfaces.*;
                 @ScriptConfiguration( // Location config
                         name =  "Location",
                         description = "Which location would you like to use? be sure to read the script guide for which ores are supported in specific locations",
-                        defaultValue = "Soul Isles",
+                        defaultValue = "Isle of Souls",
                         allowedValues = {
                                 @AllowedValue(optionName = "Varrock East"),
                                 @AllowedValue(optionName = "Varrock West"),
-                                @AllowedValue(optionName = "Soul Isles"),
-                                //@AllowedValue(optionName = "Al kharid East"),
-                                //@AllowedValue(optionName = "Mining Guild"),
+                                @AllowedValue(optionName = "Isle of Souls"),
+                                @AllowedValue(optionName = "Al Kharid East"),
+                                //@AllowedValue(optionName = "Mining Guild East"),
+                                //@AllowedValue(optionName = "Mining Guild West")
                         },
                         optionType = OptionType.STRING
                 ),
@@ -135,13 +139,14 @@ public class PublicMiner extends AbstractScript {
         dropClues = Boolean.valueOf(configs.get("Drop clues"));
         dropGems = Boolean.valueOf(configs.get("Drop gems"));
 
-        //Check and cache STARTING mining level (just to make sure people dont fuck up)
-        if (!GameTabs.isStatsTabOpen()) {
-            GameTabs.openStatsTab();
-        }
-        if (GameTabs.isStatsTabOpen()) {
-            miningLevel = Stats.getRealLevel(Skills.MINING);
-        }
+//        //Check and cache STARTING mining level (just to make sure people dont fuck up)
+//        if (!GameTabs.isStatsTabOpen()) {
+//            GameTabs.openStatsTab();
+//        }
+//        if (GameTabs.isStatsTabOpen()) {
+//            miningLevel = Stats.getRealLevel(Skills.MINING);
+//            Logger.log("Mining level: " + miningLevel);
+//        }
 
         //Setup enum values
         setupRegionInfo();
@@ -175,8 +180,14 @@ public class PublicMiner extends AbstractScript {
             case "Varrock West":
                 regionInfo = RegionInfo.VARROCK_WEST;
                 break;
-            case "Soul Isles":
-                regionInfo = RegionInfo.SOUL_ISLES;
+            case "Isle of Souls":
+                regionInfo = RegionInfo.ISLE_OF_SOULS;
+                break;
+            case "Al Kharid East":
+                regionInfo = RegionInfo.AL_KHARID_EAST;
+                break;
+            default:
+                Logger.log("Incorrect script setup, please read script guide!");
                 break;
         }
     }
@@ -210,8 +221,10 @@ public class PublicMiner extends AbstractScript {
                     Logger.log("Incorrect setup configuration");
                     break;
             }
-        } else if (regionInfo.equals(RegionInfo.SOUL_ISLES)) {
-            locationInfo = LocationInfo.SOUL_ISLES;
+        } else if (regionInfo.equals(RegionInfo.ISLE_OF_SOULS)) {
+            locationInfo = LocationInfo.ISLE_OF_SOULS;
+        } else if (regionInfo.equals(RegionInfo.AL_KHARID_EAST)) {
+            locationInfo = LocationInfo.AL_KHARID_EAST;
         }
     }
 
@@ -240,13 +253,19 @@ public class PublicMiner extends AbstractScript {
         Logger.debugLog("Setting up bank pathing");
         switch (Location) {
             case "Varrock East":
-                pathsToBanks = PathsToBanks.VARROCK_EAST_BANKPATHS;
+                pathsToBanks = PathsToBanks.VARROCK_EAST;
                 break;
             case "Varrock West":
-                pathsToBanks = PathsToBanks.VARROCK_WEST_BANKPATHS;
+                pathsToBanks = PathsToBanks.VARROCK_WEST;
                 break;
-            case "Soul Isles":
-                pathsToBanks = PathsToBanks.SOUL_ISLES;
+            case "Isle of Souls":
+                pathsToBanks = PathsToBanks.ISLE_OF_SOULS;
+                break;
+            case "Al Kharid East":
+                pathsToBanks = null;
+                break;
+            default:
+                Logger.log("Incorrect script setup, please read the script guide!");
                 break;
         }
     }

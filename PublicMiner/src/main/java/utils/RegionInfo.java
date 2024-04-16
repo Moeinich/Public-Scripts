@@ -15,10 +15,15 @@ public enum RegionInfo {
             new Area(new Tile(2690, 975), new Tile(2712, 1002)),
             new Area(new Tile(2704, 886), new Tile(2718, 906))
     ),
-    SOUL_ISLES(
+    ISLE_OF_SOULS(
             new RegionBox("SOUL_ISLES", 4440, 4938, 4707, 5355),
             new Area(new Tile(1498, 1745), new Tile(1522, 1769)),
             new Area(new Tile(1518, 1663), new Tile(1544, 1675))
+    ),
+    AL_KHARID_EAST(
+            new RegionBox("AL_KHARID_EAST", 8937, 3699, 9093, 3849),
+            new Area(new Tile(2993, 1250), new Tile(3007, 1263)),
+            new Area(new Tile(2817, 1251), new Tile(2828, 1270))
     );
 
     private final RegionBox worldRegion;
