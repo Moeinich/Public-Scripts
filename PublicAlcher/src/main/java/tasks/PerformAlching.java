@@ -59,8 +59,7 @@ public class PerformAlching extends Task {
         // Nothing to do? no problem, return and start over.
         return false;
     }
-
-
+    
     // Keep count on how many items we have left to alch.
     public void updateCountAndCheck() {
         updateCountCache();
