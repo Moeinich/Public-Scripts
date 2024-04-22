@@ -55,15 +55,6 @@ public class PublicAlcher extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
-
-        Logger.log("Checking your inventory for required items");
-        boolean hasNats = Inventory.contains(ItemList.NATURE_RUNE_561, 0.60);
-        boolean hasAlchItem = Inventory.contains(itemID, 0.60);
-
-        if (!hasNats || !hasAlchItem) {
-            Logger.log("You dont have the required items in inventory");
-            Script.stop();
-        }
     }
 
     List<Task> alchTasks = Arrays.asList(

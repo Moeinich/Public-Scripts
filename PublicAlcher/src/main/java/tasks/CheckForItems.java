@@ -17,7 +17,7 @@ public class CheckForItems extends Task {
 
     @Override
     public boolean execute() {
-        Logger.log("Checking for pickaxe");
+        Logger.log("Checking your inventory for required items");
 
         if (!GameTabs.isInventoryTabOpen()) {
             GameTabs.openInventoryTab();
