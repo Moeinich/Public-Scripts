@@ -44,6 +44,7 @@ public class PerformAlching extends Task {
         if (isInventoryOpen) {
             Logger.log("Pressing item in inventory");
             Inventory.tapItem(itemID, true, 0.60);
+            return true;
         }
 
         return false;
