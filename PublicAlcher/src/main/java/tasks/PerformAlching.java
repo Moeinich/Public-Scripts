@@ -32,18 +32,24 @@ public class PerformAlching extends Task {
             return false;
         }
 
-        boolean isMagicTabOpen = GameTabs.isMagicTabOpen();
-        boolean isInventoryOpen = GameTabs.isInventoryTabOpen();
-
-        if (isMagicTabOpen) {
+        if (GameTabs.isMagicTabOpen()) {
             Logger.log("Pressing High Alchemy spell");
             Magic.tapHighLevelAlchemySpell();
+            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 40);
             return true;
         }
 
-        if (isInventoryOpen) {
+        if (GameTabs.isInventoryTabOpen()) {
             Logger.log("Pressing item in inventory");
             Inventory.tapItem(itemID, true, 0.60);
+            Condition.wait(() -> GameTabs.isMagicTabOpen(), 100, 40);
+            return true;
+        }
+
+        //Fallback open inventory
+        if (!GameTabs.isInventoryTabOpen()) {
+            GameTabs.openInventoryTab();
+            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 20);
             return true;
         }
 
