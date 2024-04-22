@@ -27,11 +27,13 @@ public class PerformAlching extends Task {
 
     @Override
     public boolean execute() {
+        // If script is stopping, shut down the scheduler!
         if (Script.isScriptStopping()) {
             shutdownScheduler();
             return false;
         }
 
+        // Handle Magic tab case
         if (GameTabs.isMagicTabOpen()) {
             Logger.log("Pressing High Alchemy spell");
             Magic.tapHighLevelAlchemySpell();
@@ -39,6 +41,7 @@ public class PerformAlching extends Task {
             return true;
         }
 
+        // Handle Inventory tab case
         if (GameTabs.isInventoryTabOpen()) {
             Logger.log("Pressing item in inventory");
             Inventory.tapItem(itemID, true, 0.60);
@@ -53,9 +56,12 @@ public class PerformAlching extends Task {
             return true;
         }
 
+        // Nothing to do? no problem, return and start over.
         return false;
     }
 
+
+    // Keep count on how many items we have left to alch.
     public void updateCountAndCheck() {
         updateCountCache();
         if (natCountCache < 10 || itemCountCache < 10) {
