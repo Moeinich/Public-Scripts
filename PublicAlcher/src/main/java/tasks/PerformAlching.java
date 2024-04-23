@@ -9,10 +9,12 @@ import static tasks.CheckForItems.checkedForItems;
 
 public class PerformAlching extends Task {
 
-    private int natCountCache = 100;
-    private int itemCountCache = 100;
+    private int natCountCache;
+    private int itemCountCache;
     private int previousNatCountCache = 0;
     private int previousItemCountCache = 0;
+    private boolean doneInitialCheck = false;
+
 
     public boolean activate() {
         return checkedForItems;
@@ -20,7 +22,16 @@ public class PerformAlching extends Task {
 
     @Override
     public boolean execute() {
-        if (natCountCache > 1 && itemCountCache > 1) {
+        if (!doneInitialCheck) {
+            if (!GameTabs.isInventoryTabOpen()) {
+                GameTabs.openInventoryTab();
+            }
+            updateCountCache();
+            doneInitialCheck = true;
+            return true;
+        }
+
+        if (natCountCache > 0 && itemCountCache > 0 && doneInitialCheck) {
             // Open the Magic tab if it is not already open
             if (!GameTabs.isMagicTabOpen()) {
                 Logger.log("Opening Magic tab");
@@ -57,11 +68,20 @@ public class PerformAlching extends Task {
         int currentNatCount = Inventory.stackSize(ItemList.NATURE_RUNE_561);
         int currentItemCount = Inventory.stackSize(itemID);
 
-        // Log current counts for debugging
         Logger.debugLog("Current Nat count: " + currentNatCount);
+        Logger.debugLog("Previous Nat count: " + previousNatCountCache);
         Logger.debugLog("Current Item count: " + currentItemCount);
+        Logger.debugLog("Previous Item count: " + previousItemCountCache);
 
-        // Check if the count has dropped by more than 5 since last update
+        // Properly initialize previous counts on the first execution
+        if (!doneInitialCheck) {
+            previousNatCountCache = currentNatCount;
+            previousItemCountCache = currentItemCount;
+            doneInitialCheck = true;
+            Logger.debugLog("Initial counts set. Previous Nat: " + previousNatCountCache + ", Previous Item: " + previousItemCountCache);
+        }
+
+        // Update cache if the count has changed within the threshold
         if (Math.abs(previousNatCountCache - currentNatCount) <= 5) {
             natCountCache = currentNatCount;
             previousNatCountCache = currentNatCount;
