@@ -44,6 +44,7 @@ public class PerformAlching extends Task {
                 Inventory.tapItem(itemID, true, 0.60);
                 // Assume need to wait for magic tab to open again, repeating the process
                 Condition.wait(GameTabs::isMagicTabOpen, 100, 40);
+                XpBar.getXP();
                 return true;
             }
         } else {
