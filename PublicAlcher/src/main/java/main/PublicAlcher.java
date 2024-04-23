@@ -24,15 +24,16 @@ import static helpers.Interfaces.*;
         categories = {ScriptCategory.Magic}
 )
 @ScriptConfiguration.List(
-        {
+        value = {
                 @ScriptConfiguration(
                         name = "Item ID",
                         description = "Enter the item ID of what you'd like to alch, you can find the IDs here: https://www.osrsbox.com/tools/item-search/",
                         defaultValue = "0",
+                        minMaxIntValues = {0, 30000},
                         optionType = OptionType.INTEGER
                 ),
                 @ScriptConfiguration(
-                        name =  "Use world hopper?",
+                        name = "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings?",
                         defaultValue = "1",
                         optionType = OptionType.WORLDHOPPER

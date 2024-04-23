@@ -13,13 +13,8 @@ import static tasks.CheckForItems.checkedForItems;
 
 public class PerformAlching extends Task {
 
-    int natCountCache = 0;
-    int itemCountCache = 0;
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-    public PerformAlching() {
-        scheduler.scheduleWithFixedDelay(this::updateCountAndCheck, 0, 5, TimeUnit.MINUTES);
-    }
+    int natCountCache = 100;
+    int itemCountCache = 100;
 
     public boolean activate() {
         return checkedForItems;
@@ -27,71 +22,41 @@ public class PerformAlching extends Task {
 
     @Override
     public boolean execute() {
-        // If script is stopping, shut down the scheduler!
-        if (Script.isScriptStopping()) {
-            shutdownScheduler();
-            return false;
-        }
+        if (natCountCache > 1 && itemCountCache > 1) {
+            // Open the Magic tab if it is not already open
+            if (!GameTabs.isMagicTabOpen()) {
+                Logger.log("Opening Magic tab");
+                GameTabs.openMagicTab();
+                Condition.wait(GameTabs::isMagicTabOpen, 100, 10);
+            }
 
-        // Handle Magic tab case
-        if (GameTabs.isMagicTabOpen()) {
-            Logger.log("Pressing High Alchemy spell");
-            Magic.tapHighLevelAlchemySpell();
-            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 40);
-            return true;
-        }
+            // Tap the High Alchemy spell in the Magic tab
+            if (GameTabs.isMagicTabOpen()) {
+                Logger.log("Pressing High Alchemy spell");
+                Magic.tapHighLevelAlchemySpell();
+                Condition.wait(GameTabs::isInventoryTabOpen, 100, 40);
+            }
 
-        // Handle Inventory tab case
-        if (GameTabs.isInventoryTabOpen()) {
-            Logger.log("Pressing item in inventory");
-            Inventory.tapItem(itemID, true, 0.60);
-            Condition.wait(() -> GameTabs.isMagicTabOpen(), 100, 40);
-            return true;
-        }
-
-        //Fallback open inventory
-        if (!GameTabs.isInventoryTabOpen()) {
-            GameTabs.openInventoryTab();
-            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 20);
-            return true;
-        }
-
-        // Nothing to do? no problem, return and start over.
-        return false;
-    }
-
-    // Keep count on how many items we have left to alch.
-    public void updateCountAndCheck() {
-        updateCountCache();
-        if (natCountCache < 10 || itemCountCache < 10) {
-            // If counts are low, increase checking frequency to every 10 seconds
-            scheduler.scheduleWithFixedDelay(this::updateCountAndCheck, 0, 10, TimeUnit.SECONDS);
-        }
-        if (natCountCache < 1 || itemCountCache < 1) {
-            // Stop the script if counts are very low or empty
-            Logger.log("Running out of items or runes, stopping script.");
+            // Tap the item in the Inventory
+            if (GameTabs.isInventoryTabOpen()) {
+                Logger.log("Pressing item in inventory");
+                updateCountCache();
+                Inventory.tapItem(itemID, true, 0.60);
+                // Assume need to wait for magic tab to open again, repeating the process
+                Condition.wait(GameTabs::isMagicTabOpen, 100, 40);
+                return true;
+            }
+        } else {
             Script.stop();
         }
+
+        return false;
     }
 
     private void updateCountCache() {
         natCountCache = Inventory.stackSize(ItemList.NATURE_RUNE_561);
         itemCountCache = Inventory.stackSize(itemID);
-    }
-
-    private void shutdownScheduler() {
-        scheduler.shutdown();
-        try {
-            // Wait a while for existing tasks to terminate
-            if (!scheduler.awaitTermination(60, TimeUnit.SECONDS)) {
-                // Cancel currently executing tasks
-                scheduler.shutdownNow();
-            }
-        } catch (InterruptedException ie) {
-            // (Re-)Cancel if current thread also interrupted
-            scheduler.shutdownNow();
-            // Preserve interrupt status
-            Thread.currentThread().interrupt();
-        }
+        Logger.debugLog("Nat count: " + natCountCache);
+        Logger.debugLog("Item count: " + itemCountCache);
     }
 }
