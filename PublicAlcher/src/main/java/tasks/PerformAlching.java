@@ -3,18 +3,16 @@ package tasks;
 import helpers.utils.ItemList;
 import utils.Task;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import static helpers.Interfaces.*;
 import static main.PublicAlcher.itemID;
 import static tasks.CheckForItems.checkedForItems;
 
 public class PerformAlching extends Task {
 
-    int natCountCache = 100;
-    int itemCountCache = 100;
+    private int natCountCache = 100;
+    private int itemCountCache = 100;
+    private int previousNatCountCache = 0;
+    private int previousItemCountCache = 0;
 
     public boolean activate() {
         return checkedForItems;
@@ -55,9 +53,27 @@ public class PerformAlching extends Task {
     }
 
     private void updateCountCache() {
-        natCountCache = Inventory.stackSize(ItemList.NATURE_RUNE_561);
-        itemCountCache = Inventory.stackSize(itemID);
-        Logger.debugLog("Nat count: " + natCountCache);
-        Logger.debugLog("Item count: " + itemCountCache);
+        // Fetch current counts from the inventory
+        int currentNatCount = Inventory.stackSize(ItemList.NATURE_RUNE_561);
+        int currentItemCount = Inventory.stackSize(itemID);
+
+        // Log current counts for debugging
+        Logger.debugLog("Current Nat count: " + currentNatCount);
+        Logger.debugLog("Current Item count: " + currentItemCount);
+
+        // Check if the count has dropped by more than 5 since last update
+        if (Math.abs(previousNatCountCache - currentNatCount) <= 5) {
+            natCountCache = currentNatCount;
+            previousNatCountCache = currentNatCount;
+        } else {
+            Logger.debugLog("Nat count change too large, not updating cache.");
+        }
+
+        if (Math.abs(previousItemCountCache - currentItemCount) <= 5) {
+            itemCountCache = currentItemCount;
+            previousItemCountCache = currentItemCount;
+        } else {
+            Logger.debugLog("Item count change too large, not updating cache.");
+        }
     }
 }
