@@ -5,4 +5,5 @@ I encourage anyone to feel free to contribute with fixes and or additions
 
 **Scripts currently in the making:** 
 - [ ] AIO Miner - Goal is to support every useful mining location with dropping & banking support.
-- [ ] Public Alcher - Currently only supports High Alching and is its only job ;-)
+- [ ] Public Alcher - Currently only supports High Alching
+- [ ] Public Cannoneer - An AFK cannon script, WIP

@@ -5,7 +5,7 @@ import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.OptionType;
 import tasks.CheckForItems;
-import tasks.PerformAlching;
+import tasks.PerformCannoning;
 import utils.Task;
 
 import java.util.Arrays;
@@ -16,21 +16,14 @@ import static helpers.Interfaces.*;
 
 
 @ScriptManifest(
-        name = "Public Alcher",
-        description = "An easy to use Alcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
+        name = "Public Cannoneer",
+        description = "An easy to use AFK cannon script. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.0",
         guideLink = "",
-        categories = {ScriptCategory.Magic}
+        categories = {ScriptCategory.Combat}
 )
 @ScriptConfiguration.List(
         value = {
-                @ScriptConfiguration(
-                        name = "Item ID",
-                        description = "Enter the item ID of what you'd like to alch, you can find the IDs here: https://www.osrsbox.com/tools/item-search/",
-                        defaultValue = "0",
-                        minMaxIntValues = {0, 30000},
-                        optionType = OptionType.INTEGER
-                ),
                 @ScriptConfiguration(
                         name = "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings?",
@@ -40,8 +33,7 @@ import static helpers.Interfaces.*;
         }
 )
 
-public class PublicAlcher extends AbstractScript {
-    public static int itemID;
+public class PublicCannoneer extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
     public static Boolean useWDH;
@@ -51,15 +43,15 @@ public class PublicAlcher extends AbstractScript {
         Logger.log("Setting everything up");
 
         Map<String, String> configs = getConfigurations();
-        itemID = Integer.parseInt(configs.get("Item ID"));
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
     }
 
-    List<Task> alchTasks = Arrays.asList(
+    // Task list!
+    List<Task> cannonTasks = Arrays.asList(
             new CheckForItems(),
-            new PerformAlching()
+            new PerformCannoning()
     );
 
     @Override
@@ -70,7 +62,7 @@ public class PublicAlcher extends AbstractScript {
         }
 
         //Run tasks
-        for (Task task : alchTasks) {
+        for (Task task : cannonTasks) {
             if (task.activate()) {
                 task.execute();
                 return;
