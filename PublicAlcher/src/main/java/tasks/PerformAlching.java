@@ -82,14 +82,14 @@ public class PerformAlching extends Task {
         }
 
         // Update cache if the count has changed within the threshold
-        if (Math.abs(previousNatCountCache - currentNatCount) <= 5) {
+        if (Math.abs(previousNatCountCache - currentNatCount) <= 20) {
             natCountCache = currentNatCount;
             previousNatCountCache = currentNatCount;
         } else {
             Logger.debugLog("Nat count change too large, not updating cache.");
         }
 
-        if (Math.abs(previousItemCountCache - currentItemCount) <= 5) {
+        if (Math.abs(previousItemCountCache - currentItemCount) <= 20) {
             itemCountCache = currentItemCount;
             previousItemCountCache = currentItemCount;
         } else {
