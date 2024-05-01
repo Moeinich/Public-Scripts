@@ -54,6 +54,7 @@ public class PerformCannoning extends Task {
                 delayMilliseconds = delaySeconds * 1000;
                 lastExecutionTime = currentTime; // Update last execution time
                 Logger.log("New delay set: " + delaySeconds + " seconds starting from now");
+                XpBar.getXP();
             }
 
             // Check if the current time is after the last execution time plus the delay
