@@ -19,33 +19,28 @@ import static helpers.Interfaces.*;
         name = "Public Cannoneer",
         description = "An easy to use AFK cannon script. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.0",
-        guideLink = "",
+        guideLink = "https://wiki.mufasaclient.com/docs/public-cannoneer/",
         categories = {ScriptCategory.Combat}
 )
 @ScriptConfiguration.List(
         value = {
                 @ScriptConfiguration(
-                        name = "Use world hopper?",
-                        description = "Would you like to hop worlds based on your hop profile settings?",
-                        defaultValue = "1",
-                        optionType = OptionType.WORLDHOPPER
+                        name = "Max wait time",
+                        description = "Max wait time between re-fills",
+                        defaultValue = "31",
+                        minMaxIntValues = {15, 40},
+                        optionType = OptionType.INTEGER_SLIDER
                 )
         }
 )
 
 public class PublicCannoneer extends AbstractScript {
-    public static String hopProfile;
-    public static Boolean hopEnabled;
-    public static Boolean useWDH;
-
+    public static int waitTime;
     @Override
     public void onStart(){
         Logger.log("Setting everything up");
-
         Map<String, String> configs = getConfigurations();
-        hopProfile = (configs.get("Use world hopper?"));
-        hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
-        useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
+        waitTime = Integer.parseInt(configs.get("Max wait time"));
     }
 
     // Task list!
@@ -56,11 +51,6 @@ public class PublicCannoneer extends AbstractScript {
 
     @Override
     public void poll() {
-        // Check if we should WH
-        if (hopEnabled) {
-            Game.hop(hopProfile, useWDH, false); // Check if we should worldhop
-        }
-
         //Run tasks
         for (Task task : cannonTasks) {
             if (task.activate()) {
