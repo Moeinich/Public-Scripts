@@ -21,7 +21,7 @@ import static helpers.Interfaces.*;
         description = "An easy to use Teak Chopper. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.0",
         guideLink = "https://wiki.mufasaclient.com/docs/public-teak-chopper/",
-        categories = {ScriptCategory.Combat}
+        categories = {ScriptCategory.Woodcutting}
 )
 @ScriptConfiguration.List(
         {
