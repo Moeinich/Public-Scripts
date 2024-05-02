@@ -37,6 +37,11 @@ public class PerformChopping extends Task {
             Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
         }
 
+        if (!GameTabs.isInventoryTabOpen()) {
+            GameTabs.openInventoryTab();
+            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 10);
+        }
+
         if (!Player.tileEquals(location, teakTile)) {
             Logger.log("Walking to teak tile");
             Walker.step(teakTile);
