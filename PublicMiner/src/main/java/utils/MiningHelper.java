@@ -14,6 +14,10 @@ public class MiningHelper {
 
     public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
         while (!Inventory.isFull() && !Script.isScriptStopping()) {
+            if (!GameTabs.isInventoryTabOpen()) {
+                GameTabs.openInventoryTab();
+            }
+
             for (int i = 1; i <= 3; i++) {
 
                 if (useWDH) {
@@ -42,7 +46,7 @@ public class MiningHelper {
         if (isValidRect(clickLocation)) {
             Logger.log("Tapping vein " + position);
             Client.tap(clickLocation);
-            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5) || shouldHop() || Inventory.isFull(), 50, 100);
+            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5) || shouldHop() || Inventory.isFull() || Player.leveledUp(), 50, 100);
             Logger.debugLog("Successfully mined vein " + position);
             XpBar.getXP();
         }
