@@ -6,33 +6,34 @@ import java.util.List;
 
 public enum VeinColors {
     COPPER_VEIN(
-            Arrays.asList(new Color(0x865d3a),
-                    new Color(0x9c6d44),
-                    new Color(0x805b39),
-                    new Color(0x875e3b),
-                    new Color(0x835d3a),
-                    new Color(0x62462c),
-                    new Color(0x8d623e))
+            Arrays.asList(
+                    Color.decode("#996b43"),
+                    Color.decode("#875e3b")
+            )
     ),
     TIN_VEIN(
-            Arrays.asList(new Color(0x665d5d),
-                    new Color(0x817777),
-                    new Color(0x8e8282),
-                    new Color(0x504a4a),
-                    new Color(0x948988),
-                    new Color(0x554f4f))
+            Arrays.asList(
+                    Color.decode("#827878"),
+                    Color.decode("#675e5e")
+            )
     ),
     IRON_VEIN(
             Arrays.asList(
-                    new Color(0x4e2f25),
-                    new Color(0x3d261f)
+                    Color.decode("#4c2e24"),
+                    Color.decode("#503126")
             )
     ),
     CLAY(
-            Arrays.asList(new Color(0x6f5932))
+            Arrays.asList(
+                    Color.decode("#745d34"),
+                    Color.decode("#997b43")
+            )
     ),
     SILVER(
-            Arrays.asList(new Color(0x897e7d))
+            Arrays.asList(
+                    Color.decode("#ac9e9e"),
+                    Color.decode("#827878")
+            )
     );
 
     // Enum setup

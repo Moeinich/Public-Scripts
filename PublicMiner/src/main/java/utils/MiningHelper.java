@@ -3,11 +3,11 @@ package utils;
 import helpers.utils.Tile;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Random;
 
 import static helpers.Interfaces.*;
-import static main.PublicMiner.hopProfile;
-import static main.PublicMiner.useWDH;
+import static main.PublicMiner.*;
 
 public class MiningHelper {
     private final Random random = new Random();
@@ -17,58 +17,34 @@ public class MiningHelper {
             if (!GameTabs.isInventoryTabOpen()) {
                 GameTabs.openInventoryTab();
             }
+            List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
-            for (int i = 1; i <= 3; i++) {
+            if (!objects.isEmpty()) {  // Check if the list is not empty
+                Rectangle firstObject = objects.get(0);  // Get the first rectangle from the list
 
-                if (useWDH) {
-                    Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
+                if (shouldHop()) {
+                    Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
                 }
 
-                Rectangle checkLocation = getCheckLocation(locationInfo, i);
-                if (isValidRect(checkLocation)) {
-//                    Logger.log("Checking vein " + i);
-                    if (Client.isAnyColorInRect(veinColors.getActiveColor(), checkLocation, 2)) {
-
-                        if (useWDH) {
-                            Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
-                        }
-
-                        clickPositions(locationInfo, i, veinColors);
+                if (isValidRect(firstObject)) {
+                    if (useWDH) {
+                        Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
                     }
+
+                    clickPositions(firstObject, veinColors);  // Handling index if needed for clickPositions
                 }
             }
         }
         return true;
     }
 
-    private void clickPositions(LocationInfo locationInfo, int position, VeinColors veinColors) {
-        Rectangle clickLocation = getClickLocation(locationInfo, position);
-        if (isValidRect(clickLocation)) {
-            Logger.log("Tapping vein " + position);
-            Client.tap(clickLocation);
-            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), clickLocation, 5) || shouldHop() || Inventory.isFull() || Player.leveledUp(), 50, 100);
-            Logger.debugLog("Successfully mined vein " + position);
+    private void clickPositions(Rectangle position, VeinColors veinColors) {
+        if (isValidRect(position)) {
+            Logger.log("Tapping vein");
+            Client.tap(position);
+            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), position, locationInfo.getTolerance()) || shouldHop() || Inventory.isFull() || Player.leveledUp(), 50, 100);
+            Logger.debugLog("Successfully mined vein");
             XpBar.getXP();
-        }
-    }
-
-    private Rectangle getCheckLocation(LocationInfo locationInfo, int locationNumber) {
-        switch (locationNumber) {
-            case 1: return locationInfo.getCheckLocation1();
-            case 2: return locationInfo.getCheckLocation2();
-            case 3: return locationInfo.getCheckLocation3();
-            default:
-                throw new IllegalArgumentException("Invalid check location number: " + locationNumber);
-        }
-    }
-
-    private Rectangle getClickLocation(LocationInfo locationInfo, int locationNumber) {
-        switch (locationNumber) {
-            case 1: return locationInfo.getClickLocation1();
-            case 2: return locationInfo.getClickLocation2();
-            case 3: return locationInfo.getClickLocation3();
-            default:
-                throw new IllegalArgumentException("Invalid click location number: " + locationNumber);
         }
     }
 
@@ -120,8 +96,12 @@ public class MiningHelper {
     }
 
     private boolean shouldHop() {
-        if (useWDH) {
-            return Game.isPlayersUnderUs();
+        if (hopEnabled) {
+            if (!useWDH) {
+                return false;
+            } else {
+                return Game.isPlayersUnderUs() || Game.isPlayersAround();
+            }
         }
         return false;
     }
