@@ -36,7 +36,7 @@ public enum LocationInfo {
             new Tile(2700, 996) //Step
     ),
     ISLE_OF_SOULS(
-            new Rectangle(368, 197, 173, 90),
+            new Rectangle(362, 192, 188, 98),
             2,
             new Tile(1510, 1758) //Step
     ),

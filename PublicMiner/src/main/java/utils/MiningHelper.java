@@ -13,18 +13,19 @@ public class MiningHelper {
     private final Random random = new Random();
 
     public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping()) {
+        while (!Inventory.isFull() && !Script.isScriptStopping() && !Player.leveledUp()) {
             if (!GameTabs.isInventoryTabOpen()) {
                 GameTabs.openInventoryTab();
             }
+
+            if (shouldHop()) {
+                Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
+            }
+
             List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
             if (!objects.isEmpty()) {  // Check if the list is not empty
                 Rectangle firstObject = objects.get(0);  // Get the first rectangle from the list
-
-                if (shouldHop()) {
-                    Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
-                }
 
                 if (isValidRect(firstObject)) {
                     if (useWDH) {
@@ -42,7 +43,7 @@ public class MiningHelper {
         if (isValidRect(position)) {
             Logger.log("Tapping vein");
             Client.tap(position);
-            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), position, locationInfo.getTolerance()) || shouldHop() || Inventory.isFull() || Player.leveledUp(), 50, 100);
+            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), position, locationInfo.getTolerance()) || shouldHop(), 50, 100);
             Logger.debugLog("Successfully mined vein");
             XpBar.getXP();
         }
