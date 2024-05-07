@@ -18,7 +18,7 @@ public class MiningHelper {
                 GameTabs.openInventoryTab();
             }
 
-            if (shouldHop()) {
+            if (hopEnabled) {
                 Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
             }
 

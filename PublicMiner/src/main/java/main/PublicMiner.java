@@ -150,6 +150,10 @@ public class PublicMiner extends AbstractScript {
             GameTabs.openInventoryTab();
         }
 
+        if (hopEnabled) {
+            Game.hop(hopProfile, useWDH, true);
+        }
+
         //Run tasks
             for (Task task : miningTasks) {
                 if (task.activate()) {
