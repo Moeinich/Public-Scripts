@@ -21,7 +21,6 @@ public class MiningHelper {
             if (hopEnabled) {
                 Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
             }
-
             List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
             if (!objects.isEmpty()) {  // Check if the list is not empty

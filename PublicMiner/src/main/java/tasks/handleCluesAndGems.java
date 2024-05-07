@@ -3,11 +3,14 @@ package tasks;
 
 import helpers.utils.ItemList;
 import utils.Task;
+import java.util.Random;
 
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
 
 public class handleCluesAndGems extends Task {
+    Random rand = new Random();
+
     public boolean activate() {
         if (!dropCluesAndGems) {
             return false;
@@ -21,6 +24,10 @@ public class handleCluesAndGems extends Task {
 
     @Override
     public boolean execute() {
+        if (rand.nextInt(10) < 8) { // 80% chance to skip execution
+            return false;
+        }
+
         return dropCluesAndGems && (dropCluesIfNeeded() || dropGemsIfNeeded());
     }
 
