@@ -54,14 +54,14 @@ import static helpers.Interfaces.*;
                         optionType = OptionType.STRING
                 ),
                 @ScriptConfiguration( // Bank config boolean
-                        name =  "Bank ores",
+                        name =  "Bank everything",
                         description = "Make sure you read the script guide if banking is supported in your location!",
                         defaultValue = "false",
                         optionType = OptionType.BOOLEAN
                 ),
                 @ScriptConfiguration( // Boolean to drop clues or not
                         name = "Drop clues and gems",
-                        description = "Toggle this if you would like to drop clues and gems",
+                        description = "If not banking, toggle this if you would like to drop clues and gems",
                         defaultValue = "true",
                         optionType =  OptionType.BOOLEAN
                 ),
@@ -78,7 +78,6 @@ public class PublicMiner extends AbstractScript {
     List<Task> miningTasks = Arrays.asList(
             new CheckPickaxe(),
             new Bank(),
-            new handleCluesAndGems(),
             new DropOres(),
             new performMining()
     );
@@ -96,6 +95,7 @@ public class PublicMiner extends AbstractScript {
     public static RegionInfo regionInfo;
     public static VeinColors veinColors;
     public static PathsToBanks pathsToBanks;
+    public static int pickaxeInventorySlotNumber = 0;
 
     public static int[] clueIDs = {
             ItemList.CLUE_GEODE_BEGINNER_23442,

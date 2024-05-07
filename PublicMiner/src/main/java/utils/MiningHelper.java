@@ -25,14 +25,7 @@ public class MiningHelper {
 
             if (!objects.isEmpty()) {  // Check if the list is not empty
                 Rectangle firstObject = objects.get(0);  // Get the first rectangle from the list
-
-                if (isValidRect(firstObject)) {
-                    if (useWDH) {
-                        Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
-                    }
-
-                    clickPositions(firstObject, veinColors);  // Handling index if needed for clickPositions
-                }
+                clickPositions(firstObject, veinColors); //Click it
             }
         }
         return true;
