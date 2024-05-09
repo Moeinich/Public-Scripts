@@ -24,6 +24,22 @@ public enum RegionInfo {
             new RegionBox("AL_KHARID_EAST", 8937, 3699, 9093, 3849),
             new Area(new Tile(2993, 1250), new Tile(3007, 1263)),
             new Area(new Tile(2817, 1251), new Tile(2828, 1270))
+    ),
+    MINING_GUILD_COAL(
+            new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
+            new Area(new Tile(2131, 207), new Tile(2153, 219)), // Mine area
+            new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
+    ),
+    MINING_GUILD_IRON_EAST(
+            new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
+            new Area(new Tile(2147, 204), new Tile(2155, 209)), //mine area
+            new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
+    ),
+    MINING_GUILD_IRON_WEST(
+            new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
+            new Area(new Tile(2136, 202), new Tile(2141, 209)), // mining area
+            new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
+
     );
 
     private final RegionBox worldRegion;

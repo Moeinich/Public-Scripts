@@ -33,8 +33,9 @@ import static helpers.Interfaces.*;
                                 @AllowedValue(optionName = "Varrock West"),
                                 @AllowedValue(optionName = "Isle of Souls"),
                                 @AllowedValue(optionName = "Al Kharid East"),
-                                //@AllowedValue(optionName = "Mining Guild East"),
-                                //@AllowedValue(optionName = "Mining Guild West")
+                                @AllowedValue(optionName = "Mining Guild - Iron East"),
+                                @AllowedValue(optionName = "Mining Guild - Iron West"),
+                                @AllowedValue(optionName = "Mining Guild - Coal")
                         },
                         optionType = OptionType.STRING
                 ),
@@ -48,7 +49,7 @@ import static helpers.Interfaces.*;
                                 @AllowedValue(optionIcon = "434", optionName = "Clay"),
                                 @AllowedValue(optionIcon = "442", optionName = "Silver ore"),
                                 @AllowedValue(optionIcon = "440", optionName = "Iron ore"),
-                                //@AllowedValue(optionIcon = "453", optionName = "Coal"),
+                                @AllowedValue(optionIcon = "453", optionName = "Coal"),
 
                         },
                         optionType = OptionType.STRING
@@ -67,7 +68,7 @@ import static helpers.Interfaces.*;
                 ),
                 @ScriptConfiguration( // Worldhopper config
                         name =  "Use world hopper?",
-                        description = "Would you like to hop worlds based on your hop profile settings? The script will only worldhop during mining",
+                        description = "Would you like to hop worlds based on your hop profile settings? The script will only worldhop when other players are nearby",
                         defaultValue = "true",
                         optionType = OptionType.WORLDHOPPER
                 ),
@@ -121,7 +122,7 @@ public class PublicMiner extends AbstractScript {
         Map<String, String> configs = getConfigurations();
         Location = configs.get("Location");
         oreType = configs.get("Ore type");
-        bankOres = Boolean.valueOf((configs.get("Bank ores")));
+        bankOres = Boolean.valueOf((configs.get("Bank everything")));
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
@@ -178,14 +179,39 @@ public class PublicMiner extends AbstractScript {
             case "Al Kharid East":
                 regionInfo = RegionInfo.AL_KHARID_EAST;
                 break;
+            case "Mining Guild - Iron East":
+                regionInfo = RegionInfo.MINING_GUILD_IRON_EAST;
+                break;
+            case "Mining Guild - Iron West":
+                regionInfo = RegionInfo.MINING_GUILD_IRON_WEST;
+                break;
+            case "Mining Guild - Coal":
+                regionInfo = RegionInfo.MINING_GUILD_COAL;
+                break;
             default:
                 Logger.log("Incorrect script setup, please read script guide!");
                 break;
         }
     }
 
+
     private void setupLocationInfo() {
         Logger.debugLog("Setting up location info");
+        if (regionInfo.equals(RegionInfo.MINING_GUILD_IRON_EAST)) {
+            locationInfo = LocationInfo.MINING_GUILD_IRON_EAST;
+            return;
+        }
+
+        if (regionInfo.equals(RegionInfo.MINING_GUILD_IRON_WEST)) {
+            locationInfo = LocationInfo.MINING_GUILD_IRON_WEST;
+            return;
+        }
+
+        if (regionInfo.equals(RegionInfo.MINING_GUILD_COAL)) {
+            locationInfo = LocationInfo.MINING_GUILD_COAL;
+            return;
+        }
+
         if (regionInfo.equals(RegionInfo.VARROCK_EAST)) {
             switch (oreType) {
                 case "Copper ore":
@@ -238,6 +264,12 @@ public class PublicMiner extends AbstractScript {
             case "Silver ore":
                 veinColors = VeinColors.SILVER;
                 break;
+            case "Coal":
+                veinColors = VeinColors.COAL;
+                break;
+            default:
+                Logger.debugLog("Incorrect setup for vein colors.");
+                Script.stop();
         }
     }
 
@@ -255,6 +287,15 @@ public class PublicMiner extends AbstractScript {
                 break;
             case "Al Kharid East":
                 pathsToBanks = null;
+                break;
+            case "Mining Guild - Iron East":
+                pathsToBanks = PathsToBanks.MINING_GUILD_IRON_EAST;
+                break;
+            case "Mining Guild - Iron West":
+                pathsToBanks = PathsToBanks.MINING_GUILD_IRON_WEST;
+                break;
+            case "Mining Guild - Coal":
+                pathsToBanks = PathsToBanks.MINING_GUILD_COAL;
                 break;
             default:
                 Logger.log("Incorrect script setup, please read the script guide!");
@@ -285,6 +326,13 @@ public class PublicMiner extends AbstractScript {
                 oreTypeInt = 440;
                 if (miningLevel < 15) {
                     Logger.log("You dont have the required mining level for iron");
+                    Script.stop();
+                }
+                break;
+            case "Coal":
+                oreTypeInt = 453;
+                if (miningLevel < 30) {
+                    Logger.log("You dont have the required mining level for coal");
                     Script.stop();
                 }
                 break;

@@ -12,8 +12,8 @@ import static main.PublicMiner.*;
 public class MiningHelper {
     private final Random random = new Random();
 
-    public boolean checkPositionsAndPerformActions(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping() && !Player.leveledUp()) {
+    public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
+        while (!Inventory.isFull() && !Script.isScriptStopping()) {
             if (!GameTabs.isInventoryTabOpen()) {
                 GameTabs.openInventoryTab();
             }
@@ -21,6 +21,7 @@ public class MiningHelper {
             if (hopEnabled) {
                 Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
             }
+
             List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
             if (!objects.isEmpty()) {  // Check if the list is not empty

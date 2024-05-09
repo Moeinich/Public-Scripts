@@ -34,6 +34,11 @@ public enum VeinColors {
                     Color.decode("#ac9e9e"),
                     Color.decode("#827878")
             )
+    ),
+    COAL(
+      Arrays.asList(
+              Color.decode("#232318")
+      )
     );
 
     // Enum setup

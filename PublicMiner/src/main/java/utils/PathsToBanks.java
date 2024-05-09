@@ -34,6 +34,48 @@ public enum PathsToBanks {
             new Tile[] {
                     new Tile(1503, 1757), new Tile(1502, 1753), new Tile(1498, 1746), new Tile(1498, 1739), new Tile(1505, 1730), new Tile(1514, 1726), new Tile(1525, 1720), new Tile(1529, 1711), new Tile(1530, 1701), new Tile(1529, 1690), new Tile(1530, 1679), new Tile(1532, 1672)
             }
+    ),
+    MINING_GUILD_COAL(
+            new Tile[] {
+                    new Tile(2137,214),
+                    new Tile(2129,210)
+            },
+            new Tile[] {
+                    new Tile(2137,214),
+                    new Tile(2129,210)
+            },
+            new Tile[] {
+                    new Tile(2137,214),
+                    new Tile(2129,210)
+            }
+    ),
+    MINING_GUILD_IRON_WEST(
+            new Tile[] {
+                    new Tile(2140,206),
+                    new Tile(2129,210)
+            },
+            new Tile[] {
+                    new Tile(2140,206),
+                    new Tile(2129,210)
+            },
+            new Tile[] {
+                    new Tile(2140,206),
+                    new Tile(2129,210)
+            }
+    ),
+    MINING_GUILD_IRON_EAST(
+            new Tile[] {
+                    new Tile(2150,207),
+                    new Tile(2129,210)
+            },
+            new Tile[] {
+                    new Tile(2150,207),
+                    new Tile(2129,210)
+            },
+            new Tile[] {
+                    new Tile(2150,207),
+                    new Tile(2129,210)
+            }
     );
 
     // Enum setup

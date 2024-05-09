@@ -44,6 +44,21 @@ public enum LocationInfo {
             new Rectangle(420, 253, 107, 97),
             7,
             new Tile(3000, 1258) //Step
+    ),
+    MINING_GUILD_COAL(
+            new Rectangle(385, 235, 100, 89),
+            4,
+            new Tile(2137,214)
+    ),
+    MINING_GUILD_IRON_WEST(
+            new Rectangle(359, 191, 133, 193),
+            2,
+            new Tile(2140,206)
+    ),
+    MINING_GUILD_IRON_EAST(
+            new Rectangle(348, 182, 205, 144),
+            2,
+            new Tile(2150,207) //step
     );
 
     private final Rectangle checkLocation;

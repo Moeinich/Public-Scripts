@@ -13,6 +13,13 @@ public class performMining extends Task {
 
     public boolean activate() {
         location = Walker.getPlayerPosition(regionInfo.getWorldRegion()); // Cache our position so we only need to check once per loop
+
+        // Check if we should go to mining spot
+        if (!Inventory.isFull() && Player.isTileWithinArea(location, regionInfo.getBankArea())) {
+            Logger.log("Walking to mining spot!");
+            Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPathReversed(pathsToBanks));
+        }
+
         return Player.isTileWithinArea(location, regionInfo.getMineArea());
     }
     @Override
@@ -35,6 +42,6 @@ public class performMining extends Task {
     }
 
     private boolean doMining() {
-        return miningHelper.checkPositionsAndPerformActions(locationInfo, veinColors);
+        return miningHelper.performMining(locationInfo, veinColors);
     }
 }

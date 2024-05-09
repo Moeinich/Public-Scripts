@@ -20,13 +20,6 @@ public class Bank extends Task {
         }
 
         Logger.debugLog("Checking if we should bank");
-        location = Walker.getPlayerPosition(regionInfo.getWorldRegion()); // Cache our location
-
-        // Check if we already banked and if so, move back to mining spot
-        if (!Inventory.isFull() && Player.isTileWithinArea(location, regionInfo.getBankArea())) {
-            Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPathReversed(pathsToBanks));
-        }
-
         return Inventory.isFull();
     }
     @Override
@@ -37,6 +30,8 @@ public class Bank extends Task {
 
     private void handleBanking() {
         Logger.log("Banking ores!");
+        location = Walker.getPlayerPosition();
+
         if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Not at the bank, walking there");
             Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPath(pathsToBanks));
