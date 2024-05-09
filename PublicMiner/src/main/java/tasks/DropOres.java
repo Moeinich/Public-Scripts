@@ -2,10 +2,14 @@ package tasks;
 
 import utils.Task;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
 
 public class DropOres  extends Task {
+
     public boolean activate() {
         // Early exit if banking is enabled!
         if (bankOres) {
@@ -15,13 +19,16 @@ public class DropOres  extends Task {
     }
     @Override
     public boolean execute() {
-
         if (!Game.isTapToDropEnabled()) {
             Logger.log("Enabling tap to drop");
             Game.enableTapToDrop();
             Condition.wait(() -> Game.isTapToDropEnabled(), 50, 10);
             Logger.log("Tap to drop enabled");
             return true;
+        }
+
+        if (Inventory.contains(21341, 0.75)) {
+            unidentifiedMineralsInventorySpot = Inventory.itemSlotPosition(21341,0.75);
         }
 
         if (!dropCluesAndGems) {
@@ -35,7 +42,11 @@ public class DropOres  extends Task {
         } else {
             if (pickaxeInventorySlotNumber != 0) {
                 Logger.log("Dropping..");
-                Inventory.dropInventItems(pickaxeInventorySlotNumber, true);
+                if (unidentifiedMineralsInventorySpot != 0) {
+                    Inventory.dropInventItems(Arrays.asList(unidentifiedMineralsInventorySpot, pickaxeInventorySlotNumber), true);
+                } else {
+                    Inventory.dropInventItems(pickaxeInventorySlotNumber, true);
+                }
                 return true;
             } else {
                 Logger.log("Pickaxe slot # is not set");

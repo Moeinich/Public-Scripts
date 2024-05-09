@@ -97,6 +97,7 @@ public class PublicMiner extends AbstractScript {
     public static VeinColors veinColors;
     public static PathsToBanks pathsToBanks;
     public static int pickaxeInventorySlotNumber = 0;
+    public static int unidentifiedMineralsInventorySpot = 0;
 
     public static int[] clueIDs = {
             ItemList.CLUE_GEODE_BEGINNER_23442,
