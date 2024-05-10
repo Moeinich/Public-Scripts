@@ -46,6 +46,7 @@ public class PerformChopping extends Task {
             Logger.log("Walking to teak tile");
             Walker.step(teakTile);
             Condition.wait(() -> Player.atTile(teakTile), 100, 10);
+            return true;
         } else if (Player.tileEquals(location, teakTile)) {
             // Get the rectangle objects for trees found
             List<Rectangle> trees = Client.getObjectsFromColorsInRect(teakColors, searchRect, 5);
