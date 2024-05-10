@@ -19,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Teak Chopper",
         description = "An easy to use Teak Chopper. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.0",
+        version = "1.1",
         guideLink = "https://wiki.mufasaclient.com/docs/public-teak-chopper/",
         categories = {ScriptCategory.Woodcutting}
 )
@@ -36,7 +36,7 @@ import static helpers.Interfaces.*;
                 ),
                 @ScriptConfiguration(
                         name =  "Use world hopper?",
-                        description = "Would you like to hop worlds based on your hop profile settings? The script will only worldhop during mining",
+                        description = "Would you like to hop worlds based on your hop profile settings?",
                         defaultValue = "true",
                         optionType = OptionType.WORLDHOPPER
                 )

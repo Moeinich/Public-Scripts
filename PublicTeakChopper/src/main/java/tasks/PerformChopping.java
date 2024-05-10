@@ -54,6 +54,7 @@ public class PerformChopping extends Task {
                 Logger.log("Clicking teak tree");
                 Client.tap(treeRect); // Perform the tap action on each tree rectangle
                 Condition.wait(() -> !Client.isAnyColorInRect(teakColors, treeRect, 5) || Inventory.isFull() || shouldHop() || Player.leveledUp(), 300, 200);
+                Logger.debugLog("Finished cutting tree");
                 XpBar.getXP();
                 return true;
             }
