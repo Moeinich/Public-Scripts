@@ -154,7 +154,11 @@ public class PublicMiner extends AbstractScript {
         }
 
         if (hopEnabled) {
-            Game.hop(hopProfile, useWDH, true);
+            if (Game.isPlayersUnderUs()) {
+                Game.hop(hopProfile, useWDH, true);
+            } else {
+                Game.hop(hopProfile, useWDH, false);
+            }
         }
 
         //Run tasks
