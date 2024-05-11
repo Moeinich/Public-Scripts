@@ -87,6 +87,7 @@ public class PublicMiner extends AbstractScript {
     public static String oreType;
     public static int oreTypeInt;
     public static Boolean bankOres;
+    public static Boolean pickaxeEquipped = false;
     public static int miningLevel = 99; //Just setting it to 99 atm to pass checks ;)
     public static String hopProfile;
     public static Boolean hopEnabled;

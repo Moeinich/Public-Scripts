@@ -59,6 +59,7 @@ public class CheckPickaxe extends Task {
                     if (Equipment.itemAt(EquipmentSlot.WEAPON, pickaxeID)) {
                         hasPickaxe = true;
                         checkedForPickaxe = true;
+                        main.PublicMiner.pickaxeEquipped = true;
                         Logger.log("Pickaxe equipped, continuing");
                         return true;
                     }

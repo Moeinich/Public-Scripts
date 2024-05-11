@@ -48,6 +48,13 @@ public class DropOres  extends Task {
                     Inventory.dropInventItems(pickaxeInventorySlotNumber, true);
                 }
                 return true;
+            } else if (pickaxeEquipped) {
+                Logger.log("Dropping..");
+                if (unidentifiedMineralsInventorySpot != 0) {
+                    Inventory.dropInventItems(unidentifiedMineralsInventorySpot, true);
+                } else {
+                    Inventory.dropInventItems(0, true);
+                }
             } else {
                 Logger.log("Pickaxe slot # is not set");
             }
