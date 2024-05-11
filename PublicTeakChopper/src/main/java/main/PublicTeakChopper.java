@@ -19,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Teak Chopper",
         description = "An easy to use Teak Chopper. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.1",
+        version = "1.11",
         guideLink = "https://wiki.mufasaclient.com/docs/public-teak-chopper/",
         categories = {ScriptCategory.Woodcutting}
 )
