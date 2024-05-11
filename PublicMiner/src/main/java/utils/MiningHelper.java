@@ -19,7 +19,11 @@ public class MiningHelper {
             }
 
             if (hopEnabled) {
-                Game.hop(hopProfile, useWDH, true);  // Check if we should worldhop
+                if (Game.isPlayersUnderUs()) {
+                    Game.instantHop(hopProfile);
+                } else {
+                    Game.hop(hopProfile, useWDH, false);
+                }
             }
 
             List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
