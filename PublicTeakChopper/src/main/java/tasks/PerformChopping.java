@@ -34,7 +34,7 @@ public class PerformChopping extends Task {
     @Override
     public boolean execute() {
         if (useWDH) {
-            Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
+            Game.hop(hopProfile, useWDH, false); // Check if we should worldhop
         }
 
         if (!GameTabs.isInventoryTabOpen()) {
