@@ -48,6 +48,8 @@ public class PublicTeakChopper extends AbstractScript {
     public static Boolean hopEnabled;
     public static Boolean useWDH;
     public static String Location;
+    public static Boolean axeEquipped = false;
+    public static int axeInventorySlotNumber = 0;
 
     @Override
     public void onStart(){

@@ -6,6 +6,7 @@ import utils.Task;
 
 import static helpers.Interfaces.*;
 import static main.PublicMiner.pickaxeInventorySlotNumber;
+import static main.PublicMiner.pickaxeEquipped;
 
 public class CheckPickaxe extends Task {
     public static boolean hasPickaxe = false;
@@ -13,8 +14,14 @@ public class CheckPickaxe extends Task {
     boolean checkedInventory = false;
     boolean checkedEquipment = false;
     int[] pickaxeIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
+            ItemList._3RD_AGE_PICKAXE_20014,
+            ItemList.INFERNAL_PICKAXE_13243,
+            ItemList.INFERNAL_PICKAXE_UNCHARGED_13244,
+            ItemList.CRYSTAL_PICKAXE_23680,
+            ItemList.CRYSTAL_PICKAXE_UNCHARGED_23682,
             ItemList.DRAGON_PICKAXE_11920,
             ItemList.RUNE_PICKAXE_1275,
+            ItemList.GILDED_PICKAXE_23276,
             ItemList.ADAMANT_PICKAXE_1271,
             ItemList.MITHRIL_PICKAXE_1273,
             ItemList.BLACK_PICKAXE_12297,
@@ -41,7 +48,7 @@ public class CheckPickaxe extends Task {
                     hasPickaxe = true;
                     checkedForPickaxe = true;
                     pickaxeInventorySlotNumber = Inventory.itemSlotPosition(pickaxeIDs,0.75);
-                    Logger.log("Pickaxe in inventory, continuing");
+                    Logger.log("Pickaxe in inventory at slot " + pickaxeInventorySlotNumber + ", continuing");
                     return true;
                 }
             }
@@ -59,7 +66,7 @@ public class CheckPickaxe extends Task {
                     if (Equipment.itemAt(EquipmentSlot.WEAPON, pickaxeID)) {
                         hasPickaxe = true;
                         checkedForPickaxe = true;
-                        main.PublicMiner.pickaxeEquipped = true;
+                        pickaxeEquipped = true;
                         Logger.log("Pickaxe equipped, continuing");
                         return true;
                     }
