@@ -29,8 +29,10 @@ public class MiningHelper {
             List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
             if (!objects.isEmpty()) {  // Check if the list is not empty
-                Rectangle firstObject = objects.get(0);  // Get the first rectangle from the list
-                clickPositions(firstObject, veinColors); //Click it
+                int randomIndex = random.nextInt(objects.size()); // Generate a random index
+                Rectangle randomObject = objects.get(randomIndex);  // Get a random rectangle from the list
+
+                clickPositions(randomObject, veinColors); // Click the random object
             }
         }
         return true;
