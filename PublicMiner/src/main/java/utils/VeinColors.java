@@ -19,8 +19,8 @@ public enum VeinColors {
     ),
     IRON_VEIN(
             Arrays.asList(
-                    Color.decode("#4c2e24"),
-                    Color.decode("#503126")
+                    Color.decode("#2e1f17"),
+                    Color.decode("#523227")
             )
     ),
     CLAY(
