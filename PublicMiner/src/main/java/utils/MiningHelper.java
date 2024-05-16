@@ -42,7 +42,7 @@ public class MiningHelper {
         if (isValidRect(position)) {
             Logger.log("Tapping vein");
             Client.tap(position);
-            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), position, locationInfo.getTolerance()) || shouldHop(), 50, 100);
+            Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), position, locationInfo.getTolerance()) || shouldHop(), 50, 145);
             Logger.debugLog("Successfully mined vein");
             XpBar.getXP();
         }
