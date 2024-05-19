@@ -27,6 +27,8 @@ public class MineAmethyst extends Task {
             new Tile(2156, 236)
     );
     Tile location;
+    private Tile lastLocation;
+    private Instant lastCheckTime = Instant.now();
 
     @Override
     public boolean activate() {
@@ -139,24 +141,19 @@ public class MineAmethyst extends Task {
         return false;
     }
 
-    private Tile lastLocation;
-    private Instant lastCheckTime;
     private boolean playerIsMoving() {
-        if (lastLocation == null || lastCheckTime == null || Duration.between(lastCheckTime, Instant.now()).getSeconds() > 1) {
-            // Update lastLocation and lastCheckTime after at least 1 seconds have passed
-            lastLocation = Walker.getPlayerPosition(miningGuild);
-            lastCheckTime = Instant.now();
-            return true; // Assume moving initially after update
-        }
-
         Tile currentLocation = Walker.getPlayerPosition(miningGuild);
 
-        if (!currentLocation.equals(lastLocation)) {
-            lastLocation = currentLocation; // Update the last location if it has changed
-            lastCheckTime = Instant.now(); // Reset the timer since there was a movement
-            return true; // Player is moving
+        if (lastLocation != null && Player.tileEquals(lastLocation, currentLocation)) {
+            long elapsedMillis = Duration.between(lastCheckTime, Instant.now()).toMillis();
+            if (elapsedMillis >= 500) { // check if at least 500 ms have passed
+                Logger.debugLog("Player has not moved for " + elapsedMillis + " ms");
+                return false; // Player is not moving
+            }
+        } else {
+            lastCheckTime = Instant.now();
+            lastLocation = currentLocation;
         }
-
-        return false; // Player is not moving
+        return true; // Assume movement by default
     }
 }

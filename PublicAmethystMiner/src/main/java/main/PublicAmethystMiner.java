@@ -4,14 +4,8 @@ import helpers.*;
 import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
-import helpers.utils.Area;
-import helpers.utils.OptionType;
-import helpers.utils.RegionBox;
-import helpers.utils.Tile;
-import tasks.Bank;
-import tasks.CheckPickaxe;
-import tasks.Cut;
-import tasks.MineAmethyst;
+import helpers.utils.*;
+import tasks.*;
 import utils.Task;
 
 import java.util.Arrays;
@@ -24,8 +18,8 @@ import static helpers.Interfaces.*;
         name = "Public Amethyst Miner",
         description = "An easy to use Amethyst Miner. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.0",
-        guideLink = "",
-        categories = {ScriptCategory.Woodcutting}
+        guideLink = "https://wiki.mufasaclient.com/docs/public-amethystminer/",
+        categories = {ScriptCategory.Mining}
 )
 @ScriptConfiguration.List(
         {
@@ -75,6 +69,24 @@ public class PublicAmethystMiner extends AbstractScript {
             new Tile(2129,210)
     };
 
+    public static int[] clueIDs = {
+            ItemList.CLUE_GEODE_BEGINNER_23442,
+            ItemList.CLUE_GEODE_EASY_20358,
+            ItemList.CLUE_GEODE_MEDIUM_20360,
+            ItemList.CLUE_GEODE_HARD_20362,
+            ItemList.CLUE_GEODE_ELITE_20364
+    };
+    public static int[] gemIDs = {
+            ItemList.UNCUT_OPAL_1625,
+            ItemList.UNCUT_JADE_1627,
+            ItemList.UNCUT_RED_TOPAZ_1629,
+            ItemList.UNCUT_SAPPHIRE_1623,
+            ItemList.UNCUT_SAPPHIRE_1623,
+            ItemList.UNCUT_EMERALD_1621,
+            ItemList.UNCUT_RUBY_1619,
+            ItemList.UNCUT_DIAMOND_1617
+    };
+
     public static String craftOptionSelected;
 
     @Override
@@ -92,6 +104,7 @@ public class PublicAmethystMiner extends AbstractScript {
     // Task list!
     List<Task> amethystTasks = Arrays.asList(
             new CheckPickaxe(),
+            new DropGemsAndClues(),
             new Bank(),
             new Cut(),
             new MineAmethyst()
