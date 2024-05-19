@@ -10,10 +10,11 @@ import static main.PublicAmethystMiner.*;
 public class Bank extends Task {
     Tile location;
     String dynamicBank;
+    Tile bankTile = new Tile(2129,210);
 
     @Override
     public boolean activate() {
-        return !cutAmethysts && Inventory.isFull() && !Player.within(bankArea);
+        return !cutAmethysts && Inventory.isFull();
     }
 
     @Override
@@ -22,21 +23,36 @@ public class Bank extends Task {
         return false;
     }
 
-    private void handleBanking() {
+    private boolean handleBanking() {
         Logger.log("Banking ores!");
         location = Walker.getPlayerPosition();
 
         if (!Player.isTileWithinArea(location, bankArea)) {
             Logger.log("Not at the bank, walking there");
-            Walker.walkPath(miningGuild, bankPath);
+            if (Player.isTileWithinArea(location, mineArea)) {
+                Logger.log("walking to bank area");
+                Walker.walkPath(miningGuild, bankPath);
+                Condition.wait(() -> Player.within(bankArea, miningGuild), 200, 10);
+                return true;
+            }
+
+            if (Player.within(bankArea) && !Player.atTile(bankTile)) {
+                Logger.log("Stepping to bank tile");
+                Walker.step(bankTile, miningGuild);
+                Condition.wait(() -> Player.atTile(bankTile, miningGuild), 200, 10);
+                return true;
+            }
         }
 
         if (Player.isTileWithinArea(location, bankArea)) {
             ensureBankIsReady();
             if (Bank.isOpen()) {
                 bankItems();
+                return true;
             }
         }
+
+        return false;
     }
 
     private void ensureBankIsReady() {

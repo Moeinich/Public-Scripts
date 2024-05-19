@@ -63,6 +63,10 @@ public class PublicAmethystMiner extends AbstractScript {
             new Tile(2124, 205),
             new Tile(2134, 216)
     );
+    public static Area mineArea = new Area(
+            new Tile(2133, 215),
+            new Tile(2156, 236)
+    );
     public static Tile[] bankPath = new Tile[] {
             new Tile(2143, 221),
             new Tile(2139, 212),
@@ -112,6 +116,11 @@ public class PublicAmethystMiner extends AbstractScript {
 
     @Override
     public void poll() {
+        if (!GameTabs.isInventoryTabOpen()) {
+            GameTabs.openInventoryTab();
+            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 20);
+        }
+
         //Run tasks
         for (Task task : amethystTasks) {
             if (task.activate()) {

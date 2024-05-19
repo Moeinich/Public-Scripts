@@ -3,24 +3,24 @@ package tasks;
 import helpers.utils.ItemList;
 import utils.Task;
 
-import static helpers.Interfaces.Inventory;
+import static helpers.Interfaces.*;
 import static main.PublicAmethystMiner.clueIDs;
 import static main.PublicAmethystMiner.gemIDs;
 
 public class DropGemsAndClues extends Task {
     @Override
     public boolean activate() {
-        return Inventory.isFull();
+        return Inventory.isFull() && (Inventory.containsAny(clueIDs, 0.60) || Inventory.containsAny(gemIDs, 0.60));
     }
 
     @Override
     public boolean execute() {
-        if (Inventory.containsAny(clueIDs, 0.60)) {
-            tapAllClues();
+        if (!Game.isTapToDropEnabled()) {
+            Game.enableTapToDrop();
+            Condition.wait(() -> Game.isTapToDropEnabled(), 100, 20);
         }
-        if(Inventory.containsAny(gemIDs, 0.60)) {
-            tapAllGems();
-        }
+        tapAllClues();
+        tapAllGems();
 
         return false;
     }

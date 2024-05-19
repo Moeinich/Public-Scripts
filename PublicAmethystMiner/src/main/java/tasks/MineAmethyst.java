@@ -21,11 +21,6 @@ public class MineAmethyst extends Task {
                     Color.decode("#956472"),
                     Color.decode("#8a5d6a")
             );
-
-    Area mineArea = new Area(
-            new Tile(2133, 215),
-            new Tile(2156, 236)
-    );
     Tile location;
     private Tile lastLocation;
     private Instant lastCheckTime = Instant.now();
