@@ -1,6 +1,7 @@
 package main;
 
-import helpers.*;
+import helpers.AbstractScript;
+import helpers.ScriptCategory;
 import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
@@ -30,7 +31,7 @@ import static helpers.Interfaces.*;
                         optionType = OptionType.BOOLEAN
                 ),
                 @ScriptConfiguration(
-                  name = "Which craft option?",
+                        name = "Which craft option?",
                         description = "If cutting, which craft option would you like to do?",
                         defaultValue = "Amethyst bolt tips",
                         allowedValues = {
@@ -43,7 +44,7 @@ import static helpers.Interfaces.*;
                         optionType = OptionType.STRING
                 ),
                 @ScriptConfiguration(
-                        name =  "Use world hopper?",
+                        name = "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings?",
                         defaultValue = "true",
                         optionType = OptionType.WORLDHOPPER
@@ -67,10 +68,17 @@ public class PublicAmethystMiner extends AbstractScript {
             new Tile(2133, 215),
             new Tile(2156, 236)
     );
-    public static Tile[] bankPath = new Tile[] {
+    public static Tile[] bankPath = new Tile[]{
             new Tile(2143, 221),
             new Tile(2139, 212),
-            new Tile(2129,210)
+            new Tile(2129, 210)
+    };
+    public static Tile[] toMinePath = new Tile[]{
+            new Tile(2133, 208),
+            new Tile(2140, 213),
+            new Tile(2143, 221),
+            new Tile(2148, 229),
+            new Tile(2144, 234)
     };
 
     public static int[] clueIDs = {
@@ -92,9 +100,17 @@ public class PublicAmethystMiner extends AbstractScript {
     };
 
     public static String craftOptionSelected;
+    // Task list!
+    List<Task> amethystTasks = Arrays.asList(
+            new CheckPickaxe(),
+            new DropGemsAndClues(),
+            new Bank(),
+            new Cut(),
+            new MineAmethyst()
+    );
 
     @Override
-    public void onStart(){
+    public void onStart() {
         Logger.log("Setting everything up");
 
         Map<String, String> configs = getConfigurations();
@@ -104,15 +120,6 @@ public class PublicAmethystMiner extends AbstractScript {
         cutAmethysts = Boolean.parseBoolean(configs.get("Cut the amethyst"));
         craftOptionSelected = configs.get("Which craft option?");
     }
-
-    // Task list!
-    List<Task> amethystTasks = Arrays.asList(
-            new CheckPickaxe(),
-            new DropGemsAndClues(),
-            new Bank(),
-            new Cut(),
-            new MineAmethyst()
-    );
 
     @Override
     public void poll() {
@@ -128,13 +135,5 @@ public class PublicAmethystMiner extends AbstractScript {
                 return;
             }
         }
-    }
-
-    public static Tile[] reverseTiles(Tile[] original) {
-        Tile[] reversed = new Tile[original.length];
-        for (int i = 0; i < original.length; i++) {
-            reversed[i] = original[original.length - 1 - i];
-        }
-        return reversed;
     }
 }

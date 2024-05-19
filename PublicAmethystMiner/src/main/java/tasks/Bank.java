@@ -10,7 +10,7 @@ import static main.PublicAmethystMiner.*;
 public class Bank extends Task {
     Tile location;
     String dynamicBank;
-    Tile bankTile = new Tile(2129,210);
+    Tile bankTile = new Tile(2129, 210);
 
     @Override
     public boolean activate() {

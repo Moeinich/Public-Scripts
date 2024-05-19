@@ -10,9 +10,9 @@ import static main.PublicAmethystMiner.craftOptionSelected;
 import static main.PublicAmethystMiner.cutAmethysts;
 
 public class Cut extends Task {
+    Random random = new Random();
     private int makeOption = 100;
     private boolean checkedForChisel;
-    Random random = new Random();
 
     @Override
     public boolean activate() {

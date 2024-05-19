@@ -35,6 +35,7 @@ public class DropGemsAndClues extends Task {
         Inventory.tapItem(ItemList.UNCUT_RUBY_1619, false, 0.60);
         Inventory.tapItem(ItemList.UNCUT_DIAMOND_1617, false, 0.60);
     }
+
     private void tapAllClues() {
         Inventory.tapItem(ItemList.CLUE_GEODE_BEGINNER_23442, false, 0.60);
         Inventory.tapItem(ItemList.CLUE_GEODE_EASY_20358, false, 0.60);

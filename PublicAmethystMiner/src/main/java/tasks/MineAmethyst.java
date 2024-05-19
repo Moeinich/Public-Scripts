@@ -1,6 +1,5 @@
 package tasks;
 
-import helpers.utils.Area;
 import helpers.utils.Tile;
 import utils.Task;
 
@@ -32,7 +31,7 @@ public class MineAmethyst extends Task {
         // Check if we should go to mining spot
         if (!Inventory.isFull() && Player.isTileWithinArea(location, bankArea)) {
             Logger.log("Walking to mining spot!");
-            Walker.walkPath(miningGuild, reverseTiles(bankPath));
+            Walker.walkPath(miningGuild, toMinePath);
         }
 
         return Player.isTileWithinArea(location, mineArea);
