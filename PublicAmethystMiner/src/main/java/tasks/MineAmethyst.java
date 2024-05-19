@@ -68,6 +68,7 @@ public class MineAmethyst extends Task {
         Logger.log("Tapping vein");
         Client.tap(initialPosition);
 
+        lastLocation = null; //Reset it
         Condition.wait(() -> !playerIsMoving(), 200, 30);
         Logger.debugLog("We stopped moving, continuing to check vein");
 
