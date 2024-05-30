@@ -41,9 +41,9 @@ public enum LocationInfo {
             new Tile(1510, 1758) //Step
     ),
     AL_KHARID_EAST(
-            new Rectangle(420, 253, 107, 97),
-            7,
-            new Tile(3000, 1258) //Step
+            new Rectangle(368, 220, 102, 80),
+            2,
+            new Tile(3002, 1259) //Step
     ),
     MINING_GUILD_COAL(
             new Rectangle(385, 235, 100, 89),
