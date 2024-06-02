@@ -46,13 +46,7 @@ public class Bank extends Task {
     }
 
     private void ensureBankIsReady() {
-        if (dynamicBank == null) {
-            Logger.log("Finding bank");
-            dynamicBank = Bank.setupDynamicBank();
-        } else {
-            Bank.stepToBank();
-        }
-
+        Bank.setupDynamicBank();
         if (!Bank.isOpen()) {
             Bank.open(dynamicBank);
             Condition.wait(Bank::isOpen, 100, 10);
