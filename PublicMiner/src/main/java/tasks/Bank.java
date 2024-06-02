@@ -19,7 +19,6 @@ public class Bank extends Task {
             return false;
         }
 
-        Logger.debugLog("Checking if we should bank");
         return Inventory.isFull();
     }
     @Override
@@ -35,6 +34,7 @@ public class Bank extends Task {
         if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Not at the bank, walking there");
             Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPath(pathsToBanks));
+            return;
         }
 
         if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
