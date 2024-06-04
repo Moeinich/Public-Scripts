@@ -18,6 +18,8 @@ public class performMining extends Task {
         if (!Inventory.isFull() && Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Walking to mining spot!");
             Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPathReversed(pathsToBanks));
+            Condition.wait(() -> Player.within(regionInfo.getMineArea(), regionInfo.getWorldRegion()), 100, 10);
+            return true;
         }
 
         return Player.isTileWithinArea(location, regionInfo.getMineArea());

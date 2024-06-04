@@ -10,7 +10,7 @@ import static main.PublicMiner.*;
 
 public class Bank extends Task {
     MiningHelper miningHelper = new MiningHelper();
-    String dynamicBank;
+    String dynamicBank = null;
     Tile location;
 
     public boolean activate() {
@@ -29,7 +29,7 @@ public class Bank extends Task {
 
     private void handleBanking() {
         Logger.log("Banking ores!");
-        location = Walker.getPlayerPosition();
+        location = Walker.getPlayerPosition(regionInfo.getWorldRegion());
 
         if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Not at the bank, walking there");

@@ -18,7 +18,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.235",
+        version = "1.236",
         guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
@@ -151,14 +151,6 @@ public class PublicMiner extends AbstractScript {
     public void poll() {
         if (!GameTabs.isInventoryTabOpen()) {
             GameTabs.openInventoryTab();
-        }
-
-        if (hopEnabled) {
-            if (Game.isPlayersUnderUs()) {
-                Game.instantHop(hopProfile);
-            } else {
-                Game.hop(hopProfile, useWDH, false);
-            }
         }
 
         //Run tasks
