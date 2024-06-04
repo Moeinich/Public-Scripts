@@ -23,37 +23,38 @@ public class Bank extends Task {
     }
     @Override
     public boolean execute() {
-        handleBanking();
+        location = Walker.getPlayerPosition(regionInfo.getWorldRegion());
+
+        // Make sure we get to the bank spot!
+        if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
+            Logger.log("Not at the bank, walking there");
+            Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPath(pathsToBanks));
+            Condition.wait(() -> Player.within(regionInfo.getBankArea()), 50, 20);
+            handleBanking();
+        }
+
+        // perform banking
+        if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
+            handleBanking();
+        }
+
         return false;
     }
 
     private void handleBanking() {
-        Logger.log("Banking ores!");
-        location = Walker.getPlayerPosition(regionInfo.getWorldRegion());
+        ensureBankIsReady();
 
-        if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
-            Logger.log("Not at the bank, walking there");
-            Walker.walkPath(regionInfo.getWorldRegion(), miningHelper.pickRandomPath(pathsToBanks));
-            return;
-        }
-
-        if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
-            ensureBankIsReady();
-            if (Bank.isOpen()) {
-                bankItems();
-            }
+        if (Bank.isOpen()) {
+            Logger.log("Banking ores!");
+            bankItems();
         }
     }
 
     private void ensureBankIsReady() {
-        if (dynamicBank == null) {
-            Logger.log("Finding bank");
-            dynamicBank = Bank.setupDynamicBank();
-        } else {
-            Bank.stepToBank(dynamicBank);
-        }
+        dynamicBank = Bank.setupDynamicBank();
 
         if (!Bank.isOpen()) {
+            Logger.debugLog("Opening bank");
             Bank.open(dynamicBank);
             Condition.wait(Bank::isOpen, 100, 10);
         }

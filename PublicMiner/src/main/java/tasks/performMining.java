@@ -30,7 +30,7 @@ public class performMining extends Task {
         if (!Player.tileEquals(locationInfo.getStepLocation(), location)) {
             Logger.log("Stepping to vein spot");
             Walker.step(locationInfo.getStepLocation(), regionInfo.getWorldRegion());
-            Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 200, 10);
+            Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 100, 10);
             return true;
         }
 
