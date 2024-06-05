@@ -28,7 +28,6 @@ public class Bank extends Task {
         if (!Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Not at the bank, walking there");
             Walker.walkPath(regionInfo.getWorldRegion(), pickRandomPath(pathsToBanks));
-            Condition.wait(() -> Player.within(regionInfo.getBankArea()), 50, 20);
         }
 
         handleBanking();
@@ -49,7 +48,7 @@ public class Bank extends Task {
         if (!Bank.isOpen()) {
             Logger.debugLog("Opening bank");
             Bank.open(dynamicBank);
-            Condition.wait(Bank::isOpen, 100, 10);
+            Condition.wait(Bank::isOpen, 50, 10);
         }
     }
 
@@ -57,6 +56,7 @@ public class Bank extends Task {
         if (dynamicBank == null) {
             Logger.log("Finding bank");
             dynamicBank = Bank.setupDynamicBank();
+            Logger.debugLog("Reached bank tile.");
         } else {
             Logger.log("Stepping to bank");
             Bank.stepToBank(dynamicBank);

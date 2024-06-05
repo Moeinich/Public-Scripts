@@ -12,36 +12,51 @@ public class performMining extends Task {
     MiningHelper miningHelper = new MiningHelper();
     Tile location;
 
+    @Override
     public boolean activate() {
-        location = Walker.getPlayerPosition(regionInfo.getWorldRegion()); // Cache our position so we only need to check once per loop
-
-        // Check if we should go to mining spot
-        if (!Inventory.isFull() && Player.isTileWithinArea(location, regionInfo.getBankArea())) {
-            Logger.log("Walking to mining spot!");
-            Walker.walkPath(regionInfo.getWorldRegion(), pickRandomPathReversed(pathsToBanks));
-            Condition.wait(() -> Player.within(regionInfo.getMineArea(), regionInfo.getWorldRegion()), 100, 10);
-            return true;
+        location = Walker.getPlayerPosition(regionInfo.getWorldRegion());
+        if (Inventory.isFull()) {
+            return false;
         }
-
-        return Player.isTileWithinArea(location, regionInfo.getMineArea());
+        return isAtStepLocation() || handleMiningAreaCheck() || handleBankAreaCheck();
     }
+
     @Override
     public boolean execute() {
-        //Move to spot
-        if (!Player.tileEquals(locationInfo.getStepLocation(), location)) {
-            Logger.log("Stepping to vein spot");
+        if (!isAtStepLocation()) {
+            return moveTo(locationInfo.getStepLocation());
+        }
+        return doMining();
+    }
+
+    private boolean moveTo(Tile targetLocation) {
+        Walker.step(targetLocation, regionInfo.getWorldRegion());
+        Condition.wait(() -> Player.atTile(targetLocation, regionInfo.getWorldRegion()), 100, 20);
+        return true;
+    }
+
+    private boolean handleMiningAreaCheck() {
+        if (Player.isTileWithinArea(location, regionInfo.getMineArea())) {
+            Logger.log("Stepping to mine spot");
             Walker.step(locationInfo.getStepLocation(), regionInfo.getWorldRegion());
-            Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 100, 10);
+            Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 100, 20);
             return true;
         }
+        return false;
+    }
 
-        //perform mining
-        if (Player.tileEquals(locationInfo.getStepLocation(), location)) {
-            Logger.debugLog("Mining...");
-            return doMining();
+    private boolean handleBankAreaCheck() {
+        if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
+            Logger.log("Walking to mining spot!");
+            Walker.walkPath(regionInfo.getWorldRegion(), pickRandomPathReversed(pathsToBanks));
+            Condition.wait(() -> Player.within(regionInfo.getMineArea(), regionInfo.getWorldRegion()), 100, 20);
+            return true;
         }
+        return false;
+    }
 
-        return false; // Nothing to do
+    private boolean isAtStepLocation() {
+        return Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion());
     }
 
     private boolean doMining() {

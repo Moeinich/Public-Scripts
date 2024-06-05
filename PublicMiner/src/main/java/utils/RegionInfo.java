@@ -27,17 +27,17 @@ public enum RegionInfo {
     ),
     MINING_GUILD_COAL(
             new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
-            new Area(new Tile(2131, 207), new Tile(2153, 219)), // Mine area
+            new Area(new Tile(2123, 198), new Tile(2174, 218)), // Mine area
             new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
     ),
     MINING_GUILD_IRON_EAST(
             new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
-            new Area(new Tile(2147, 204), new Tile(2155, 209)), //mine area
+            new Area(new Tile(2123, 198), new Tile(2174, 218)), //mine area
             new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
     ),
     MINING_GUILD_IRON_WEST(
             new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
-            new Area(new Tile(2136, 202), new Tile(2141, 209)), // mining area
+            new Area(new Tile(2123, 198), new Tile(2174, 218)), // mining area
             new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
 
     );
