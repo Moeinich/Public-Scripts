@@ -9,7 +9,7 @@ import static main.PublicAmethystMiner.*;
 
 public class Bank extends Task {
     Tile location;
-    String dynamicBank;
+    String dynamicBank = null;
     Tile bankTile = new Tile(2129, 210);
 
     @Override
@@ -19,33 +19,24 @@ public class Bank extends Task {
 
     @Override
     public boolean execute() {
-        handleBanking();
-        return false;
+        location = Walker.getPlayerPosition(miningGuild);
+
+        if (!Player.isTileWithinArea(location, bankArea)) {
+            Logger.log("Not at the bank, walking there");
+            Logger.log("walking to bank area");
+            Walker.walkPath(miningGuild, bankPath);
+            Condition.wait(() -> Player.within(bankArea, miningGuild), 200, 10);
+            return true;
+        }
+
+        return handleBanking();
     }
 
     private boolean handleBanking() {
         Logger.log("Banking ores!");
-        location = Walker.getPlayerPosition();
-
-        if (!Player.isTileWithinArea(location, bankArea)) {
-            Logger.log("Not at the bank, walking there");
-            if (Player.isTileWithinArea(location, mineArea)) {
-                Logger.log("walking to bank area");
-                Walker.walkPath(miningGuild, bankPath);
-                Condition.wait(() -> Player.within(bankArea, miningGuild), 200, 10);
-                return true;
-            }
-
-            if (Player.within(bankArea) && !Player.atTile(bankTile)) {
-                Logger.log("Stepping to bank tile");
-                Walker.step(bankTile, miningGuild);
-                Condition.wait(() -> Player.atTile(bankTile, miningGuild), 200, 10);
-                return true;
-            }
-        }
 
         if (Player.isTileWithinArea(location, bankArea)) {
-            ensureBankIsReady();
+            ensureBankIsOpenAndReady();
             if (Bank.isOpen()) {
                 bankItems();
                 return true;
@@ -55,17 +46,24 @@ public class Bank extends Task {
         return false;
     }
 
-    private void ensureBankIsReady() {
+    private void ensureBankIsOpenAndReady() {
+        stepToBank();
+        if (!Bank.isOpen()) {
+            Logger.debugLog("Opening bank");
+            Bank.open(dynamicBank);
+            Condition.wait(Bank::isOpen, 50, 10);
+        }
+    }
+
+    private void stepToBank() {
         if (dynamicBank == null) {
             Logger.log("Finding bank");
             dynamicBank = Bank.setupDynamicBank();
+            Logger.debugLog("Reached bank tile.");
         } else {
-            Bank.stepToBank();
-        }
-
-        if (!Bank.isOpen()) {
-            Bank.open(dynamicBank);
-            Condition.wait(Bank::isOpen, 100, 10);
+            Logger.log("Stepping to bank");
+            Bank.stepToBank(dynamicBank);
+            Logger.debugLog("Reached bank tile");
         }
     }
 
