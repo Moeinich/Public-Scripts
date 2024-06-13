@@ -21,13 +21,14 @@ public class DropLogs extends Task {
             Condition.wait(() -> Game.isTapToDropEnabled(), 50, 10);
         }
 
-        if (axeInventorySlotNumber != 0) {
-            Inventory.dropInventItems(axeInventorySlotNumber, true);
-        } else if (axeEquipped) {
-            Inventory.dropInventItems(0, true);
-        } else {
-            Inventory.tapAllItems(ItemList.TEAK_LOGS_6333, 0.80);
-        }
+//        if (axeInventorySlotNumber != 0) {
+//            Inventory.dropInventItems(axeInventorySlotNumber, true);
+//        } else if (axeEquipped) {
+//            Inventory.dropInventItems(0, true);
+//        } else {
+//            Inventory.tapAllItems(ItemList.TEAK_LOGS_6333, 0.80);
+//        }
+        Inventory.tapAllItems(ItemList.TEAK_LOGS_6333, 0.80);
 
         return true;
     }
