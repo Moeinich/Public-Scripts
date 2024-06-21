@@ -20,7 +20,7 @@ public class CheckInventory extends Task {
             ItemList.MITHRIL_DART_TIP_822,
             ItemList.ADAMANT_DART_TIP_823,
             ItemList.RUNE_DART_TIP_824,
-            // Missing amethyst
+            ItemList.AMETHYST_DART_TIP_25853,
             ItemList.DRAGON_DART_TIP_11232,
     };
 
