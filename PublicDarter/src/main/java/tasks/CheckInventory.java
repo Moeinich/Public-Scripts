@@ -3,8 +3,6 @@ package tasks;
 import helpers.utils.ItemList;
 import utils.Task;
 
-import java.util.List;
-
 import static helpers.Interfaces.*;
 
 public class CheckInventory extends Task {

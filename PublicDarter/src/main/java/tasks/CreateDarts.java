@@ -4,6 +4,9 @@ import utils.Task;
 
 import java.util.Random;
 
+import static helpers.Interfaces.Condition;
+import static helpers.Interfaces.Inventory;
+
 
 public class CreateDarts extends Task {
     Random random = new Random();
@@ -14,7 +17,11 @@ public class CreateDarts extends Task {
 
     @Override
     public boolean execute() {
-        return false;
+        Inventory.tapItem(CheckInventory.featherInventorySpot);
+        Condition.sleep(generateRandomDelay(100, 400));
+        Inventory.tapItem(CheckInventory.dartInventorySpot);
+        Condition.sleep(generateRandomDelay(100, 400));
+        return true;
     }
 
     private int generateRandomDelay(int lowerBound, int upperBound) {
