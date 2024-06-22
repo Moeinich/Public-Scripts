@@ -11,6 +11,7 @@ public class CheckInventory extends Task {
     private boolean hasDartTips = false;
     public static int featherInventorySpot = 0;
     public static int dartInventorySpot = 0;
+    public static int foundDartID;
 
     public static int[] dartIDs = {
             ItemList.BRONZE_DART_TIP_819,
@@ -19,7 +20,7 @@ public class CheckInventory extends Task {
             ItemList.MITHRIL_DART_TIP_822,
             ItemList.ADAMANT_DART_TIP_823,
             ItemList.RUNE_DART_TIP_824,
-            // Missing amethyst
+            ItemList.AMETHYST_DART_TIP_25853,
             ItemList.DRAGON_DART_TIP_11232,
     };
 
@@ -42,6 +43,7 @@ public class CheckInventory extends Task {
             if (Inventory.contains(dartID, 0.80)) {
                 hasDartTips = true;
                 dartInventorySpot = Inventory.itemSlotPosition(dartID, 0.80);
+                foundDartID = dartID;
                 break;
             }
         }

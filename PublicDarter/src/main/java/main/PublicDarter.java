@@ -19,11 +19,25 @@ import static helpers.Interfaces.*;
         name = "Public Darter",
         description = "An easy to use Dart crafter. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.0",
-        guideLink = "",
+        guideLink = "https://wiki.mufasaclient.com/docs/publicdarter/",
         categories = {ScriptCategory.Mining}
 )
 @ScriptConfiguration.List(
         {
+                @ScriptConfiguration(
+                        name = "Min tap speed",
+                        description = "Set the minimum tap speed you would like to use",
+                        defaultValue = "100",
+                        minMaxIntValues = {50, 500},
+                        optionType = OptionType.INTEGER_SLIDER
+                ),
+                @ScriptConfiguration(
+                        name = "Max tap speed",
+                        description = "Set the maximum tap speed you would like to use",
+                        defaultValue = "400",
+                        minMaxIntValues = {50, 500},
+                        optionType = OptionType.INTEGER_SLIDER
+                ),
                 @ScriptConfiguration(
                         name = "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings?",
@@ -37,6 +51,8 @@ public class PublicDarter extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
     public static Boolean useWDH;
+    public static int minTapSpeed;
+    public static int maxTapSpeed;
 
     @Override
     public void onStart() {
@@ -46,6 +62,8 @@ public class PublicDarter extends AbstractScript {
         hopProfile = configs.get("Use world hopper?");
         hopEnabled = Boolean.parseBoolean(configs.get("Use world hopper?.enabled"));
         useWDH = Boolean.parseBoolean(configs.get("Use world hopper?.useWDH"));
+        minTapSpeed = Integer.parseInt(configs.get("Min tap speed"));
+        maxTapSpeed = Integer.parseInt(configs.get("Max tap speed"));
     }
 
     // Task list!
