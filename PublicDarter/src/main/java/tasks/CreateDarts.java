@@ -22,9 +22,9 @@ public class CreateDarts extends Task {
             Script.stop();
         }
 
-        Inventory.tapItem(CheckInventory.featherInventorySpot);
+        Inventory.tapItem(1);
         Condition.sleep(generateRandomDelay(PublicDarter.minTapSpeed, PublicDarter.maxTapSpeed));
-        Inventory.tapItem(CheckInventory.dartInventorySpot);
+        Inventory.tapItem(2);
         Condition.sleep(generateRandomDelay(PublicDarter.minTapSpeed, PublicDarter.maxTapSpeed));
         XpBar.getXP();
         return true;

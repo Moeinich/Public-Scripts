@@ -36,6 +36,7 @@ public class CheckInventory extends Task {
         if (Inventory.contains(ItemList.FEATHER_314, 0.80)) {
             hasFeathers = true;
             featherInventorySpot = Inventory.itemSlotPosition(ItemList.FEATHER_314, 0.80);
+            Logger.log("We have feathers in spot: " + featherInventorySpot);
         }
 
         // Loop over dartIDs to check inventory for each type of dart
@@ -44,15 +45,16 @@ public class CheckInventory extends Task {
                 hasDartTips = true;
                 dartInventorySpot = Inventory.itemSlotPosition(dartID, 0.80);
                 foundDartID = dartID;
+                Logger.log("We found darts");
                 break;
             }
         }
         checkedInventory = true;
-        if (!hasFeathers || !hasDartTips || featherInventorySpot == 0 || dartInventorySpot == 0) {
+        if (!hasFeathers || !hasDartTips) {
             Logger.log("We failed checking inventory.. stopping script");
             Script.stop();
         }
 
-        return hasFeathers && hasDartTips && featherInventorySpot != 0 && dartInventorySpot != 0;
+        return hasFeathers && hasDartTips;
     }
 }
