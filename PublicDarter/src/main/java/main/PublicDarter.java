@@ -20,7 +20,7 @@ import static helpers.Interfaces.*;
         description = "An easy to use Dart crafter. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.0",
         guideLink = "https://wiki.mufasaclient.com/docs/publicdarter/",
-        categories = {ScriptCategory.Mining}
+        categories = {ScriptCategory.Fletching}
 )
 @ScriptConfiguration.List(
         {
