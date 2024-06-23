@@ -26,6 +26,7 @@ public class CreateDarts extends Task {
         Condition.sleep(generateRandomDelay(PublicDarter.minTapSpeed, PublicDarter.maxTapSpeed));
         Inventory.tapItem(CheckInventory.dartInventorySpot);
         Condition.sleep(generateRandomDelay(PublicDarter.minTapSpeed, PublicDarter.maxTapSpeed));
+        XpBar.getXP();
         return true;
     }
 
