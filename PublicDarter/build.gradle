@@ -23,7 +23,7 @@ dependencies {
 }
 
 jar {
-    archiveFileName = 'PublicAmethystMiner.jar'
+    archiveFileName = 'PublicDarter.jar'
     destinationDirectory = file('jar/')
 
     manifest {
