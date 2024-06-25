@@ -14,7 +14,7 @@ public class PerformAlching extends Task {
 
     @Override
     public boolean execute() {
-        if (!Inventory.contains(itemID, 0.80)) {
+        if (!Inventory.contains(itemID, 0.60)) {
             Logger.log("Ran out of items to alch, stopping script");
             Logout.logout();
             Script.stop();
