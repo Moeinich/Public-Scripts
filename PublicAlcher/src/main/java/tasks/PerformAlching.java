@@ -14,10 +14,11 @@ public class PerformAlching extends Task {
 
     @Override
     public boolean execute() {
-        if (!Inventory.contains(itemID, 0.60)) {
+        if (!Inventory.contains(itemID, 0.80) && GameTabs.isInventoryTabOpen()) {
             Logger.log("Ran out of items to alch, stopping script");
             Logout.logout();
             Script.stop();
+            return true;
         }
 
         // Open the Magic tab if it is not already open
@@ -37,7 +38,7 @@ public class PerformAlching extends Task {
         // Tap the item in the Inventory
         if (GameTabs.isInventoryTabOpen()) {
             Logger.log("Pressing item in inventory");
-            Inventory.tapItem(itemID, true, 0.60);
+            Inventory.tapItem(itemID, true, 0.80);
             // Need to wait for magic tab to open again, repeating the process
             Condition.wait(GameTabs::isMagicTabOpen, 100, 40);
             XpBar.getXP();
