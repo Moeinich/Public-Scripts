@@ -8,13 +8,6 @@ import static tasks.CheckForItems.checkedForItems;
 
 public class PerformAlching extends Task {
 
-    private int natCountCache;
-    private int itemCountCache;
-    private final int previousNatCountCache = 0;
-    private final int previousItemCountCache = 0;
-    private final boolean doneInitialCheck = false;
-
-
     public boolean activate() {
         return checkedForItems;
     }
