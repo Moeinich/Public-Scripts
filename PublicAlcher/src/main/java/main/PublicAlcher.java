@@ -48,7 +48,7 @@ public class PublicAlcher extends AbstractScript {
 
     @Override
     public void onStart(){
-        Logger.log("Setting everything up");
+        Logger.log("Starting Public Alcher v1.1");
 
         Map<String, String> configs = getConfigurations();
         itemID = Integer.parseInt(configs.get("Item ID"));
