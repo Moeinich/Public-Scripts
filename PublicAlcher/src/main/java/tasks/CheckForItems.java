@@ -24,20 +24,18 @@ public class CheckForItems extends Task {
             Condition.wait(() -> GameTabs.isInventoryTabOpen(), 50, 10);
         }
 
-        if (GameTabs.isInventoryTabOpen()) {
-            boolean hasNats = Inventory.contains(ItemList.NATURE_RUNE_561, 0.60);
-            checkedForNats = true;
-            boolean hasAlchItem = Inventory.contains(itemID, 0.60);
-            checkedForItem = true;
+        boolean hasNats = Inventory.contains(ItemList.NATURE_RUNE_561, 0.80);
+        checkedForNats = true;
+        boolean hasAlchItem = Inventory.contains(itemID, 0.80);
+        checkedForItem = true;
 
-            if (hasNats && hasAlchItem) {
-                checkedForItems = true;
-                return true;
-            }
+        if (hasNats && hasAlchItem) {
+            checkedForItems = true;
+            return true;
+        } else {
+            Logger.log("Nats or Item not found, stopping script");
+            Script.stop();
+            return false;
         }
-
-        Logger.log("Nats or Item not found, stopping script");
-        Script.stop();
-        return false;
     }
 }
