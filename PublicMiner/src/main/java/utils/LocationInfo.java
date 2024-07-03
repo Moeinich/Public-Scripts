@@ -28,7 +28,7 @@ public enum LocationInfo {
     VARROCK_WEST_IRON(
             new Rectangle(411, 209, 63, 146),
             2,
-            new Tile(2697, 994) //Step
+            new Tile(2698, 994) //Step
     ),
     VARROCK_WEST_SILVER(
             new Rectangle(361, 206, 111, 104),
