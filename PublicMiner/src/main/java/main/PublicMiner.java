@@ -18,7 +18,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.238",
+        version = "1.239",
         guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
