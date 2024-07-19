@@ -17,7 +17,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Pumper",
         description = "An easy to use AFK BF Pumper. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.011",
+        version = "1.012",
         guideLink = "",
         categories = {ScriptCategory.Combat}
 )

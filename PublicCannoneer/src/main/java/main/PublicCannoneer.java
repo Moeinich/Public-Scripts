@@ -18,7 +18,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Cannoneer",
         description = "An easy to use AFK cannon script. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.12",
+        version = "1.13",
         guideLink = "https://wiki.mufasaclient.com/docs/public-cannoneer/",
         categories = {ScriptCategory.Combat}
 )

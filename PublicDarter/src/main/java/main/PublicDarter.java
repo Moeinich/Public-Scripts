@@ -18,7 +18,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Darter",
         description = "An easy to use Dart crafter. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.011",
+        version = "1.012",
         guideLink = "https://wiki.mufasaclient.com/docs/publicdarter/",
         categories = {ScriptCategory.Fletching}
 )
