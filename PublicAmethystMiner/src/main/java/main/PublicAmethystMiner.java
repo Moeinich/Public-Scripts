@@ -18,7 +18,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Amethyst Miner",
         description = "An easy to use Amethyst Miner. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.012",
+        version = "1.011",
         guideLink = "https://wiki.mufasaclient.com/docs/public-amethystminer/",
         categories = {ScriptCategory.Mining, ScriptCategory.Moneymaking}
 )
