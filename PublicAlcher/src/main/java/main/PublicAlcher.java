@@ -19,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Alcher",
         description = "An easy to use Alcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.15",
+        version = "1.16",
         guideLink = "",
         categories = {ScriptCategory.Magic}
 )
@@ -50,7 +50,7 @@ public class PublicAlcher extends AbstractScript {
 
     @Override
     public void onStart(){
-        Logger.log("Starting Public Alcher v1.1");
+        Logger.log("Starting Public Alcher v1.16");
 
         Map<String, String> configs = getConfigurations();
         itemID = Integer.parseInt(configs.get("Item ID"));
@@ -64,6 +64,11 @@ public class PublicAlcher extends AbstractScript {
         magicLevel = Stats.getRealLevel(Skills.MAGIC);
 
         Logger.log("Magic level is: " + magicLevel);
+        if (magicLevel >= 55) {
+            Logger.log("We'll be using High Level Alchemy during this run");
+        } else {
+            Logger.log("We'll be using Low Level Alchemy during this run");
+        }
 
         // Open the inventory again.
         GameTabs.openInventoryTab();
