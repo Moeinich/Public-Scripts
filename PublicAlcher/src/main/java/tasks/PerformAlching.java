@@ -1,5 +1,6 @@
 package tasks;
 
+import main.PublicAlcher;
 import utils.Task;
 
 import static helpers.Interfaces.*;
@@ -28,11 +29,17 @@ public class PerformAlching extends Task {
             Condition.wait(GameTabs::isMagicTabOpen, 100, 10);
         }
 
-        // Tap the High Alchemy spell in the Magic tab
+        // Tap the Alchemy spell based on the magic level in the Magic tab
         if (GameTabs.isMagicTabOpen()) {
-            Logger.log("Pressing High Alchemy spell");
-            Magic.tapHighLevelAlchemySpell();
-            Condition.wait(GameTabs::isInventoryTabOpen, 100, 40);
+            if (PublicAlcher.magicLevel > 55) {
+                Logger.log("Pressing High Alchemy spell");
+                Magic.tapHighLevelAlchemySpell();
+                Condition.wait(GameTabs::isInventoryTabOpen, 100, 40);
+            } else {
+                Logger.log("Pressing Low Alchemy spell");
+                Magic.tapLowLevelAlchemySpell();
+                Condition.wait(GameTabs::isInventoryTabOpen, 100, 40);
+            }
         }
 
         // Tap the item in the Inventory

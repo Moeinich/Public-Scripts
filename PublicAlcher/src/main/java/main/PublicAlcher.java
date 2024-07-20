@@ -4,6 +4,7 @@ import helpers.*;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.OptionType;
+import helpers.utils.Skills;
 import tasks.CheckForItems;
 import tasks.PerformAlching;
 import utils.Task;
@@ -18,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Alcher",
         description = "An easy to use Alcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.14",
+        version = "1.15",
         guideLink = "",
         categories = {ScriptCategory.Magic}
 )
@@ -45,6 +46,7 @@ public class PublicAlcher extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
     public static Boolean useWDH;
+    public static int magicLevel = 0;
 
     @Override
     public void onStart(){
@@ -55,6 +57,14 @@ public class PublicAlcher extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
+
+        // Check our levels here to decide which spell to use.
+        GameTabs.openStatsTab();
+        Condition.sleep(600);
+        magicLevel = Stats.getRealLevel(Skills.MAGIC);
+
+        // Open the inventory again.
+        GameTabs.openInventoryTab();
     }
 
     List<Task> alchTasks = Arrays.asList(
