@@ -63,6 +63,8 @@ public class PublicAlcher extends AbstractScript {
         Condition.sleep(600);
         magicLevel = Stats.getRealLevel(Skills.MAGIC);
 
+        Logger.log("Magic level is: " + magicLevel);
+
         // Open the inventory again.
         GameTabs.openInventoryTab();
     }
