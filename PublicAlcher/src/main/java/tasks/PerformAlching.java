@@ -31,7 +31,7 @@ public class PerformAlching extends Task {
 
         // Tap the Alchemy spell based on the magic level in the Magic tab
         if (GameTabs.isMagicTabOpen()) {
-            if (PublicAlcher.magicLevel >= 55) {
+            if (PublicAlcher.alchemySpell.equals("High Level Alchemy")) {
                 Logger.log("Pressing High Alchemy spell");
                 Magic.tapHighLevelAlchemySpell();
                 Condition.wait(GameTabs::isInventoryTabOpen, 100, 40);

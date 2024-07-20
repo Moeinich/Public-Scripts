@@ -1,6 +1,7 @@
 package main;
 
 import helpers.*;
+import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.OptionType;
@@ -33,6 +34,16 @@ import static helpers.Interfaces.*;
                         optionType = OptionType.INTEGER
                 ),
                 @ScriptConfiguration(
+                        name =  "Alchemy spell",
+                        description = "Which alchemy spell would you like to cast?",
+                        defaultValue = "High Level Alchemy",
+                        allowedValues = {
+                                @AllowedValue(optionName = "High Level Alchemy"),
+                                @AllowedValue(optionName = "Low Level Alchemy")
+                        },
+                        optionType = OptionType.STRING
+                ),
+                @ScriptConfiguration(
                         name = "Use world hopper?",
                         description = "Would you like to hop worlds based on your hop profile settings?",
                         defaultValue = "1",
@@ -47,6 +58,7 @@ public class PublicAlcher extends AbstractScript {
     public static Boolean hopEnabled;
     public static Boolean useWDH;
     public static int magicLevel = 0;
+    public static String alchemySpell;
 
     @Override
     public void onStart(){
@@ -57,6 +69,7 @@ public class PublicAlcher extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
+        alchemySpell = configs.get("Alchemy spell");
 
         // Check our levels here to decide which spell to use.
         GameTabs.openStatsTab();
@@ -64,11 +77,6 @@ public class PublicAlcher extends AbstractScript {
         magicLevel = Stats.getRealLevel(Skills.MAGIC);
 
         Logger.log("Magic level is: " + magicLevel);
-        if (magicLevel >= 55) {
-            Logger.log("We'll be using High Level Alchemy during this run");
-        } else {
-            Logger.log("We'll be using Low Level Alchemy during this run");
-        }
 
         // Open the inventory again.
         GameTabs.openInventoryTab();
