@@ -38,7 +38,7 @@ public class PerformAlching extends Task {
         // Tap the item in the Inventory
         if (GameTabs.isInventoryTabOpen()) {
             Logger.log("Pressing item in inventory");
-            Inventory.tapItem(itemID, true, 0.80);
+            Inventory.tapItem(itemID, true, 0.69);
             // Need to wait for magic tab to open again, repeating the process
             Condition.wait(GameTabs::isMagicTabOpen, 100, 40);
             XpBar.getXP();
