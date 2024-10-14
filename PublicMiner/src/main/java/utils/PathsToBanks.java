@@ -5,76 +5,203 @@ import helpers.utils.Tile;
 public enum PathsToBanks {
     VARROCK_EAST(
             new Tile[] {
-                    new Tile(2848, 987), new Tile(2851, 984), new Tile(2855, 979), new Tile(2856, 970), new Tile(2852, 961), new Tile(2851, 951), new Tile(2851, 945), new Tile(2850, 938), new Tile(2847, 928), new Tile(2842, 920), new Tile(2834, 916), new Tile(2826, 913), new Tile(2814, 913), new Tile(2803, 912), new Tile(2802, 916), new Tile(2801, 923)
+                    new Tile(13152, 13227, 0),
+                    new Tile(13160, 13241, 0),
+                    new Tile(13167, 13253, 0),
+                    new Tile(13172, 13275, 0),
+                    new Tile(13171, 13300, 0),
+                    new Tile(13165, 13322, 0),
+                    new Tile(13166, 13337, 0),
+                    new Tile(13166, 13365, 0),
+                    new Tile(13157, 13397, 0),
+                    new Tile(13149, 13416, 0),
+                    new Tile(13142, 13438, 0),
+                    new Tile(13121, 13441, 0),
+                    new Tile(13099, 13452, 0),
+                    new Tile(13056, 13450, 0),
+                    new Tile(13040, 13454, 0),
+                    new Tile(13015, 13433, 0)
             },
             new Tile[] {
-                    new Tile(2848, 987), new Tile(2850, 985), new Tile(2853, 981), new Tile(2855, 977), new Tile(2854, 970), new Tile(2853, 960), new Tile(2852, 954), new Tile(2851, 948), new Tile(2850, 943), new Tile(2849, 936), new Tile(2841, 931), new Tile(2838, 926), new Tile(2835, 922), new Tile(2833, 917), new Tile(2829, 912), new Tile(2821, 912), new Tile(2811, 913), new Tile(2803, 912), new Tile(2802, 918), new Tile(2800, 923)
+                    new Tile(13149, 13227, 0),
+                    new Tile(13158, 13240, 0),
+                    new Tile(13170, 13256, 0),
+                    new Tile(13174, 13279, 0),
+                    new Tile(13173, 13303, 0),
+                    new Tile(13169, 13320, 0),
+                    new Tile(13166, 13347, 0),
+                    new Tile(13163, 13369, 0),
+                    new Tile(13155, 13398, 0),
+                    new Tile(13153, 13416, 0),
+                    new Tile(13143, 13444, 0),
+                    new Tile(13116, 13450, 0),
+                    new Tile(13095, 13452, 0),
+                    new Tile(13064, 13455, 0),
+                    new Tile(13042, 13455, 0),
+                    new Tile(13017, 13434, 0)
             },
-            new Tile[] {new Tile(2847, 987), new Tile(2851, 983), new Tile(2856, 979), new Tile(2855, 971), new Tile(2853, 963), new Tile(2851, 954), new Tile(2851, 947), new Tile(2851, 939), new Tile(2848, 932), new Tile(2846, 925), new Tile(2841, 920), new Tile(2834, 915), new Tile(2824, 913), new Tile(2815, 913), new Tile(2803, 912), new Tile(2801, 922)
+            new Tile[] {
+                    new Tile(13148, 13227, 0),
+                    new Tile(13157, 13238, 0),
+                    new Tile(13167, 13249, 0),
+                    new Tile(13175, 13262, 0),
+                    new Tile(13172, 13287, 0),
+                    new Tile(13168, 13314, 0),
+                    new Tile(13165, 13340, 0),
+                    new Tile(13166, 13364, 0),
+                    new Tile(13159, 13389, 0),
+                    new Tile(13151, 13413, 0),
+                    new Tile(13145, 13432, 0),
+                    new Tile(13121, 13440, 0),
+                    new Tile(13101, 13454, 0),
+                    new Tile(13073, 13455, 0),
+                    new Tile(13042, 13456, 0),
+                    new Tile(13018, 13447, 0),
+                    new Tile(13016, 13428, 0)
             }
     ),
     VARROCK_WEST(
             new Tile[] {
-                    new Tile(2697, 981), new Tile(2696, 977), new Tile(2695, 970), new Tile(2693, 962), new Tile(2693, 953), new Tile(2692, 945), new Tile(2692, 938), new Tile(2692, 933), new Tile(2693, 927), new Tile(2693, 921), new Tile(2694, 918), new Tile(2697, 915), new Tile(2701, 911), new Tile(2708, 908)
+                    new Tile(12714, 13259, 0),
+                    new Tile(12711, 13277, 0),
+                    new Tile(12705, 13300, 0),
+                    new Tile(12694, 13322, 0),
+                    new Tile(12685, 13345, 0),
+                    new Tile(12687, 13370, 0),
+                    new Tile(12688, 13391, 0),
+                    new Tile(12690, 13415, 0),
+                    new Tile(12688, 13434, 0),
+                    new Tile(12692, 13446, 0),
+                    new Tile(12704, 13454, 0),
+                    new Tile(12722, 13464, 0),
+                    new Tile(12734, 13486, 0)
             },
             new Tile[] {
-                    new Tile(2700, 979), new Tile(2699, 973), new Tile(2698, 968), new Tile(2696, 960), new Tile(2695, 955), new Tile(2693, 947), new Tile(2693, 939), new Tile(2693, 932), new Tile(2693, 925), new Tile(2694, 921), new Tile(2699, 913), new Tile(2707, 909)
+                    new Tile(12710, 13262, 0),
+                    new Tile(12708, 13283, 0),
+                    new Tile(12701, 13304, 0),
+                    new Tile(12692, 13332, 0),
+                    new Tile(12687, 13357, 0),
+                    new Tile(12689, 13387, 0),
+                    new Tile(12689, 13408, 0),
+                    new Tile(12692, 13431, 0),
+                    new Tile(12717, 13461, 0),
+                    new Tile(12731, 13472, 0),
+                    new Tile(12736, 13488, 0)
             },
             new Tile[] {
-                    new Tile(2702, 978), new Tile(2700, 975), new Tile(2698, 969), new Tile(2696, 963), new Tile(2694, 959), new Tile(2693, 954), new Tile(2692, 948), new Tile(2692, 941), new Tile(2693, 935), new Tile(2693, 930), new Tile(2694, 925), new Tile(2694, 921), new Tile(2695, 916), new Tile(2701, 914), new Tile(2707, 908)
+                    new Tile(12711, 13259, 0),
+                    new Tile(12707, 13277, 0),
+                    new Tile(12695, 13310, 0),
+                    new Tile(12688, 13336, 0),
+                    new Tile(12686, 13371, 0),
+                    new Tile(12689, 13400, 0),
+                    new Tile(12691, 13428, 0),
+                    new Tile(12707, 13449, 0),
+                    new Tile(12735, 13461, 0),
+                    new Tile(12738, 13486, 0)
             }
     ),
     ISLE_OF_SOULS(
             new Tile[] {
-                    new Tile(1503, 1755), new Tile(1501, 1752), new Tile(1499, 1747), new Tile(1498, 1738), new Tile(1500, 1735), new Tile(1507, 1730), new Tile(1515, 1725), new Tile(1521, 1722), new Tile(1524, 1718), new Tile(1528, 1711), new Tile(1529, 1704), new Tile(1529, 1697), new Tile(1529, 1688), new Tile(1530, 1683), new Tile(1530, 1677), new Tile(1532, 1671)
+                    new Tile(8772, 10915, 0),
+                    new Tile(8763, 10925, 0),
+                    new Tile(8755, 10949, 0),
+                    new Tile(8751, 10969, 0),
+                    new Tile(8756, 10987, 0),
+                    new Tile(8772, 11004, 0),
+                    new Tile(8790, 11014, 0),
+                    new Tile(8817, 11022, 0),
+                    new Tile(8834, 11035, 0),
+                    new Tile(8841, 11057, 0),
+                    new Tile(8845, 11078, 0),
+                    new Tile(8844, 11107, 0),
+                    new Tile(8843, 11129, 0),
+                    new Tile(8846, 11151, 0),
+                    new Tile(8851, 11171, 0)
             },
             new Tile[] {
-                    new Tile(1507, 1753), new Tile(1504, 1751), new Tile(1501, 1750), new Tile(1499, 1746), new Tile(1499, 1740), new Tile(1499, 1735), new Tile(1506, 1731), new Tile(1511, 1727), new Tile(1515, 1724), new Tile(1521, 1720), new Tile(1525, 1714), new Tile(1529, 1707), new Tile(1529, 1702), new Tile(1530, 1694), new Tile(1529, 1687), new Tile(1530, 1680), new Tile(1532, 1671)
+                    new Tile(8778, 10924, 0),
+                    new Tile(8767, 10930, 0),
+                    new Tile(8756, 10939, 0),
+                    new Tile(8752, 10956, 0),
+                    new Tile(8752, 10980, 0),
+                    new Tile(8766, 10998, 0),
+                    new Tile(8777, 11004, 0),
+                    new Tile(8791, 11013, 0),
+                    new Tile(8810, 11021, 0),
+                    new Tile(8825, 11026, 0),
+                    new Tile(8837, 11038, 0),
+                    new Tile(8842, 11054, 0),
+                    new Tile(8843, 11076, 0),
+                    new Tile(8844, 11100, 0),
+                    new Tile(8845, 11118, 0),
+                    new Tile(8845, 11139, 0),
+                    new Tile(8846, 11150, 0),
+                    new Tile(8851, 11172, 0)
             },
             new Tile[] {
-                    new Tile(1503, 1757), new Tile(1502, 1753), new Tile(1498, 1746), new Tile(1498, 1739), new Tile(1505, 1730), new Tile(1514, 1726), new Tile(1525, 1720), new Tile(1529, 1711), new Tile(1530, 1701), new Tile(1529, 1690), new Tile(1530, 1679), new Tile(1532, 1672)
+                    new Tile(8771, 10915, 0),
+                    new Tile(8761, 10923, 0),
+                    new Tile(8757, 10937, 0),
+                    new Tile(8752, 10954, 0),
+                    new Tile(8749, 10971, 0),
+                    new Tile(8757, 10989, 0),
+                    new Tile(8778, 11002, 0),
+                    new Tile(8797, 11014, 0),
+                    new Tile(8815, 11021, 0),
+                    new Tile(8836, 11041, 0),
+                    new Tile(8843, 11065, 0),
+                    new Tile(8845, 11088, 0),
+                    new Tile(8845, 11114, 0),
+                    new Tile(8844, 11133, 0),
+                    new Tile(8845, 11150, 0),
+                    new Tile(8852, 11173, 0)
             }
     ),
     MINING_GUILD_COAL(
             new Tile[] {
-                    new Tile(2137,214),
-                    new Tile(2129,210)
+                    new Tile(12075, 38608, 0),
+                    new Tile(12055, 38619, 0)
             },
             new Tile[] {
-                    new Tile(2137,214),
-                    new Tile(2129,210)
+                    new Tile(12080, 38606, 0),
+                    new Tile(12055, 38619, 0)
             },
             new Tile[] {
-                    new Tile(2137,214),
-                    new Tile(2129,210)
+                    new Tile(12082, 38605, 0),
+                    new Tile(12054, 38619, 0)
             }
     ),
     MINING_GUILD_IRON_WEST(
             new Tile[] {
-                    new Tile(2140,206),
-                    new Tile(2129,210)
+                    new Tile(12077, 38622, 0),
+                    new Tile(12053, 38618, 0)
             },
             new Tile[] {
-                    new Tile(2140,206),
-                    new Tile(2129,210)
+                    new Tile(12078, 38623, 0),
+                    new Tile(12052, 38617, 0)
             },
             new Tile[] {
-                    new Tile(2140,206),
-                    new Tile(2129,210)
+                    new Tile(12076, 38626, 0),
+                    new Tile(12053, 38616, 0)
             }
     ),
     MINING_GUILD_IRON_EAST(
             new Tile[] {
-                    new Tile(2150,207),
-                    new Tile(2129,210)
+                    new Tile(12107, 38624, 0),
+                    new Tile(12087, 38614, 0),
+                    new Tile(12055, 38620, 0)
             },
             new Tile[] {
-                    new Tile(2150,207),
-                    new Tile(2129,210)
+                    new Tile(12120, 38619, 0),
+                    new Tile(12088, 38615, 0),
+                    new Tile(12053, 38619, 0)
             },
             new Tile[] {
-                    new Tile(2150,207),
-                    new Tile(2129,210)
+                    new Tile(12120, 38617, 0),
+                    new Tile(12089, 38614, 0),
+                    new Tile(12053, 38618, 0)
             }
     );
 

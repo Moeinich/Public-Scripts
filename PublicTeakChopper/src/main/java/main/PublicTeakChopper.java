@@ -4,6 +4,7 @@ import helpers.*;
 import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
+import helpers.utils.MapChunk;
 import helpers.utils.OptionType;
 import tasks.CheckEquipment;
 import tasks.DropLogs;
@@ -60,6 +61,8 @@ public class PublicTeakChopper extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
+
+        Walker.setup(new MapChunk(new String[]{"33-46", "35-44"}, "0"));
     }
 
     // Task list!

@@ -1,60 +1,86 @@
 package utils;
 
 import helpers.utils.Area;
-import helpers.utils.RegionBox;
 import helpers.utils.Tile;
 
 public enum RegionInfo {
     VARROCK_EAST(
-            new RegionBox("VARROCK_EAST", 8232, 2601, 8748, 3213), //World region for this spot
-            new Area(new Tile(2829, 983), new Tile(2862, 1013)), // the Mine area
-            new Area(new Tile(2796, 916), new Tile(2808, 929)) // the Bank area
+            new Area(
+                    new Tile(13119, 13177, 0),
+                    new Tile(13179, 13233, 0)
+            ), // the Mine area
+            new Area(
+                    new Tile(13000, 13414, 0),
+                    new Tile(13035, 13442, 0)
+            ) // the Bank area
     ),
     VARROCK_WEST(
-            new RegionBox("VARROCK_WEST", 7830, 2538, 8292, 3135),
-            new Area(new Tile(2690, 975), new Tile(2712, 1002)),
-            new Area(new Tile(2704, 886), new Tile(2718, 906))
+            new Area(
+                    new Tile(12686, 13197, 0),
+                    new Tile(12741, 13268, 0)
+            ),
+            new Area(
+                    new Tile(12719, 13475, 0),
+                    new Tile(12765, 13536, 0)
+            )
     ),
     ISLE_OF_SOULS(
-            new RegionBox("SOUL_ISLES", 4440, 4938, 4707, 5355),
-            new Area(new Tile(1498, 1745), new Tile(1522, 1769)),
-            new Area(new Tile(1518, 1663), new Tile(1544, 1675))
+            new Area(
+                    new Tile(8768, 10900, 0),
+                    new Tile(8803, 10928, 0)
+            ),
+            new Area(
+                    new Tile(8828, 11163, 0),
+                    new Tile(8871, 11197, 0)
+            )
     ),
     AL_KHARID_EAST(
-            new RegionBox("AL_KHARID_EAST", 8937, 3699, 9093, 3849),
-            new Area(new Tile(2993, 1250), new Tile(3007, 1263)),
-            new Area(new Tile(2817, 1251), new Tile(2828, 1270))
+            new Area(
+                    new Tile(13599, 12409, 0),
+                    new Tile(13625, 12436, 0)
+            ),
+            new Area(
+                    new Tile(13062, 12385, 0),
+                    new Tile(13093, 12438, 0)
+            )
     ),
     MINING_GUILD_COAL(
-            new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
-            new Area(new Tile(2123, 198), new Tile(2174, 218)), // Mine area
-            new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
+            new Area(new Tile(12063, 38595, 0), new Tile(12086, 38620, 0)), // Mine area
+            new Area(
+                    new Tile(12042, 38610, 0),
+                    new Tile(12058, 38627, 0)
+            ) // Bank
     ),
     MINING_GUILD_IRON_EAST(
-            new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
-            new Area(new Tile(2123, 198), new Tile(2174, 218)), //mine area
-            new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
+            new Area(
+                    new Tile(12113, 38618, 0),
+                    new Tile(12129, 38629, 0)
+            ), //mine area
+            new Area(
+                    new Tile(12042, 38610, 0),
+                    new Tile(12058, 38627, 0)
+            ) // Bank
     ),
     MINING_GUILD_IRON_WEST(
-            new RegionBox("MINING_GUILD", 6291, 459, 6654, 777), // Region
-            new Area(new Tile(2123, 198), new Tile(2174, 218)), // mining area
-            new Area(new Tile(2124, 205), new Tile(2130, 212)) // Bank
+            new Area(
+                    new Tile(12080, 38619, 0),
+                    new Tile(12091, 38634, 0)
+            ), // mining area
+            new Area(
+                    new Tile(12042, 38610, 0),
+                    new Tile(12058, 38627, 0)
+            ) // Bank
 
     );
 
-    private final RegionBox worldRegion;
     private final Area mineArea;
     private final Area bankArea;
 
-    RegionInfo(RegionBox worldRegion, Area mineRegion, Area bankRegion) {
-        this.worldRegion = worldRegion;
+    RegionInfo(Area mineRegion, Area bankRegion) {
         this.mineArea = mineRegion;
         this.bankArea = bankRegion;
     }
 
-    public RegionBox getWorldRegion() {
-        return worldRegion;
-    }
     public Area getMineArea() {
         return mineArea;
     }

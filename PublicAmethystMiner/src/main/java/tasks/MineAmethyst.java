@@ -26,12 +26,12 @@ public class MineAmethyst extends Task {
 
     @Override
     public boolean activate() {
-        location = Walker.getPlayerPosition(miningGuild); // Cache our position so we only need to check once per loop
+        location = Walker.getPlayerPosition(); // Cache our position so we only need to check once per loop
 
         // Check if we should go to mining spot
         if (!Inventory.isFull() && Player.isTileWithinArea(location, bankArea)) {
             Logger.log("Walking to mining spot!");
-            Walker.walkPath(miningGuild, toMinePath);
+            Walker.walkPath(toMinePath);
         }
 
         return Player.isTileWithinArea(location, mineArea);
@@ -137,7 +137,7 @@ public class MineAmethyst extends Task {
     }
 
     private boolean playerIsMoving() {
-        Tile currentLocation = Walker.getPlayerPosition(miningGuild);
+        Tile currentLocation = Walker.getPlayerPosition();
 
         if (lastLocation != null && Player.tileEquals(lastLocation, currentLocation)) {
             long elapsedMillis = Duration.between(lastCheckTime, Instant.now()).toMillis();

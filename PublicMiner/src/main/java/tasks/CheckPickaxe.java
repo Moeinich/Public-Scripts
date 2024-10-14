@@ -16,9 +16,9 @@ public class CheckPickaxe extends Task {
     int[] pickaxeIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
             ItemList._3RD_AGE_PICKAXE_20014,
             ItemList.INFERNAL_PICKAXE_13243,
-            ItemList.INFERNAL_PICKAXE_UNCHARGED_13244,
+            ItemList.INFERNAL_PICKAXE__UNCHARGED__13244,
             ItemList.CRYSTAL_PICKAXE_23680,
-            ItemList.CRYSTAL_PICKAXE_UNCHARGED_23682,
+            ItemList.CRYSTAL_PICKAXE__INACTIVE__23682,
             ItemList.DRAGON_PICKAXE_11920,
             ItemList.RUNE_PICKAXE_1275,
             ItemList.GILDED_PICKAXE_23276,

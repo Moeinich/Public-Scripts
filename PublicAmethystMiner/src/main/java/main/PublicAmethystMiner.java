@@ -61,32 +61,32 @@ public class PublicAmethystMiner extends AbstractScript {
     public static Boolean pickaxeEquipped = false;
     public static RegionBox miningGuild = new RegionBox("MINING_GUILD", 6291, 459, 6654, 777);
     public static Area bankArea = new Area(
-            new Tile(2124, 205),
-            new Tile(2134, 216)
+            new Tile(12042, 38600, 0),
+            new Tile(12065, 38632, 0)
     );
     public static Area mineArea = new Area(
-            new Tile(2133, 215),
-            new Tile(2156, 236)
+            new Tile(12067, 38535, 0),
+            new Tile(12123, 38586, 0)
     );
-    public static Tile[] bankPath = new Tile[]{
-            new Tile(2143, 221),
-            new Tile(2139, 212),
-            new Tile(2129, 210)
+    public static Tile[] bankPath = new Tile[] {
+            new Tile(12096, 38587, 0),
+            new Tile(12086, 38607, 0),
+            new Tile(12069, 38621, 0),
+            new Tile(12053, 38620, 0)
     };
-    public static Tile[] toMinePath = new Tile[]{
-            new Tile(2133, 208),
-            new Tile(2140, 213),
-            new Tile(2143, 221),
-            new Tile(2148, 229),
-            new Tile(2144, 234)
+    public static Tile[] toMinePath = new Tile[] {
+            new Tile(12070, 38621, 0),
+            new Tile(12086, 38607, 0),
+            new Tile(12094, 38592, 0),
+            new Tile(12097, 38578, 0)
     };
 
     public static int[] clueIDs = {
-            ItemList.CLUE_GEODE_BEGINNER_23442,
-            ItemList.CLUE_GEODE_EASY_20358,
-            ItemList.CLUE_GEODE_MEDIUM_20360,
-            ItemList.CLUE_GEODE_HARD_20362,
-            ItemList.CLUE_GEODE_ELITE_20364
+            ItemList.CLUE_GEODE__BEGINNER__23442,
+            ItemList.CLUE_GEODE__EASY__20358,
+            ItemList.CLUE_GEODE__MEDIUM__20360,
+            ItemList.CLUE_GEODE__HARD__20362,
+            ItemList.CLUE_GEODE__ELITE__20364
     };
     public static int[] gemIDs = {
             ItemList.UNCUT_OPAL_1625,
@@ -119,6 +119,8 @@ public class PublicAmethystMiner extends AbstractScript {
         useWDH = Boolean.parseBoolean(configs.get("Use world hopper?.useWDH"));
         cutAmethysts = Boolean.parseBoolean(configs.get("Cut the amethyst"));
         craftOptionSelected = configs.get("Which craft option?");
+
+        Walker.setup(new MapChunk(new String[]{"47-151", "46-151", "46-152", "47-152"}, "0"));
     }
 
     @Override

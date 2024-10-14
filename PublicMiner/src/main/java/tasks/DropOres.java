@@ -3,7 +3,6 @@ package tasks;
 import utils.Task;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;

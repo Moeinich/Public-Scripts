@@ -5,6 +5,7 @@ import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.ItemList;
+import helpers.utils.MapChunk;
 import helpers.utils.OptionType;
 import tasks.*;
 import utils.*;
@@ -101,11 +102,11 @@ public class PublicMiner extends AbstractScript {
     public static int unidentifiedMineralsInventorySpot = 0;
 
     public static int[] clueIDs = {
-            ItemList.CLUE_GEODE_BEGINNER_23442,
-            ItemList.CLUE_GEODE_EASY_20358,
-            ItemList.CLUE_GEODE_MEDIUM_20360,
-            ItemList.CLUE_GEODE_HARD_20362,
-            ItemList.CLUE_GEODE_ELITE_20364
+            ItemList.CLUE_GEODE__BEGINNER__23442,
+            ItemList.CLUE_GEODE__EASY__20358,
+            ItemList.CLUE_GEODE__MEDIUM__20360,
+            ItemList.CLUE_GEODE__HARD__20362,
+            ItemList.CLUE_GEODE__ELITE__20364
     };
     public static int[] gemIDs = {
             ItemList.UNCUT_OPAL_1625,
@@ -130,21 +131,28 @@ public class PublicMiner extends AbstractScript {
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
         dropCluesAndGems = Boolean.valueOf(configs.get("Drop clues and gems"));
 
-//        //Check and cache STARTING mining level (just to make sure people dont fuck up)
-//        if (!GameTabs.isStatsTabOpen()) {
-//            GameTabs.openStatsTab();
-//        }
-//        if (GameTabs.isStatsTabOpen()) {
-//            miningLevel = Stats.getRealLevel(Skills.MINING);
-//            Logger.log("Mining level: " + miningLevel);
-//        }
-
         //Setup enum values
         setupRegionInfo();
         setupLocationInfo();
         setupVeinColors();
         setupPathsToBank();
         setupOreTypeInts();
+
+        // 47-151, 46-151, 46-152, 47-152, 49-52, 49-53, 49-54, 50-54, 50-53, 51-53, 51-52, 53-49, 53-50, 52-49, 51-49, 50-49, 34-44, 34-43, 33-43, 33-44
+        MapChunk mapChunk = new MapChunk(new String[]
+                {
+                        // Mining Guild
+                        "47-151", "46-151", "46-152", "47-152",
+                        //Varrock
+                        "49-52", "49-53", "49-54", "50-54", "50-53", "51-53", "51-52",
+                        //Al Kharid
+                        "53-49", "53-50", "52-49", "51-49", "50-49",
+                        //Isle of souls
+                        "34-44", "34-43", "33-43", "33-44"
+                },
+                "0");
+
+        Walker.setup(mapChunk);
     }
 
     @Override

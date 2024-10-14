@@ -1,5 +1,6 @@
 package tasks;
 
+import helpers.utils.Area;
 import helpers.utils.RegionBox;
 import helpers.utils.Tile;
 import utils.Task;
@@ -11,15 +12,18 @@ import static main.PublicPumper.hopProfile;
 import static main.PublicPumper.useWDH;
 
 public class PerformPumping extends Task {
-    Rectangle pumpRect = new Rectangle(371, 267, 12, 12);
-    RegionBox BFRegion = new RegionBox("BF", 10263, 1407, 10557, 1707);
-    Tile pumping = new Tile(3483, 514);
-    Tile nextToPump = new Tile(3484, 514);
+    Rectangle pumpRect = new Rectangle(384, 249, 13, 27);
+    Area BFArea = new Area(
+            new Tile(7734, 19562, 0),
+            new Tile(7838, 19652, 0)
+    );
+    Tile pumping = new Tile(7799, 19593, 0);
+    Tile nextToPump = new Tile(7803, 19593, 0);
     Tile location;
 
     public boolean activate() {
-        location = Walker.getPlayerPosition(BFRegion);
-        return Player.isTileWithinRegionbox(location, BFRegion);
+        location = Walker.getPlayerPosition();
+        return Player.isTileWithinArea(location, BFArea);
     }
 
     @Override

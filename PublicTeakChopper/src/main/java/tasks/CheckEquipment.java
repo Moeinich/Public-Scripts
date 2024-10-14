@@ -16,11 +16,11 @@ public class CheckEquipment extends Task {
     boolean checkedEquipment = false;
     int[] axeIDs = { //Reversed order to check highest pickaxes first instead of lower ones.
             ItemList.CRYSTAL_AXE_23673,
-            ItemList.CRYSTAL_AXE_UNCHARGED_23675,
+            ItemList.CRYSTAL_AXE__INACTIVE__23675,
             ItemList.CRYSTAL_FELLING_AXE_28220,
-            ItemList.CRYSTAL_FELLING_AXE_UNCHARGED_28223,
+            ItemList.CRYSTAL_FELLING_AXE__INACTIVE__28223,
             ItemList.INFERNAL_AXE_13241,
-            ItemList.INFERNAL_AXE_UNCHARGED_13242,
+            ItemList.INFERNAL_AXE__UNCHARGED__13242,
             ItemList._3RD_AGE_AXE_20011,
             ItemList._3RD_AGE_FELLING_AXE_28226,
             ItemList.DRAGON_AXE_6739,

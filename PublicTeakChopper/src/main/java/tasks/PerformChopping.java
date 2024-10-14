@@ -1,5 +1,6 @@
 package tasks;
 
+import helpers.utils.Area;
 import helpers.utils.RegionBox;
 import helpers.utils.Tile;
 import utils.Task;
@@ -14,9 +15,12 @@ import static main.PublicTeakChopper.useWDH;
 import static tasks.CheckEquipment.hasAxe;
 
 public class PerformChopping extends Task {
-    RegionBox TeakRegion = new RegionBox("ISLE_OF_SOULS_TEAKS", 4410, 4389, 4695, 4638);
     Rectangle searchRect = new Rectangle(408, 159, 69, 174);
-    Tile teakTile = new Tile(1496, 1495);
+    Tile teakTile = new Tile(8739, 11705, 0);
+    Area teakArea = new Area(
+            new Tile(8699, 11657, 0),
+            new Tile(8810, 11764, 0)
+    );
     Tile location;
 
     List<Color> teakColors =
@@ -27,8 +31,8 @@ public class PerformChopping extends Task {
             );
 
     public boolean activate() {
-        location = Walker.getPlayerPosition(TeakRegion);
-        return Player.isTileWithinRegionbox(location, TeakRegion) && hasAxe;
+        location = Walker.getPlayerPosition();
+        return Player.isTileWithinArea(location, teakArea) && hasAxe;
     }
 
     @Override

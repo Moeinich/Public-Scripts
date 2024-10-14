@@ -37,10 +37,10 @@ public class DropGemsAndClues extends Task {
     }
 
     private void tapAllClues() {
-        Inventory.tapItem(ItemList.CLUE_GEODE_BEGINNER_23442, false, 0.60);
-        Inventory.tapItem(ItemList.CLUE_GEODE_EASY_20358, false, 0.60);
-        Inventory.tapItem(ItemList.CLUE_GEODE_MEDIUM_20360, false, 0.60);
-        Inventory.tapItem(ItemList.CLUE_GEODE_HARD_20362, false, 0.60);
-        Inventory.tapItem(ItemList.CLUE_GEODE_ELITE_20364, false, 0.60);
+        Inventory.tapItem(ItemList.CLUE_GEODE__BEGINNER__23442, false, 0.60);
+        Inventory.tapItem(ItemList.CLUE_GEODE__EASY__20358, false, 0.60);
+        Inventory.tapItem(ItemList.CLUE_GEODE__MEDIUM__20360, false, 0.60);
+        Inventory.tapItem(ItemList.CLUE_GEODE__HARD__20362, false, 0.60);
+        Inventory.tapItem(ItemList.CLUE_GEODE__ELITE__20364, false, 0.60);
     }
 }

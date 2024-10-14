@@ -14,7 +14,7 @@ public class performMining extends Task {
 
     @Override
     public boolean activate() {
-        location = Walker.getPlayerPosition(regionInfo.getWorldRegion());
+        location = Walker.getPlayerPosition();
         if (Inventory.isFull()) {
             return false;
         }
@@ -30,7 +30,7 @@ public class performMining extends Task {
     }
 
     private boolean moveTo(Tile targetLocation) {
-        Walker.step(targetLocation, regionInfo.getWorldRegion());
+        Walker.step(targetLocation);
         Condition.wait(() -> Player.atTile(targetLocation, regionInfo.getWorldRegion()), 100, 20);
         return true;
     }
@@ -38,7 +38,7 @@ public class performMining extends Task {
     private boolean handleMiningAreaCheck() {
         if (Player.isTileWithinArea(location, regionInfo.getMineArea())) {
             Logger.log("Stepping to mine spot");
-            Walker.step(locationInfo.getStepLocation(), regionInfo.getWorldRegion());
+            Walker.step(locationInfo.getStepLocation());
             Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 100, 20);
             return true;
         }
@@ -48,7 +48,7 @@ public class performMining extends Task {
     private boolean handleBankAreaCheck() {
         if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Walking to mining spot!");
-            Walker.walkPath(regionInfo.getWorldRegion(), pickRandomPathReversed(pathsToBanks));
+            Walker.walkPath(pickRandomPathReversed(pathsToBanks));
             Condition.wait(() -> Player.within(regionInfo.getMineArea(), regionInfo.getWorldRegion()), 100, 20);
             return true;
         }

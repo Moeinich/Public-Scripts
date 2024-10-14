@@ -29,7 +29,7 @@ public class CheckForItems extends Task {
             }
         }
 
-        Logger.log("Nats or Item not found, stopping script");
+        Logger.log("Cannonballs not found, stopping script");
         Script.stop();
         return false;
     }

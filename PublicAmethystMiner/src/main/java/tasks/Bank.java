@@ -10,7 +10,7 @@ import static main.PublicAmethystMiner.*;
 public class Bank extends Task {
     Tile location;
     String dynamicBank = null;
-    Tile bankTile = new Tile(2129, 210);
+    Tile bankTile = new Tile(12051, 38621, 0);
 
     @Override
     public boolean activate() {
@@ -19,12 +19,12 @@ public class Bank extends Task {
 
     @Override
     public boolean execute() {
-        location = Walker.getPlayerPosition(miningGuild);
+        location = Walker.getPlayerPosition();
 
         if (!Player.isTileWithinArea(location, bankArea)) {
             Logger.log("Not at the bank, walking there");
             Logger.log("walking to bank area");
-            Walker.walkPath(miningGuild, bankPath);
+            Walker.walkPath(bankPath);
             Condition.wait(() -> Player.within(bankArea, miningGuild), 200, 10);
             return true;
         }

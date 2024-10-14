@@ -20,7 +20,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Alcher",
         description = "An easy to use Alcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.16",
+        version = "1.18",
         guideLink = "",
         categories = {ScriptCategory.Magic}
 )

@@ -3,6 +3,7 @@ package main;
 import helpers.*;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
+import helpers.utils.MapChunk;
 import helpers.utils.OptionType;
 import tasks.PerformPumping;
 import utils.Task;
@@ -17,7 +18,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Pumper",
         description = "An easy to use AFK BF Pumper. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.012",
+        version = "1.22",
         guideLink = "",
         categories = {ScriptCategory.Combat}
 )
@@ -44,6 +45,12 @@ public class PublicPumper extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
+
+        // Create the MapChunk with chunk "30-77 and 31-77 (to avoid using 3x3 chunks) and plane "0"
+        MapChunk chunks = new MapChunk(new String[]{"30-77", "31-77"}, "0");
+
+        // Set up the walker with the created MapChunk
+        Walker.setup(chunks);
     }
 
     // Task list!
