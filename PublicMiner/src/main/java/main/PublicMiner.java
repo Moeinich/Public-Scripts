@@ -101,24 +101,6 @@ public class PublicMiner extends AbstractScript {
     public static int pickaxeInventorySlotNumber = 0;
     public static int unidentifiedMineralsInventorySpot = 0;
 
-    public static int[] clueIDs = {
-            ItemList.CLUE_GEODE__BEGINNER__23442,
-            ItemList.CLUE_GEODE__EASY__20358,
-            ItemList.CLUE_GEODE__MEDIUM__20360,
-            ItemList.CLUE_GEODE__HARD__20362,
-            ItemList.CLUE_GEODE__ELITE__20364
-    };
-    public static int[] gemIDs = {
-            ItemList.UNCUT_OPAL_1625,
-            ItemList.UNCUT_JADE_1627,
-            ItemList.UNCUT_RED_TOPAZ_1629,
-            ItemList.UNCUT_SAPPHIRE_1623,
-            ItemList.UNCUT_SAPPHIRE_1623,
-            ItemList.UNCUT_EMERALD_1621,
-            ItemList.UNCUT_RUBY_1619,
-            ItemList.UNCUT_DIAMOND_1617
-    };
-
     @Override
     public void onStart(){
         //Setup configs

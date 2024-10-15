@@ -31,7 +31,7 @@ public class performMining extends Task {
 
     private boolean moveTo(Tile targetLocation) {
         Walker.step(targetLocation);
-        Condition.wait(() -> Player.atTile(targetLocation, regionInfo.getWorldRegion()), 100, 20);
+        Condition.wait(() -> Player.atTile(targetLocation), 100, 20);
         return true;
     }
 
@@ -39,7 +39,7 @@ public class performMining extends Task {
         if (Player.isTileWithinArea(location, regionInfo.getMineArea())) {
             Logger.log("Stepping to mine spot");
             Walker.step(locationInfo.getStepLocation());
-            Condition.wait(() -> Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion()), 100, 20);
+            Condition.wait(() -> Player.atTile(locationInfo.getStepLocation()), 100, 20);
             return true;
         }
         return false;
@@ -49,14 +49,14 @@ public class performMining extends Task {
         if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Walking to mining spot!");
             Walker.walkPath(pickRandomPathReversed(pathsToBanks));
-            Condition.wait(() -> Player.within(regionInfo.getMineArea(), regionInfo.getWorldRegion()), 100, 20);
+            Condition.wait(() -> Player.within(regionInfo.getMineArea()), 100, 20);
             return true;
         }
         return false;
     }
 
     private boolean isAtStepLocation() {
-        return Player.atTile(locationInfo.getStepLocation(), regionInfo.getWorldRegion());
+        return Player.atTile(locationInfo.getStepLocation());
     }
 
     private boolean doMining() {
