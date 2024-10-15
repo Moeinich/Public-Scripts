@@ -2,12 +2,11 @@ package tasks;
 
 import utils.Task;
 
-import java.util.Arrays;
-
 import static helpers.Interfaces.*;
-import static main.PublicMiner.*;
+import static main.PublicMiner.bankOres;
+import static main.PublicMiner.slotsToSafeConfig;
 
-public class DropOres  extends Task {
+public class DropOres extends Task {
 
     public boolean activate() {
         // Early exit if banking is enabled!
@@ -16,57 +15,44 @@ public class DropOres  extends Task {
         }
         return Inventory.isFull();
     }
+
     @Override
     public boolean execute() {
         if (!Game.isTapToDropEnabled()) {
             Logger.log("Enabling tap to drop");
             Game.enableTapToDrop();
-            Condition.wait(() -> Game.isTapToDropEnabled(), 50, 10);
+            Condition.wait(Game::isTapToDropEnabled, 50, 10);
             Logger.log("Tap to drop enabled");
             return true;
         }
 
-        if (Inventory.contains(21341, 0.75)) {
-            unidentifiedMineralsInventorySpot = Inventory.itemSlotPosition(21341,0.75);
+        Logger.log("Dropping items except for safe slots...");
+
+        int slotsToSafe;
+        try {
+            slotsToSafe = slotsToSafeConfig;
+        } catch (NumberFormatException e) {
+            Logger.log("Invalid Slots to Safe value, defaulting to 0.");
+            slotsToSafe = 0;
         }
 
-        if (!dropCluesAndGems) {
-            boolean inventoryHasOres = Inventory.contains(oreTypeInt, 0.60);
-            // Drop the items
-            if (inventoryHasOres) {
-                Logger.log("Dropping ores");
-                Inventory.tapAllItems(oreTypeInt, 0.60);
-                return true;
-            }
-        } else {
-            if (pickaxeInventorySlotNumber != 0) {
-                Logger.log("Dropping..");
-                if (unidentifiedMineralsInventorySpot != 0) {
-                    Inventory.dropInventItems(Arrays.asList(unidentifiedMineralsInventorySpot, pickaxeInventorySlotNumber), true);
-                } else {
-                    Inventory.dropInventItems(pickaxeInventorySlotNumber, true);
-                }
-                return true;
-            } else if (pickaxeEquipped) {
-                Logger.log("Dropping..");
-                if (unidentifiedMineralsInventorySpot != 0) {
-                    Inventory.dropInventItems(unidentifiedMineralsInventorySpot, true);
-                } else {
-                    Inventory.dropInventItems(0, true);
-                }
-            } else {
-                Logger.log("Pickaxe slot # is not set");
-            }
+        int totalSlots = 28;  // Slots range from 1 to 28
+        int excludedStartIndex = totalSlots - slotsToSafe;
+
+        // Drop all items in slots from 1 to excludedStartIndex (inclusive)
+        for (int i = 1; i <= excludedStartIndex; i++) {
+            if (Script.isScriptStopping()) break;  // Stop if the script is being terminated
+            Inventory.tapItem(i);
+            Condition.sleep(100);
         }
 
         if (Inventory.isFull()) {
-            Logger.log("Your inventory is still full, we cannot drop anything!");
+            Logger.log("Inventory is still full after dropping, stopping script.");
             Logout.logout();
             Script.stop();
         }
 
         return false;
     }
-
-
 }
+

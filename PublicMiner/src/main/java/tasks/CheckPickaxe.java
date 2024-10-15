@@ -5,7 +5,6 @@ import helpers.utils.ItemList;
 import utils.Task;
 
 import static helpers.Interfaces.*;
-import static main.PublicMiner.pickaxeInventorySlotNumber;
 import static main.PublicMiner.pickaxeEquipped;
 
 public class CheckPickaxe extends Task {
@@ -47,8 +46,7 @@ public class CheckPickaxe extends Task {
                 if (Inventory.containsAny(pickaxeIDs, 0.75)) {
                     hasPickaxe = true;
                     checkedForPickaxe = true;
-                    pickaxeInventorySlotNumber = Inventory.itemSlotPosition(pickaxeIDs,0.75);
-                    Logger.log("Pickaxe in inventory at slot " + pickaxeInventorySlotNumber + ", continuing");
+                    Logger.log("Pickaxe in inventory, continuing");
                     return true;
                 }
             }

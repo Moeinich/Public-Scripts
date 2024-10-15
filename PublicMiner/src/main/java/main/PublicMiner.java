@@ -4,7 +4,6 @@ import helpers.*;
 import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
-import helpers.utils.ItemList;
 import helpers.utils.MapChunk;
 import helpers.utils.OptionType;
 import tasks.*;
@@ -40,6 +39,13 @@ import static helpers.Interfaces.*;
                         },
                         optionType = OptionType.STRING
                 ),
+                @ScriptConfiguration(
+                        name = "Amount of safe slots",
+                        description = "this will exclude x slots starting from the bottom of inventory and moving up.",
+                        defaultValue = "0",
+                        minMaxIntValues = {0, 28},
+                        optionType = OptionType.INTEGER_SLIDER
+                ),
                 @ScriptConfiguration( // Ore type
                         name =  "Ore type",
                         description = "Which ore would you like to mine?",
@@ -60,12 +66,6 @@ import static helpers.Interfaces.*;
                         description = "Make sure you read the script guide if banking is supported in your location!",
                         defaultValue = "false",
                         optionType = OptionType.BOOLEAN
-                ),
-                @ScriptConfiguration( // Boolean to drop clues or not
-                        name = "Drop clues and gems",
-                        description = "If not banking, toggle this if you would like to drop clues and gems",
-                        defaultValue = "true",
-                        optionType =  OptionType.BOOLEAN
                 ),
                 @ScriptConfiguration( // Worldhopper config
                         name =  "Use world hopper?",
@@ -93,13 +93,11 @@ public class PublicMiner extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
     public static Boolean useWDH;
-    public static Boolean dropCluesAndGems;
     public static LocationInfo locationInfo;
     public static RegionInfo regionInfo;
     public static VeinColors veinColors;
     public static PathsToBanks pathsToBanks;
-    public static int pickaxeInventorySlotNumber = 0;
-    public static int unidentifiedMineralsInventorySpot = 0;
+    public static int slotsToSafeConfig = 0;
 
     @Override
     public void onStart(){
@@ -111,7 +109,7 @@ public class PublicMiner extends AbstractScript {
         hopProfile = (configs.get("Use world hopper?"));
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
-        dropCluesAndGems = Boolean.valueOf(configs.get("Drop clues and gems"));
+        slotsToSafeConfig = Integer.parseInt(configs.get("Amount of safe slots"));
 
         //Setup enum values
         setupRegionInfo();
