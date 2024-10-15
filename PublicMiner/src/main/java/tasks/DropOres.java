@@ -42,7 +42,7 @@ public class DropOres extends Task {
         for (int i = 1; i <= excludedStartIndex; i++) {
             if (Script.isScriptStopping()) break;  // Stop if the script is being terminated
             Inventory.tapItem(i);
-            Condition.sleep(generateRandomDelay(100, 300));
+            Condition.sleep(generateRandomDelay(100, 200));
         }
 
         if (Inventory.isFull()) {
