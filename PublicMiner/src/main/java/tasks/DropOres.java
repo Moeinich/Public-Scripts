@@ -3,8 +3,7 @@ package tasks;
 import utils.Task;
 
 import static helpers.Interfaces.*;
-import static main.PublicMiner.bankOres;
-import static main.PublicMiner.slotsToSafeConfig;
+import static main.PublicMiner.*;
 
 public class DropOres extends Task {
 
@@ -43,7 +42,7 @@ public class DropOres extends Task {
         for (int i = 1; i <= excludedStartIndex; i++) {
             if (Script.isScriptStopping()) break;  // Stop if the script is being terminated
             Inventory.tapItem(i);
-            Condition.sleep(100);
+            Condition.sleep(generateRandomDelay(100, 300));
         }
 
         if (Inventory.isFull()) {

@@ -12,13 +12,14 @@ import utils.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static helpers.Interfaces.*;
 
 @ScriptManifest(
         name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.240",
+        version = "1.241",
         guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
@@ -323,5 +324,16 @@ public class PublicMiner extends AbstractScript {
                 }
                 break;
         }
+    }
+
+    static Random random = new Random();
+    public static int generateRandomDelay(int lowerBound, int upperBound) {
+        // Swap if lowerBound is greater than upperBound
+        if (lowerBound > upperBound) {
+            int temp = lowerBound;
+            lowerBound = upperBound;
+            upperBound = temp;
+        }
+        return lowerBound + random.nextInt(upperBound - lowerBound + 1);
     }
 }
