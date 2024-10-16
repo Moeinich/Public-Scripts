@@ -19,8 +19,10 @@ public class MiningHelper {
             if (hopEnabled) {
                 if (Game.isPlayersUnderUs()) {
                     Game.instantHop(hopProfile);
+                    continue;
                 } else {
                     Game.hop(hopProfile, useWDH, false);
+                    continue;
                 }
             }
 
