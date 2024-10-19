@@ -22,7 +22,6 @@ public class MiningHelper {
                     continue;
                 } else {
                     Game.hop(hopProfile, useWDH, false);
-                    continue;
                 }
             }
 
