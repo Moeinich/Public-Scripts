@@ -6,12 +6,14 @@ import java.util.Random;
 
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
+import static main.PublicMiner.locationInfo;
 
 public class MiningHelper {
     private final Random random = new Random();
 
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping()) {
+        while (!Inventory.isFull() && !Script.isScriptStopping() && Player.atTile(locationInfo.getStepLocation())) {
+
             if (!GameTabs.isInventoryTabOpen()) {
                 GameTabs.openInventoryTab();
             }
@@ -21,10 +23,9 @@ public class MiningHelper {
                     Game.instantHop(hopProfile);
                     continue;
                 } else {
-                    Game.hop(hopProfile, useWDH, false);
+                    Game.hop(hopProfile, useWDH, useWDH);
                 }
             }
-
             List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
             if (!objects.isEmpty()) {  // Check if the list is not empty
