@@ -19,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.243",
+        version = "1.244",
         guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
@@ -207,8 +207,12 @@ public class PublicMiner extends AbstractScript {
                 case "Iron ore":
                     locationInfo = LocationInfo.VARROCK_EAST_IRON;
                     break;
+                case "Tin ore":
+                    locationInfo = LocationInfo.VARROCK_EAST_TIN;
+                    break;
                 default:
                     Logger.log("Incorrect setup configuration");
+                    Script.stop();
                     break;
             }
         } else if (regionInfo.equals(RegionInfo.VARROCK_WEST)) {
@@ -224,6 +228,7 @@ public class PublicMiner extends AbstractScript {
                     break;
                 default:
                     Logger.log("Incorrect setup configuration");
+                    Script.stop();
                     break;
             }
         } else if (regionInfo.equals(RegionInfo.ISLE_OF_SOULS)) {

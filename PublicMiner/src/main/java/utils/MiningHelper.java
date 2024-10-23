@@ -1,6 +1,7 @@
 package utils;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +10,13 @@ import static main.PublicMiner.*;
 import static main.PublicMiner.locationInfo;
 
 public class MiningHelper {
+    private final List<Rectangle> checkRects = Arrays.asList(
+            new Rectangle(397, 266, 22, 20),
+            new Rectangle(440, 221, 27, 23),
+            new Rectangle(439, 306, 23, 24),
+            new Rectangle(484, 260, 22, 24)
+            );
+
     private final Random random = new Random();
 
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
@@ -26,13 +34,20 @@ public class MiningHelper {
                     Game.hop(hopProfile, useWDH, useWDH);
                 }
             }
-            List<Rectangle> objects = Client.getObjectsFromColorsInRect(veinColors.getActiveColor(), locationInfo.getCheckLocation(), locationInfo.getTolerance());
 
-            if (!objects.isEmpty()) {  // Check if the list is not empty
-                int randomIndex = random.nextInt(objects.size()); // Generate a random index
-                Rectangle randomObject = objects.get(randomIndex);  // Get a random rectangle from the list
+            // Loop through each rectangle in checkRects
+            for (Rectangle checkRect : checkRects) {
+                // Get objects from colors within the current rectangle
+                List<Rectangle> objects = Client.getObjectsFromColorsInRect(
+                        veinColors.getActiveColor(),
+                        checkRect,  // Using the current checkRect in the loop
+                        locationInfo.getTolerance()
+                );
 
-                clickPositions(randomObject, veinColors); // Click the random object
+                if (!objects.isEmpty()) {  // Check if the list is not empty
+                    clickPositions(checkRect, veinColors);
+                    break;
+                }
             }
         }
         return true;

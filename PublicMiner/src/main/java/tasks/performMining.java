@@ -1,6 +1,7 @@
 package tasks;
 
 import helpers.utils.Tile;
+import utils.LocationInfo;
 import utils.MiningHelper;
 import utils.Task;
 
@@ -48,7 +49,11 @@ public class performMining extends Task {
     private boolean handleBankAreaCheck() {
         if (Player.isTileWithinArea(location, regionInfo.getBankArea())) {
             Logger.log("Walking to mining spot!");
-            Walker.walkPath(pickRandomPathReversed(pathsToBanks));
+            if (Walker.isReachable(locationInfo.getStepLocation())) {
+                Walker.step(locationInfo.getStepLocation());
+            } else {
+                Walker.webWalk(locationInfo.getStepLocation(), true);
+            }
             Condition.wait(() -> Player.within(regionInfo.getMineArea()), 100, 20);
             return true;
         }
