@@ -3,7 +3,6 @@ package utils;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
@@ -16,8 +15,6 @@ public class MiningHelper {
             new Rectangle(439, 306, 23, 24),
             new Rectangle(484, 260, 22, 24)
             );
-
-    private final Random random = new Random();
 
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
         while (!Inventory.isFull() && !Script.isScriptStopping() && Player.atTile(locationInfo.getStepLocation())) {
