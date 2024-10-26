@@ -25,15 +25,9 @@ public class performMining extends Task {
     @Override
     public boolean execute() {
         if (!isAtStepLocation()) {
-            return moveTo(locationInfo.getStepLocation());
+            return handleMiningAreaCheck();
         }
         return doMining();
-    }
-
-    private boolean moveTo(Tile targetLocation) {
-        Walker.step(targetLocation);
-        Condition.wait(() -> Player.atTile(targetLocation), 100, 20);
-        return true;
     }
 
     private boolean handleMiningAreaCheck() {
@@ -42,6 +36,8 @@ public class performMining extends Task {
             Walker.step(locationInfo.getStepLocation());
             Condition.wait(() -> Player.atTile(locationInfo.getStepLocation()), 100, 20);
             return true;
+        } else {
+            Walker.webWalk(locationInfo.getStepLocation(), true);
         }
         return false;
     }
