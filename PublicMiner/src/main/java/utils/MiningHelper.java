@@ -20,11 +20,13 @@ public class MiningHelper {
         while (!Inventory.isFull() && !Script.isScriptStopping() && Player.atTile(locationInfo.getStepLocation())) {
 
             if (!GameTabs.isInventoryTabOpen()) {
+                Logger.log("Opening inventory");
                 GameTabs.openInventoryTab();
             }
 
             if (hopEnabled) {
                 if (Game.isPlayersUnderUs()) {
+                    Logger.log("instant hopping, player is under us");
                     Game.instantHop(hopProfile);
                     continue;
                 } else {
@@ -34,6 +36,7 @@ public class MiningHelper {
 
             // Loop through each rectangle in checkRects
             for (Rectangle checkRect : checkRects) {
+                Logger.debugLog("Checking for veins..");
                 // Get objects from colors within the current rectangle
                 List<Rectangle> objects = Client.getObjectsFromColorsInRect(
                         veinColors.getActiveColor(),
@@ -42,6 +45,7 @@ public class MiningHelper {
                 );
 
                 if (!objects.isEmpty()) {  // Check if the list is not empty
+                    Logger.log("Clicking vein!");
                     clickPositions(checkRect, veinColors);
                     break;
                 }
