@@ -138,10 +138,6 @@ public class PublicMiner extends AbstractScript {
 
     @Override
     public void poll() {
-        if (!GameTabs.isInventoryTabOpen()) {
-            GameTabs.openInventoryTab();
-        }
-
         //Run tasks
             for (Task task : miningTasks) {
                 if (task.activate()) {

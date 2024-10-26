@@ -17,6 +17,11 @@ public class DropOres extends Task {
 
     @Override
     public boolean execute() {
+        if (!GameTabs.isInventoryTabOpen()) {
+            Logger.log("Opening inventory");
+            GameTabs.openInventoryTab();
+        }
+
         if (!Game.isTapToDropEnabled()) {
             Logger.log("Enabling tap to drop");
             Game.enableTapToDrop();
