@@ -53,8 +53,8 @@ public enum RegionInfo {
     ),
     MINING_GUILD_IRON_EAST(
             new Area(
-                    new Tile(12113, 38618, 0),
-                    new Tile(12129, 38629, 0)
+                    new Tile(13108, 13166, 0),
+                    new Tile(13189, 13240, 0)
             ), //mine area
             new Area(
                     new Tile(12042, 38610, 0),
