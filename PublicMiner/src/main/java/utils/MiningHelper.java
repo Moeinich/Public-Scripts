@@ -48,6 +48,8 @@ public class MiningHelper {
                     Logger.log("Clicking vein!");
                     clickPositions(checkRect, veinColors);
                     break;
+                } else {
+                    Condition.sleep(generateRandomDelay(50, 120));
                 }
             }
         }
