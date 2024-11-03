@@ -10,10 +10,10 @@ import static main.PublicMiner.locationInfo;
 
 public class MiningHelper {
     private final List<Rectangle> checkRects = Arrays.asList(
-            new Rectangle(397, 266, 22, 20),
-            new Rectangle(440, 221, 27, 23),
-            new Rectangle(439, 306, 23, 24),
-            new Rectangle(484, 260, 22, 24)
+            new Rectangle(385, 261, 25, 31), // WEST
+            new Rectangle(431, 222, 29, 25), // NORTH
+            new Rectangle(478, 265, 30, 25), // EAST
+            new Rectangle(438, 300, 27, 35) //SOUTH
             );
 
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
