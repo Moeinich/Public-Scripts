@@ -24,9 +24,9 @@ public class CheckForItems extends Task {
             Condition.wait(() -> GameTabs.isInventoryTabOpen(), 50, 10);
         }
 
-        boolean hasNats = Inventory.contains(ItemList.NATURE_RUNE_561, 0.80);
+        boolean hasNats = Inventory.contains(ItemList.NATURE_RUNE_561, 0.69);
         checkedForNats = true;
-        boolean hasAlchItem = Inventory.contains(itemID, 0.80);
+        boolean hasAlchItem = Inventory.contains(itemID, 0.69);
         checkedForItem = true;
 
         if (hasNats && hasAlchItem) {
