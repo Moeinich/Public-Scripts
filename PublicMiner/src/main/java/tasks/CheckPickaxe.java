@@ -39,7 +39,7 @@ public class CheckPickaxe extends Task {
         if (!checkedInventory) {
             if (!GameTabs.isInventoryTabOpen()) {
                 GameTabs.openInventoryTab();
-                Condition.wait(() -> GameTabs.isInventoryTabOpen(), 50, 10);
+                Condition.wait(() -> GameTabs.isInventoryTabOpen(), 200, 10);
             }
 
             if (GameTabs.isInventoryTabOpen()) {
