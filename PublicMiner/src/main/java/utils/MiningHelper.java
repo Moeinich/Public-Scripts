@@ -1,5 +1,7 @@
 package utils;
 
+import helpers.utils.Tile;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -9,15 +11,8 @@ import static main.PublicMiner.*;
 import static main.PublicMiner.locationInfo;
 
 public class MiningHelper {
-    private final List<Rectangle> checkRects = Arrays.asList(
-            new Rectangle(385, 261, 25, 31), // WEST
-            new Rectangle(431, 222, 29, 25), // NORTH
-            new Rectangle(478, 265, 30, 25), // EAST
-            new Rectangle(438, 300, 27, 35) //SOUTH
-            );
-
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak() && Player.atTile(locationInfo.getStepLocation())) {
+        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak() && isAtStepLocation()) {
 
             if (!GameTabs.isInventoryTabOpen()) {
                 Logger.log("Opening inventory");
@@ -34,13 +29,15 @@ public class MiningHelper {
                 }
             }
 
-            // Loop through each rectangle in checkRects
-            for (Rectangle checkRect : checkRects) {
-                Logger.debugLog("Checking for veins..");
+            // Loop through each rectangle in locationInfo's associated directions
+            for (DirectionCheckRect direction : locationInfo.getDirections()) {
+                Rectangle checkRect = direction.getRectangle(); // Get the rectangle for the current direction
+                Logger.debugLog("Checking for veins in direction: " + direction);
+
                 // Get objects from colors within the current rectangle
                 List<Rectangle> objects = Client.getObjectsFromColorsInRect(
                         veinColors.getActiveColor(),
-                        checkRect,  // Using the current checkRect in the loop
+                        checkRect,
                         locationInfo.getTolerance()
                 );
 
@@ -79,5 +76,13 @@ public class MiningHelper {
             }
         }
         return false;
+    }
+
+    private static final Tile alKharidOffTile = new Tile(13611, 12421, 0);
+    public static boolean isAtStepLocation() {
+        if (Location.equals("Al Kharid East")) {
+            return Player.atTile(locationInfo.getStepLocation()) || Player.atTile(alKharidOffTile);
+        }
+        return Player.atTile(locationInfo.getStepLocation());
     }
 }

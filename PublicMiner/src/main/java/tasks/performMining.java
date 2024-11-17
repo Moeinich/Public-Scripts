@@ -1,12 +1,17 @@
 package tasks;
 
 import helpers.utils.Tile;
+import main.PublicMiner;
 import utils.LocationInfo;
 import utils.MiningHelper;
+import utils.RegionInfo;
 import utils.Task;
+
+import java.util.Objects;
 
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
+import static utils.MiningHelper.isAtStepLocation;
 import static utils.utils.pickRandomPathReversed;
 
 public class performMining extends Task {
@@ -54,10 +59,6 @@ public class performMining extends Task {
             return true;
         }
         return false;
-    }
-
-    private boolean isAtStepLocation() {
-        return Player.atTile(locationInfo.getStepLocation());
     }
 
     private boolean doMining() {
