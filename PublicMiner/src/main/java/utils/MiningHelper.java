@@ -17,7 +17,7 @@ public class MiningHelper {
             );
 
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak()) {
+        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak() && Player.atTile(locationInfo.getStepLocation())) {
 
             if (!GameTabs.isInventoryTabOpen()) {
                 Logger.log("Opening inventory");
