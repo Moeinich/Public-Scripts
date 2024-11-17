@@ -51,7 +51,7 @@ public enum LocationInfo {
     ),
     AL_KHARID_EAST(
             new Rectangle(368, 220, 102, 80),
-            2,
+            4,
             new Tile( 13611, 12417, 0), //Step
             EnumSet.of(DirectionCheckRect.NORTH, DirectionCheckRect.WEST)
     ),
