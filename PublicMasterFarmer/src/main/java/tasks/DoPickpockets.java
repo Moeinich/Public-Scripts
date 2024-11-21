@@ -9,6 +9,8 @@ import static helpers.Interfaces.*;
 import static main.PublicMasterFarmer.getRandomInt;
 
 public class DoPickpockets extends Task {
+    final int MIN_WIDTH = 20;
+    final int MIN_HEIGHT = 10;
 
     private final List<Color> outlineColor = List.of(
             Color.decode("#26ffff")
@@ -23,10 +25,25 @@ public class DoPickpockets extends Task {
     public boolean execute() {
         // Get the rectangle objects for NPCs found
         List<Rectangle> NPCs = Client.getObjectsFromColorsInRect(outlineColor, NPCSearchRect, 5);
-        // Loop through each tree rectangle in the list
-        for (Rectangle NPCRects : NPCs) {
+
+        // Loop through each NPC rectangle in the list
+        for (Rectangle NPCRect : NPCs) {
+            // Check if the rectangle meets the minimum size requirements
+            if (NPCRect.width < MIN_WIDTH || NPCRect.height < MIN_HEIGHT) {
+                Logger.debugLog("Skipping found NPC Rect: Does not meet minimum size requirements.");
+                continue;
+            }
+
+            // Trim the rectangle
+            Rectangle trimmedRect = new Rectangle(
+                    NPCRect.x + 10,                      // Add 10 to the left
+                    NPCRect.y + 5,                          // Add 5 to the top
+                    NPCRect.width - 20,                     // Subtract 10 from each side
+                    NPCRect.height - 10                     // Subtract 5 from top and bottom
+            );
+
             Logger.log("Clicking Master Farmer");
-            Client.tap(NPCRects); // Perform the tap action on each tree rectangle
+            Client.tap(trimmedRect); // Perform the tap action on the trimmed rectangle
             Condition.sleep(getRandomInt(150, 500));
             XpBar.getXP();
             return true;
