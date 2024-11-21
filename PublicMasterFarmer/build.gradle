@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo1.maven.org/maven2" }
+    maven { url "https://openpnp.github.io/maven" }
+    maven { url 'https://jitpack.io' }
+    google()
+}
+
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+dependencies {
+    implementation('com.github.Mufasa-SDK:SDKRepo:1.2.61') {
+        changing = true
+    }
+}
+
+jar {
+    archiveFileName = 'PublicMasterFarmer.jar'
+    destinationDirectory = file('jar/')
+
+    manifest {
+        attributes(
+                'Manifest-Version': '1.0',
+                'Created-By': 'Moeinich'
+        )
+    }
+}
