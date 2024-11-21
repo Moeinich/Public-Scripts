@@ -36,10 +36,10 @@ public class DoPickpockets extends Task {
 
             // Trim the rectangle
             Rectangle trimmedRect = new Rectangle(
-                    NPCRect.x + 10,                      // Add 10 to the left
-                    NPCRect.y + 5,                          // Add 5 to the top
-                    NPCRect.width - 20,                     // Subtract 10 from each side
-                    NPCRect.height - 10                     // Subtract 5 from top and bottom
+                    NPCRect.x + 5,                       // Add 5 to the left
+                    NPCRect.y + 3,                       // Add 3 to the top
+                    NPCRect.width - 10,                  // Subtract 5 from each side (total 10)
+                    NPCRect.height - 6                   // Subtract 3 from top and bottom (total 6)
             );
 
             Logger.log("Clicking Master Farmer");

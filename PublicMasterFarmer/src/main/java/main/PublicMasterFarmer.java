@@ -24,6 +24,7 @@ import static helpers.Interfaces.*;
         description = "An easy to use Master Farmer snatcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
         version = "1.20",
         guideLink = "",
+        skipZoomSetup = true,
         categories = {ScriptCategory.Magic}
 )
 @ScriptConfiguration.List(
@@ -107,6 +108,8 @@ public class PublicMasterFarmer extends AbstractScript {
         slotsToSafeConfig = Integer.parseInt(configs.get("Amount of safe slots"));
 
         setupFoodIDs();
+
+        Game.setZoom("2");
 
         // Open the inventory again.
         GameTabs.openInventoryTab();
