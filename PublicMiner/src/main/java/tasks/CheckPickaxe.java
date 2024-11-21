@@ -69,7 +69,7 @@ public class CheckPickaxe extends Task {
                         }
                         hasPickaxe = true;
                         checkedForPickaxe = true;
-                        Logger.log("Pickaxe in inventory, continuing");
+                        Logger.log("Pickaxe(" + pickaxeID + ") in inventory, continuing");
                         return true;
                     }
                 }
@@ -92,7 +92,7 @@ public class CheckPickaxe extends Task {
                         hasPickaxe = true;
                         checkedForPickaxe = true;
                         pickaxeEquipped = true;
-                        Logger.log("Pickaxe equipped, continuing");
+                        Logger.log("Pickaxe(" + pickaxeID + ") equipped, continuing");
                         return true;
                     }
                 }
