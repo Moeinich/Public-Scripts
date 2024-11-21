@@ -9,14 +9,20 @@ import java.util.List;
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
 import static main.PublicMiner.locationInfo;
+import static tasks.CheckPickaxe.useSpecial;
 
 public class MiningHelper {
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak() && isAtStepLocation()) {
+        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak() && !Script.isPaused() && isAtStepLocation()) {
 
             if (!GameTabs.isInventoryTabOpen()) {
                 Logger.log("Opening inventory");
                 GameTabs.openInventoryTab();
+            }
+
+            if (shouldSpecialAttack()) {
+                Player.useSpec();
+                Condition.wait(() -> Player.getSpec() < 100, 400, 10);
             }
 
             if (hopEnabled) {
@@ -51,6 +57,15 @@ public class MiningHelper {
             }
         }
         return true;
+    }
+
+    private boolean shouldSpecialAttack() {
+        if (useSpecial) {
+            if (Player.getSpec() >= 100) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void clickPositions(Rectangle position, VeinColors veinColors) {
