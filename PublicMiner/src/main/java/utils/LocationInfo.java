@@ -45,9 +45,9 @@ public enum LocationInfo {
     ),
     ISLE_OF_SOULS(
             new Rectangle(362, 192, 188, 98),
-            2,
+            4,
             new Tile(8783, 10913, 0), //Step
-            EnumSet.of(DirectionCheckRect.NORTH, DirectionCheckRect.EAST, DirectionCheckRect.WEST)
+            EnumSet.of(DirectionCheckRect.WEST, DirectionCheckRect.NORTH, DirectionCheckRect.EAST)
     ),
     AL_KHARID_EAST(
             new Rectangle(368, 220, 102, 80),
