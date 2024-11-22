@@ -15,6 +15,7 @@ public class DoPickpockets extends Task {
     private final List<Color> outlineColor = List.of(
             Color.decode("#26ffff")
     );
+
     private final Rectangle NPCSearchRect = new Rectangle(5, 8, 882, 530);
 
     public boolean activate() {
