@@ -19,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.250",
+        version = "1.251",
         guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
@@ -46,6 +46,12 @@ import static helpers.Interfaces.*;
                         defaultValue = "0",
                         minMaxIntValues = {0, 28},
                         optionType = OptionType.INTEGER_SLIDER
+                ),
+                @ScriptConfiguration(
+                        name = "Randomize dropping",
+                        description = "Select this option if you would like to randomize drop patterns",
+                        defaultValue = "false",
+                        optionType = OptionType.BOOLEAN
                 ),
                 @ScriptConfiguration( // Ore type
                         name =  "Ore type",
@@ -89,6 +95,7 @@ public class PublicMiner extends AbstractScript {
     public static String oreType;
     public static int oreTypeInt;
     public static Boolean bankOres;
+    public static Boolean randomDropping;
     public static Boolean pickaxeEquipped = false;
     public static int miningLevel = 99; //Just setting it to 99 atm to pass checks ;)
     public static String hopProfile;
@@ -111,6 +118,7 @@ public class PublicMiner extends AbstractScript {
         hopEnabled = Boolean.valueOf((configs.get("Use world hopper?.enabled")));
         useWDH = Boolean.valueOf((configs.get("Use world hopper?.useWDH")));
         slotsToSafeConfig = Integer.parseInt(configs.get("Amount of safe slots"));
+        randomDropping = Boolean.valueOf(configs.get("Randomize dropping"));
 
         //Setup enum values
         setupRegionInfo();

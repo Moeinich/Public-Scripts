@@ -2,10 +2,15 @@ package tasks;
 
 import utils.Task;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static helpers.Interfaces.*;
 import static main.PublicMiner.*;
 
 public class DropOres extends Task {
+    private static List<Integer> cachedRandomSlots = null;
 
     public boolean activate() {
         // Early exit if banking is enabled!
@@ -44,10 +49,27 @@ public class DropOres extends Task {
         int excludedStartIndex = totalSlots - slotsToSafe;
 
         // Drop all items in slots from 1 to excludedStartIndex (inclusive)
-        for (int i = 1; i <= excludedStartIndex; i++) {
-            if (Script.isScriptStopping()) break;  // Stop if the script is being terminated
-            Inventory.tapItem(i);
-            Condition.sleep(generateRandomDelay(75, 125));
+        if (randomDropping) {
+            if (cachedRandomSlots == null || cachedRandomSlots.size() != excludedStartIndex) {
+                cachedRandomSlots = new ArrayList<>();
+                for (int i = 1; i <= excludedStartIndex; i++) {
+                    cachedRandomSlots.add(i);
+                }
+            }
+
+            // Use cached shuffled slots for dropping
+            Collections.shuffle(cachedRandomSlots);
+            for (int slot : cachedRandomSlots) {
+                if (Script.isScriptStopping()) break;  // Stop if the script is being terminated
+                Inventory.tapItem(slot);
+                Condition.sleep(generateRandomDelay(75, 125));
+            }
+        } else {
+            for (int i = 1; i <= excludedStartIndex; i++) {
+                if (Script.isScriptStopping()) break;  // Stop if the script is being terminated
+                Inventory.tapItem(i);
+                Condition.sleep(generateRandomDelay(75, 125));
+            }
         }
 
         if (Inventory.isFull()) {
