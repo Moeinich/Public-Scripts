@@ -152,7 +152,7 @@ public class PublicMasterFarmer extends AbstractScript {
 
     @Override
     public void onStart(){
-        Logger.log("Starting Public Alcher v1.16");
+        Logger.log("Starting PublicMasterFarmer");
 
         Map<String, String> configs = getConfigurations();
         hopProfile = (configs.get("Use world hopper?"));
