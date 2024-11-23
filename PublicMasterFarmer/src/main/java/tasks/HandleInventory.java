@@ -1,8 +1,10 @@
 package tasks;
 
+import helpers.utils.ItemPair;
 import utils.Task;
 
 import static helpers.Interfaces.*;
+import static main.PublicMasterFarmer.dropList;
 
 public class HandleInventory extends Task {
 
@@ -25,8 +27,8 @@ public class HandleInventory extends Task {
             return true;
         }
 
+        Inventory.tapAllItems(dropList, 0.80);
 
-
-        return false;
+        return true;
     }
 }

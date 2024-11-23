@@ -5,8 +5,8 @@ import helpers.annotations.AllowedValue;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.ItemList;
+import helpers.utils.ItemPair;
 import helpers.utils.OptionType;
-import javafx.util.Pair;
 import tasks.Bank;
 import tasks.Eat;
 import tasks.HandleInventory;
@@ -259,67 +259,67 @@ public class PublicMasterFarmer extends AbstractScript {
         return lowerBound + random.nextInt(upperBound - lowerBound + 1);
     }
 
-    public static final List<Pair<Integer, Color>> fullList = Arrays.asList(
+    public static final List<ItemPair> fullList = Arrays.asList(
             // Allotments
-            new Pair<>(ItemList.POTATO_SEED_5318, Color.RED),
-            new Pair<>(ItemList.ONION_SEED_7550, Color.GREEN),
-            new Pair<>(ItemList.CABBAGE_SEED_5324, Color.BLUE),
-            new Pair<>(ItemList.TOMATO_SEED_13800, Color.BLUE),
-            new Pair<>(ItemList.SWEETCORN_SEED_5320, Color.BLUE),
-            new Pair<>(ItemList.STRAWBERRY_SEED_5323, Color.BLUE),
-            new Pair<>(ItemList.WATERMELON_SEED_5321, Color.BLUE),
-            new Pair<>(ItemList.SNAPE_GRASS_SEED_22879, Color.BLUE),
+            new ItemPair(ItemList.POTATO_SEED_5318, Color.RED),
+            new ItemPair(ItemList.ONION_SEED_7550, Color.GREEN),
+            new ItemPair(ItemList.CABBAGE_SEED_5324, Color.BLUE),
+            new ItemPair(ItemList.TOMATO_SEED_13800, Color.BLUE),
+            new ItemPair(ItemList.SWEETCORN_SEED_5320, Color.BLUE),
+            new ItemPair(ItemList.STRAWBERRY_SEED_5323, Color.BLUE),
+            new ItemPair(ItemList.WATERMELON_SEED_5321, Color.BLUE),
+            new ItemPair(ItemList.SNAPE_GRASS_SEED_22879, Color.BLUE),
 
             // Hops
-            new Pair<>(ItemList.BARLEY_SEED_5305, Color.BLUE),
-            new Pair<>(ItemList.HAMMERSTONE_SEED_5307, Color.BLUE),
-            new Pair<>(ItemList.ASGARNIAN_SEED_5308, Color.BLUE),
-            new Pair<>(ItemList.JUTE_SEED_5306, Color.BLUE),
-            new Pair<>(ItemList.YANILLIAN_SEED_5309, Color.BLUE),
-            new Pair<>(ItemList.KRANDORIAN_SEED_5310, Color.BLUE),
-            new Pair<>(ItemList.WILDBLOOD_SEED_5311, Color.BLUE),
+            new ItemPair(ItemList.BARLEY_SEED_5305, Color.BLUE),
+            new ItemPair(ItemList.HAMMERSTONE_SEED_5307, Color.BLUE),
+            new ItemPair(ItemList.ASGARNIAN_SEED_5308, Color.BLUE),
+            new ItemPair(ItemList.JUTE_SEED_5306, Color.BLUE),
+            new ItemPair(ItemList.YANILLIAN_SEED_5309, Color.BLUE),
+            new ItemPair(ItemList.KRANDORIAN_SEED_5310, Color.BLUE),
+            new ItemPair(ItemList.WILDBLOOD_SEED_5311, Color.BLUE),
 
             // Flowers
-            new Pair<>(ItemList.MARIGOLD_SEED_5096, Color.BLUE),
-            new Pair<>(ItemList.NASTURTIUM_SEED_5098, Color.BLUE),
-            new Pair<>(ItemList.ROSEMARY_SEED_5097, Color.BLUE),
-            new Pair<>(ItemList.WOAD_SEED_5099, Color.BLUE),
-            new Pair<>(ItemList.LIMPWURT_SEED_5100, Color.BLUE),
+            new ItemPair(ItemList.MARIGOLD_SEED_5096, Color.BLUE),
+            new ItemPair(ItemList.NASTURTIUM_SEED_5098, Color.BLUE),
+            new ItemPair(ItemList.ROSEMARY_SEED_5097, Color.BLUE),
+            new ItemPair(ItemList.WOAD_SEED_5099, Color.BLUE),
+            new ItemPair(ItemList.LIMPWURT_SEED_5100, Color.BLUE),
 
             // Bushes
-            new Pair<>(ItemList.REDBERRY_SEED_5101, Color.BLUE),
-            new Pair<>(ItemList.CADAVABERRY_SEED_5102, Color.BLUE),
-            new Pair<>(ItemList.DWELLBERRY_SEED_5103, Color.BLUE),
-            new Pair<>(ItemList.JANGERBERRY_SEED_5104, Color.BLUE),
-            new Pair<>(ItemList.WHITEBERRY_SEED_5105, Color.BLUE),
-            new Pair<>(ItemList.POISON_IVY_SEED_5106, Color.BLUE),
+            new ItemPair(ItemList.REDBERRY_SEED_5101, Color.BLUE),
+            new ItemPair(ItemList.CADAVABERRY_SEED_5102, Color.BLUE),
+            new ItemPair(ItemList.DWELLBERRY_SEED_5103, Color.BLUE),
+            new ItemPair(ItemList.JANGERBERRY_SEED_5104, Color.BLUE),
+            new ItemPair(ItemList.WHITEBERRY_SEED_5105, Color.BLUE),
+            new ItemPair(ItemList.POISON_IVY_SEED_5106, Color.BLUE),
 
             // Special
-            new Pair<>(ItemList.MUSHROOM_SPORE_5282, Color.BLUE),
-            new Pair<>(ItemList.BELLADONNA_SEED_5281, Color.BLUE),
-            new Pair<>(ItemList.CACTUS_SEED_5280, Color.BLUE),
-            new Pair<>(ItemList.SEAWEED_SPORE_21490, Color.BLUE),
-            new Pair<>(ItemList.POTATO_CACTUS_3138, Color.BLUE),
+            new ItemPair(ItemList.MUSHROOM_SPORE_5282, Color.BLUE),
+            new ItemPair(ItemList.BELLADONNA_SEED_5281, Color.BLUE),
+            new ItemPair(ItemList.CACTUS_SEED_5280, Color.BLUE),
+            new ItemPair(ItemList.SEAWEED_SPORE_21490, Color.BLUE),
+            new ItemPair(ItemList.POTATO_CACTUS_3138, Color.BLUE),
 
             // Herbs
-            new Pair<>(ItemList.GUAM_SEED_5291, Color.BLUE),
-            new Pair<>(ItemList.MARRENTILL_SEED_5292, Color.BLUE),
-            new Pair<>(ItemList.TARROMIN_SEED_5293, Color.BLUE),
-            new Pair<>(ItemList.HARRALANDER_SEED_5294, Color.BLUE),
-            new Pair<>(ItemList.RANARR_SEED_5295, Color.BLUE),
-            new Pair<>(ItemList.TOADFLAX_SEED_5296, Color.BLUE),
-            new Pair<>(ItemList.IRIT_SEED_5297, Color.BLUE),
-            new Pair<>(ItemList.AVANTOE_SEED_5298, Color.BLUE),
-            new Pair<>(ItemList.KWUARM_SEED_5299, Color.BLUE),
-            new Pair<>(ItemList.SNAPDRAGON_SEED_5300, Color.BLUE),
-            new Pair<>(ItemList.CADANTINE_SEED_5301, Color.BLUE),
-            new Pair<>(ItemList.LANTADYME_SEED_5302, Color.BLUE),
-            new Pair<>(ItemList.DWARF_WEED_SEED_5303, Color.BLUE),
-            new Pair<>(ItemList.TORSTOL_SEED_5304, Color.BLUE)
+            new ItemPair(ItemList.GUAM_SEED_5291, Color.BLUE),
+            new ItemPair(ItemList.MARRENTILL_SEED_5292, Color.BLUE),
+            new ItemPair(ItemList.TARROMIN_SEED_5293, Color.BLUE),
+            new ItemPair(ItemList.HARRALANDER_SEED_5294, Color.BLUE),
+            new ItemPair(ItemList.RANARR_SEED_5295, Color.BLUE),
+            new ItemPair(ItemList.TOADFLAX_SEED_5296, Color.BLUE),
+            new ItemPair(ItemList.IRIT_SEED_5297, Color.BLUE),
+            new ItemPair(ItemList.AVANTOE_SEED_5298, Color.BLUE),
+            new ItemPair(ItemList.KWUARM_SEED_5299, Color.BLUE),
+            new ItemPair(ItemList.SNAPDRAGON_SEED_5300, Color.BLUE),
+            new ItemPair(ItemList.CADANTINE_SEED_5301, Color.BLUE),
+            new ItemPair(ItemList.LANTADYME_SEED_5302, Color.BLUE),
+            new ItemPair(ItemList.DWARF_WEED_SEED_5303, Color.BLUE),
+            new ItemPair(ItemList.TORSTOL_SEED_5304, Color.BLUE)
     );
 
-    public static List<Pair<Integer, Color>> dropList;
-    public static List<Pair<Integer, Color>> keepList;
+    public static List<ItemPair> dropList;
+    public static List<ItemPair> keepList;
 
     private void buildLists() {
         // Parse the selected seeds into a Set for quick lookup
@@ -332,9 +332,9 @@ public class PublicMasterFarmer extends AbstractScript {
         keepList.clear();
 
         // Iterate through the full list
-        for (Pair<Integer, Color> seed : fullList) {
+        for (ItemPair seed : fullList) {
             // Extract the seed name from the ItemList constant name
-            String seedName = getSeedName(seed.getKey());
+            String seedName = getSeedName(seed.getItemID());
 
             if (selectedSeedSet.contains(seedName)) {
                 // Add to keepList if the seed is selected
