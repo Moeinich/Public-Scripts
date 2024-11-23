@@ -23,11 +23,11 @@ import static helpers.Interfaces.*;
 
 @ScriptManifest(
         name = "Public Master Farmer",
-        description = "An easy to use Master Farmer snatcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.20",
+        description = "An easy to use Master Farmer thiever. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
+        version = "1.0",
         guideLink = "",
         skipZoomSetup = true,
-        categories = {ScriptCategory.Magic}
+        categories = {ScriptCategory.Thieving}
 )
 @ScriptConfiguration.List(
         value = {
