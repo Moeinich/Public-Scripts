@@ -17,7 +17,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation('com.github.Mufasa-SDK:SDKRepo:1.2.56') {
+    implementation('com.github.Mufasa-SDK:SDKRepo:1.2.77') {
         changing = true
     }
 }

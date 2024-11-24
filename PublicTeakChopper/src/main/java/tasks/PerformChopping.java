@@ -12,6 +12,7 @@ import static helpers.Interfaces.*;
 import static main.PublicTeakChopper.hopProfile;
 import static main.PublicTeakChopper.useWDH;
 import static tasks.CheckEquipment.hasAxe;
+import static tasks.CheckEquipment.useSpecial;
 
 public class PerformChopping extends Task {
     Rectangle searchRect = new Rectangle(408, 159, 69, 174);
@@ -45,6 +46,11 @@ public class PerformChopping extends Task {
             Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 10);
         }
 
+        if (shouldSpecialAttack()) {
+            Player.useSpec();
+            Condition.wait(() -> Player.getSpec() < 100, 400, 10);
+        }
+
         if (!Player.tileEquals(location, teakTile)) {
             Logger.log("Walking to teak tile");
             Walker.step(teakTile);
@@ -69,6 +75,15 @@ public class PerformChopping extends Task {
     private boolean shouldHop() {
         if (useWDH) {
             return Game.isPlayersUnderUs() || Game.isPlayersAround();
+        }
+        return false;
+    }
+
+    private boolean shouldSpecialAttack() {
+        if (useSpecial) {
+            if (Player.getSpec() >= 100) {
+                return true;
+            }
         }
         return false;
     }
