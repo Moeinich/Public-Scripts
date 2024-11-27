@@ -25,7 +25,7 @@ public class Bank extends Task {
             Logger.log("Not at the bank, walking there");
             Logger.log("walking to bank area");
             Walker.walkPath(bankPath);
-            Condition.wait(() -> Player.within(bankArea, miningGuild), 200, 10);
+            Condition.wait(() -> Player.within(bankArea), 200, 10);
             return true;
         }
 

@@ -59,7 +59,6 @@ public class PublicAmethystMiner extends AbstractScript {
     public static boolean cutAmethysts;
     public static int pickaxeInventorySlotNumber = 0;
     public static Boolean pickaxeEquipped = false;
-    public static RegionBox miningGuild = new RegionBox("MINING_GUILD", 6291, 459, 6654, 777);
     public static Area bankArea = new Area(
             new Tile(12042, 38600, 0),
             new Tile(12065, 38632, 0)
