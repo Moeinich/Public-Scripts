@@ -1,13 +1,11 @@
 package tasks;
 
+import helpers.utils.ItemPair;
 import helpers.utils.Tile;
 import utils.Task;
 
-import java.awt.*;
-
 import static helpers.Interfaces.*;
-import static main.PublicMasterFarmer.foodID;
-import static main.PublicMasterFarmer.getRandomInt;
+import static main.PublicMasterFarmer.*;
 
 public class Bank extends Task {
     public static final Tile bankTile = new Tile(6875, 13609, 0); //TODO: this is not correct.
@@ -15,7 +13,7 @@ public class Bank extends Task {
 
     @Override
     public boolean activate() {
-        return !Inventory.contains(foodID, 0.75);
+        return !Inventory.contains(foodID, 0.85);
     }
 
     @Override
@@ -28,11 +26,18 @@ public class Bank extends Task {
                 bank = Bank.setupDynamicBank();
             }
             openBank();
+            depositLoot();
             withdrawFood();
             closeBank();
 
         }
         return false;
+    }
+
+    private void depositLoot() {
+        for (ItemPair itemID : keepList) {
+            Inventory.tapAllItems(itemID.getItemID(), 0.85);
+        }
     }
 
     private void withdrawFood() {
@@ -42,15 +47,7 @@ public class Bank extends Task {
 
     private void setCustomQuantity() {
         if (!Bank.isSelectedQuantityCustomButton()) {
-            Rectangle customQty = Bank.findQuantityCustomButton();
-            Client.longPress(customQty);
-            Condition.sleep(getRandomInt(300, 500));
-            Client.tap(393, 499);
-            Condition.sleep(getRandomInt(500, 800));
-            Client.sendKeystroke("KEYCODE_5");
-            Client.sendKeystroke("KEYCODE_ENTER");
-            Logger.debugLog("Set custom quantity 14 for items in the bank.");
-            Condition.wait(() -> Bank.isSelectedQuantityCustomButton(), 200, 12);
+            Bank.setCustomQuantity(3);
         }
     }
 

@@ -6,10 +6,11 @@ import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.ItemList;
 import helpers.utils.ItemPair;
+import helpers.utils.MapChunk;
 import helpers.utils.OptionType;
 import tasks.Bank;
 import tasks.Eat;
-import tasks.HandleInventory;
+import tasks.Drop;
 import tasks.DoPickpockets;
 import utils.Task;
 
@@ -164,6 +165,16 @@ public class PublicMasterFarmer extends AbstractScript {
         hpToEat = Integer.parseInt(configs.get("HP to eat at"));
         selectedFood = configs.get("Food");
 
+        // 24-48, 27-47
+        MapChunk mapChunk = new MapChunk(new String[]
+                {
+                        // Varlamore
+                        "24-48", "27-47"
+                },
+                "0");
+
+        Walker.setup(mapChunk);
+
         setupFoodIDs();
         buildLists();
 
@@ -176,7 +187,7 @@ public class PublicMasterFarmer extends AbstractScript {
     List<Task> pickpocketTasks = Arrays.asList(
             new Eat(),
             new Bank(),
-            new HandleInventory(),
+            new Drop(),
             new DoPickpockets()
     );
 
@@ -261,61 +272,61 @@ public class PublicMasterFarmer extends AbstractScript {
 
     public static final List<ItemPair> fullList = Arrays.asList(
             // Allotments
-            new ItemPair(ItemList.POTATO_SEED_5318, Color.RED),
-            new ItemPair(ItemList.ONION_SEED_7550, Color.GREEN),
-            new ItemPair(ItemList.CABBAGE_SEED_5324, Color.BLUE),
-            new ItemPair(ItemList.TOMATO_SEED_13800, Color.BLUE),
-            new ItemPair(ItemList.SWEETCORN_SEED_5320, Color.BLUE),
-            new ItemPair(ItemList.STRAWBERRY_SEED_5323, Color.BLUE),
-            new ItemPair(ItemList.WATERMELON_SEED_5321, Color.BLUE),
-            new ItemPair(ItemList.SNAPE_GRASS_SEED_22879, Color.BLUE),
+            new ItemPair(ItemList.POTATO_SEED_5318, Color.decode("#544B1D")),
+            new ItemPair(ItemList.ONION_SEED_7550, Color.decode("#998756")),
+            new ItemPair(ItemList.CABBAGE_SEED_5324, Color.decode("#6A2C1B")),
+            new ItemPair(ItemList.TOMATO_SEED_13800, Color.decode("#D6A665")),
+            new ItemPair(ItemList.SWEETCORN_SEED_5320, Color.decode("#D8A637")),
+            new ItemPair(ItemList.STRAWBERRY_SEED_5323, Color.decode("#9F8D5A")),
+            new ItemPair(ItemList.WATERMELON_SEED_5321, Color.decode("#9F8D5A")),
+            new ItemPair(ItemList.SNAPE_GRASS_SEED_22879, Color.decode("#0D844C")),
 
             // Hops
-            new ItemPair(ItemList.BARLEY_SEED_5305, Color.BLUE),
-            new ItemPair(ItemList.HAMMERSTONE_SEED_5307, Color.BLUE),
-            new ItemPair(ItemList.ASGARNIAN_SEED_5308, Color.BLUE),
-            new ItemPair(ItemList.JUTE_SEED_5306, Color.BLUE),
-            new ItemPair(ItemList.YANILLIAN_SEED_5309, Color.BLUE),
-            new ItemPair(ItemList.KRANDORIAN_SEED_5310, Color.BLUE),
-            new ItemPair(ItemList.WILDBLOOD_SEED_5311, Color.BLUE),
+            new ItemPair(ItemList.BARLEY_SEED_5305, Color.decode("#C4AD85")),
+            new ItemPair(ItemList.HAMMERSTONE_SEED_5307, Color.decode("#7C875B")),
+            new ItemPair(ItemList.ASGARNIAN_SEED_5308, Color.decode("#818F24")),
+            new ItemPair(ItemList.JUTE_SEED_5306, Color.decode("#A27D5C")),
+            new ItemPair(ItemList.YANILLIAN_SEED_5309, Color.decode("#A59A15")),
+            new ItemPair(ItemList.KRANDORIAN_SEED_5310, Color.decode("#987B55")),
+            new ItemPair(ItemList.WILDBLOOD_SEED_5311, Color.decode("#8A5F4F")),
 
             // Flowers
-            new ItemPair(ItemList.MARIGOLD_SEED_5096, Color.BLUE),
-            new ItemPair(ItemList.NASTURTIUM_SEED_5098, Color.BLUE),
-            new ItemPair(ItemList.ROSEMARY_SEED_5097, Color.BLUE),
-            new ItemPair(ItemList.WOAD_SEED_5099, Color.BLUE),
-            new ItemPair(ItemList.LIMPWURT_SEED_5100, Color.BLUE),
+            new ItemPair(ItemList.MARIGOLD_SEED_5096, Color.decode("#A79371")),
+            new ItemPair(ItemList.NASTURTIUM_SEED_5098, Color.decode("#837359")),
+            new ItemPair(ItemList.ROSEMARY_SEED_5097, Color.decode("#837359")),
+            new ItemPair(ItemList.WOAD_SEED_5099, Color.decode("#938663")),
+            new ItemPair(ItemList.LIMPWURT_SEED_5100, Color.decode("#8D7312")),
 
             // Bushes
-            new ItemPair(ItemList.REDBERRY_SEED_5101, Color.BLUE),
-            new ItemPair(ItemList.CADAVABERRY_SEED_5102, Color.BLUE),
-            new ItemPair(ItemList.DWELLBERRY_SEED_5103, Color.BLUE),
-            new ItemPair(ItemList.JANGERBERRY_SEED_5104, Color.BLUE),
-            new ItemPair(ItemList.WHITEBERRY_SEED_5105, Color.BLUE),
-            new ItemPair(ItemList.POISON_IVY_SEED_5106, Color.BLUE),
+            new ItemPair(ItemList.REDBERRY_SEED_5101, Color.decode("#915652")),
+            new ItemPair(ItemList.CADAVABERRY_SEED_5102, Color.decode("#8C5F8B")),
+            new ItemPair(ItemList.DWELLBERRY_SEED_5103, Color.decode("#8C5F8B")),
+            new ItemPair(ItemList.JANGERBERRY_SEED_5104, Color.decode("#9B9D63")),
+            new ItemPair(ItemList.WHITEBERRY_SEED_5105, Color.decode("#BEB4B4")),
+            new ItemPair(ItemList.POISON_IVY_SEED_5106, Color.decode("#B4A9A8")),
 
             // Special
-            new ItemPair(ItemList.MUSHROOM_SPORE_5282, Color.BLUE),
-            new ItemPair(ItemList.BELLADONNA_SEED_5281, Color.BLUE),
-            new ItemPair(ItemList.CACTUS_SEED_5280, Color.BLUE),
-            new ItemPair(ItemList.SEAWEED_SPORE_21490, Color.BLUE),
-            new ItemPair(ItemList.POTATO_CACTUS_3138, Color.BLUE),
+            new ItemPair(ItemList.MUSHROOM_SPORE_5282, Color.decode("#B5A57A")),
+            new ItemPair(ItemList.BELLADONNA_SEED_5281, Color.decode("#997F9F")),
+            new ItemPair(ItemList.CACTUS_SEED_5280, Color.decode("#658348")),
+            new ItemPair(ItemList.SEAWEED_SPORE_21490, Color.decode("#92CB9F")),
+            new ItemPair(ItemList.POTATO_CACTUS_3138, Color.decode("#65713F")),
 
             // Herbs
-            new ItemPair(ItemList.GUAM_SEED_5291, Color.BLUE),
-            new ItemPair(ItemList.MARRENTILL_SEED_5292, Color.BLUE),
-            new ItemPair(ItemList.TARROMIN_SEED_5293, Color.BLUE),
-            new ItemPair(ItemList.HARRALANDER_SEED_5294, Color.BLUE),
-            new ItemPair(ItemList.RANARR_SEED_5295, Color.BLUE),
-            new ItemPair(ItemList.TOADFLAX_SEED_5296, Color.BLUE),
-            new ItemPair(ItemList.IRIT_SEED_5297, Color.BLUE),
-            new ItemPair(ItemList.AVANTOE_SEED_5298, Color.BLUE),
-            new ItemPair(ItemList.KWUARM_SEED_5299, Color.BLUE),
-            new ItemPair(ItemList.SNAPDRAGON_SEED_5300, Color.BLUE),
-            new ItemPair(ItemList.CADANTINE_SEED_5301, Color.BLUE),
-            new ItemPair(ItemList.LANTADYME_SEED_5302, Color.BLUE),
-            new ItemPair(ItemList.DWARF_WEED_SEED_5303, Color.BLUE),
-            new ItemPair(ItemList.TORSTOL_SEED_5304, Color.BLUE)
+            new ItemPair(ItemList.GUAM_SEED_5291, Color.decode("#385E00")),
+            new ItemPair(ItemList.MARRENTILL_SEED_5292, Color.decode("#385E00")),
+            new ItemPair(ItemList.TARROMIN_SEED_5293, Color.decode("#385E00")),
+            new ItemPair(ItemList.HARRALANDER_SEED_5294, Color.decode("#385E00")),
+            new ItemPair(ItemList.RANARR_SEED_5295, Color.decode("#385E00")),
+            new ItemPair(ItemList.TOADFLAX_SEED_5296, Color.decode("#385E00")),
+            new ItemPair(ItemList.IRIT_SEED_5297, Color.decode("#385E00")),
+            new ItemPair(ItemList.AVANTOE_SEED_5298, Color.decode("#385E00")),
+            new ItemPair(ItemList.KWUARM_SEED_5299, Color.decode("#385E00")),
+            new ItemPair(ItemList.SNAPDRAGON_SEED_5300, Color.decode("#385E00")),
+            new ItemPair(ItemList.CADANTINE_SEED_5301, Color.decode("#385E00")),
+            new ItemPair(ItemList.LANTADYME_SEED_5302, Color.decode("#385E00")),
+            new ItemPair(ItemList.DWARF_WEED_SEED_5303, Color.decode("#385E00")),
+            new ItemPair(ItemList.TORSTOL_SEED_5304, Color.decode("#385E00"))
     );
 
     public static List<ItemPair> dropList;
