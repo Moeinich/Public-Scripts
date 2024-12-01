@@ -64,9 +64,6 @@ public class CheckPickaxe extends Task {
             if (GameTabs.isInventoryTabOpen()) {
                 for (int pickaxeID : pickaxeIDs) {
                     if (Inventory.contains(pickaxeID, 0.75)) {
-                        if (isUseSpecialPickaxe(pickaxeID)) {
-                            useSpecial = true;
-                        }
                         hasPickaxe = true;
                         checkedForPickaxe = true;
                         Logger.log("Pickaxe(" + pickaxeID + ") in inventory, continuing");
