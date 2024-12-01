@@ -3,6 +3,7 @@ package utils;
 import helpers.utils.Tile;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 import static helpers.Interfaces.*;
@@ -20,6 +21,7 @@ public class MiningHelper {
             }
 
             if (shouldSpecialAttack()) {
+                Logger.log("Using spec!");
                 Player.useSpec();
                 Condition.wait(() -> Player.getSpec() < 100, 400, 10);
             }
