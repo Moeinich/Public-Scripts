@@ -3,7 +3,6 @@ package utils;
 import helpers.utils.Tile;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 
 import static helpers.Interfaces.*;
@@ -61,9 +60,7 @@ public class MiningHelper {
 
     private boolean shouldSpecialAttack() {
         if (useSpecial) {
-            if (Player.getSpec() >= 100) {
-                return true;
-            }
+            return Player.getSpec() >= 100;
         }
         return false;
     }
@@ -96,6 +93,7 @@ public class MiningHelper {
     private static final Tile alKharidOffTile = new Tile(13611, 12421, 0);
     public static boolean isAtStepLocation() {
         Tile position = Walker.getPlayerPosition();
+
         if (Location.equals("Al Kharid East")) {
             return Player.tileEquals(position, locationInfo.getStepLocation()) || Player.tileEquals(position, alKharidOffTile);
         }

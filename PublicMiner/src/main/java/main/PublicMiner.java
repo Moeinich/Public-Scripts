@@ -120,6 +120,7 @@ public class PublicMiner extends AbstractScript {
         slotsToSafeConfig = Integer.parseInt(configs.get("Amount of safe slots"));
         randomDropping = Boolean.valueOf(configs.get("Randomize dropping"));
 
+        Logger.log("Performing startup actions");
         //Setup enum values
         setupRegionInfo();
         setupLocationInfo();
@@ -141,9 +142,9 @@ public class PublicMiner extends AbstractScript {
             switch (Location) {
                 case "Varrock East":
                 case "Varrock West":
-                    return new MapChunk(new String[]{"49-52", "49-53", "49-54", "50-54", "50-53", "51-53", "51-52",}, "0");
+                    return new MapChunk(new String[]{"49-52", "49-53", "49-54", "50-54", "50-53", "51-53", "51-52"}, "0");
                 case "Isle of Souls":
-                    return new MapChunk(new String[]{"34-44", "34-43", "33-43", "33-44",}, "0");
+                    return new MapChunk(new String[]{"34-44", "34-43", "33-43", "33-44"}, "0");
                 case "Al Kharid East":
                     return new MapChunk(new String[]{"53-49", "52-49", "51-49", "50-49"}, "0");
                 case "Mining Guild - Iron East":
