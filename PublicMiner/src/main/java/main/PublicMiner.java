@@ -19,7 +19,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Miner",
         description = "Mines ores in different places. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.251",
+        version = "1.252",
         guideLink = "https://wiki.mufasaclient.com/docs/publicminer/",
         categories = {ScriptCategory.Mining}
 )
@@ -128,20 +128,33 @@ public class PublicMiner extends AbstractScript {
         setupOreTypeInts();
 
         // 47-151, 46-151, 46-152, 47-152, 49-52, 49-53, 49-54, 50-54, 50-53, 51-53, 51-52, 53-49, 52-49, 51-49, 50-49, 34-44, 34-43, 33-43, 33-44
-        MapChunk mapChunk = new MapChunk(new String[]
-                {
-                        // Mining Guild
-                        "47-151", "46-151", "46-152", "47-152",
-                        //Varrock
-                        "49-52", "49-53", "49-54", "50-54", "50-53", "51-53", "51-52",
-                        //Al Kharid
-                        "53-49", "52-49", "51-49", "50-49",
-                        //Isle of souls
-                        "34-44", "34-43", "33-43", "33-44"
-                },
-                "0");
+        MapChunk mapChunk = getMapChunk();
+        if (mapChunk != null) {
+            Walker.setup(mapChunk);
+        } else {
+            Logger.log("Failed to create map!");
+            Script.stop();
+        }
+    }
 
-        Walker.setup(mapChunk);
+    public MapChunk getMapChunk() {
+            switch (Location) {
+                case "Varrock East":
+                case "Varrock West":
+                    return new MapChunk(new String[]{"49-52", "49-53", "49-54", "50-54", "50-53", "51-53", "51-52",}, "0");
+                case "Isle of Souls":
+                    return new MapChunk(new String[]{"34-44", "34-43", "33-43", "33-44",}, "0");
+                case "Al Kharid East":
+                    return new MapChunk(new String[]{"53-49", "52-49", "51-49", "50-49"}, "0");
+                case "Mining Guild - Iron East":
+                case "Mining Guild - Iron West":
+                case "Mining Guild - Coal":
+                    return new MapChunk(new String[]{"47-151", "46-151", "46-152", "47-152"}, "0");
+                default:
+                    Logger.log("Incorrect script setup, please read script guide!");
+                    break;
+            }
+            return null;
     }
 
     @Override

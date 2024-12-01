@@ -95,9 +95,10 @@ public class MiningHelper {
 
     private static final Tile alKharidOffTile = new Tile(13611, 12421, 0);
     public static boolean isAtStepLocation() {
+        Tile position = Walker.getPlayerPosition();
         if (Location.equals("Al Kharid East")) {
-            return Player.atTile(locationInfo.getStepLocation()) || Player.atTile(alKharidOffTile);
+            return Player.tileEquals(position, locationInfo.getStepLocation()) || Player.tileEquals(position, alKharidOffTile);
         }
-        return Player.atTile(locationInfo.getStepLocation());
+        return Player.tileEquals(position, locationInfo.getStepLocation());
     }
 }
