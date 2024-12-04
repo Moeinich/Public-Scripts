@@ -73,9 +73,6 @@ public class CheckEquipment extends Task {
             if (GameTabs.isInventoryTabOpen()) {
                 for (int axeID : axeIDs) {
                     if (Inventory.contains(axeID, 0.75)) {
-                        if (isUseSpecialAxe(axeID)) {
-                            useSpecial = true;
-                        }
                         hasAxe = true;
                         checkedForAxe = true;
                         Logger.log("Axe(" + axeID + ") in inventory, continuing");
