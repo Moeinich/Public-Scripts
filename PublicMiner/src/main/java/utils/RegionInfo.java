@@ -26,8 +26,8 @@ public enum RegionInfo {
     ),
     ISLE_OF_SOULS(
             new Area(
-                    new Tile(8768, 10900, 0),
-                    new Tile(8803, 10928, 0)
+                    new Tile(8761, 10937, 0),
+                    new Tile(8808, 10890, 0)
             ),
             new Area(
                     new Tile(8828, 11163, 0),

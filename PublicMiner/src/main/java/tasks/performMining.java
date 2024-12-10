@@ -18,7 +18,7 @@ public class performMining extends Task {
         if (Inventory.isFull()) {
             return false;
         }
-        return isAtStepLocation() || handleBankAreaCheck();
+        return isAtStepLocation() || handleMiningAreaCheck() || handleBankAreaCheck();
     }
 
     @Override
@@ -30,6 +30,7 @@ public class performMining extends Task {
     }
 
     private boolean handleMiningAreaCheck() {
+        Logger.log("inside mining area check");
         if (Player.isTileWithinArea(location, regionInfo.getMineArea())) {
             Logger.log("Stepping to mine spot");
             Walker.step(locationInfo.getStepLocation());
