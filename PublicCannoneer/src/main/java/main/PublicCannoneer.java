@@ -36,8 +36,8 @@ import static helpers.Interfaces.*;
                 @ScriptConfiguration(
                         name = "Break every",
                         description = "Break every random x minutes",
-                        defaultValue = "31",
-                        minMaxIntValues = {15, 40},
+                        defaultValue = "30",
+                        minMaxIntValues = {15, 55},
                         optionType = OptionType.INTEGER_SLIDER
                 )
         }
