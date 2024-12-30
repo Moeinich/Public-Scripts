@@ -91,7 +91,15 @@ public class PortRewards extends Task {
     private void randomizeGameAmount() {
         int lowerBound = initialGameAmount > 1 ? initialGameAmount - (initialGameAmount <= 5 ? 1 : 2) : 1;
         int upperBound = initialGameAmount + (initialGameAmount <= 5 ? 1 : 2);
-        gameAmount = random.nextInt(upperBound - lowerBound) + lowerBound;
+
+        // Ensure the bounds are valid
+        if (upperBound <= lowerBound) {
+            Logger.debugLog("Invalid bounds for randomization: lowerBound=" + lowerBound + ", upperBound=" + upperBound);
+            gameAmount = lowerBound; // Default to lowerBound
+        } else {
+            gameAmount = random.nextInt(upperBound - lowerBound) + lowerBound;
+        }
+
         Logger.debugLog("Game amount randomized for the next cycle: " + gameAmount);
     }
 }
