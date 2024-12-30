@@ -2,8 +2,7 @@ package mTrawler.Tasks;
 
 import mTrawler.Task;
 
-import static helpers.Interfaces.Logger;
-import static helpers.Interfaces.Player;
+import static helpers.Interfaces.*;
 
 public class Run extends Task {
     @Override
@@ -14,6 +13,7 @@ public class Run extends Task {
 
     @Override //the code to execute if criteria met
     public boolean execute() {
+        Paint.setStatus("Turn run on");
         Logger.debugLog("Turning on run.");
         Player.toggleRun();
         return true;

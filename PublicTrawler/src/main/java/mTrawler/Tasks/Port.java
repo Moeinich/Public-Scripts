@@ -31,6 +31,7 @@ public class Port extends Task {
 
     @Override //the code to execute if criteria met
     public boolean execute() {
+        Paint.setStatus("Walk to boat entrance");
         Logger.log("Attempting to walk to boat entrance.");
         Walker.step(boatEnterTile);
         Condition.wait(() -> {
@@ -39,12 +40,17 @@ public class Port extends Task {
         }, 200, 10);
 
         if(Player.tileEquals(currentPos, boatEnterTile)) {
+            Paint.setStatus("Enter boat");
             Logger.log("Entering boat.");
             Client.tap(enterBoatRect);
             Condition.wait(() -> {
                 currentPos = Walker.getPlayerPosition(); // Update location after moving
                 return Player.isTileWithinArea(currentPos, boatArea);
             }, 200, 10);
+            if (Chatbox.isMakeMenuVisible()) {
+                Client.sendKeystroke("space");
+                Condition.wait(() -> !Chatbox.isMakeMenuVisible(), 100, 30);
+            }
             return true;
         }
         return false;

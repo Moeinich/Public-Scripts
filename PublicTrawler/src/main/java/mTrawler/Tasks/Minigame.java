@@ -35,6 +35,7 @@ public class Minigame extends Task {
         ensureInventoryTabOpen();
 
         if (!inPosition) {
+            Paint.setStatus("Move to repair tile");
             moveToRepairTile();
         }
 
@@ -75,10 +76,12 @@ public class Minigame extends Task {
             if (Inventory.contains(583, 0.75)) {
                 handleBailingWater();
             } else {
+                Paint.setStatus("Sleep");
                 Logger.log("We have enough contribution, just sleeping");
                 sleepRandom(generateRandomDelay(500, 1000));
             }
         } else {
+            Paint.setStatus("Repair hole");
             Logger.log("Getting contribution");
             Client.tap(tapRect);
             sleepRandom(generateRandomDelay(100, 200));
@@ -87,11 +90,13 @@ public class Minigame extends Task {
 
     private void handleBailingWater() {
         if (Client.isColorInRect(waterColor, waterCheckRect, 5)) {
+            Paint.setStatus("Bail water");
             Logger.log("Bailing water..");
             Inventory.tapItem(583, true, 0.75);
             sleepRandom(generateRandomDelay(200, 700));
 
         } else {
+            Paint.setStatus("Sleep");
             Logger.log("We have enough contribution and no water to bail, just sleeping");
             sleepRandom(generateRandomDelay(500, 1000));
         }

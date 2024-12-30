@@ -11,8 +11,9 @@ import java.awt.*;
 
 import static helpers.Interfaces.*;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class PortRewards extends Task {
     Tile rewardTile = new Tile(10667, 12413, 0);
@@ -25,6 +26,35 @@ public class PortRewards extends Task {
     );
     private static Integer breakCounter = 0;
     private static final Integer initialGameAmount = gameAmount;
+
+
+    // Fish colors
+    private static final Color mantaColor = Color.decode("#525c36");
+    private static final Color seaturtleColor = Color.decode("#736423");
+    private static final Color sharkColor = Color.decode("#6a6160");
+    private static final Color swordfishColor = Color.decode("#b47bbf");
+    private static final Color lobsterColor = Color.decode("#6e3914");
+    private static final Color tunaColor = Color.decode("#9b8f8e");
+    private static final Color anchoviesColor = Color.decode("#5e5f7b");
+    private static final List<Color> anglerOutfitColors = Arrays.asList(
+            // Boots
+            Color.decode("#292f00"),
+            Color.decode("#121400"),
+            // Top and bottom
+            Color.decode("#5a5a39"),
+            Color.decode("#37371c")
+            // Hat
+            // Not yet obtained
+    );
+
+    // Reward boxes
+    private static final Rectangle rewardBox1 = new Rectangle(133, 225, 55, 51);
+    private static final Rectangle rewardBox2 = new Rectangle(190, 225, 55, 51);
+    private static final Rectangle rewardBox3 = new Rectangle(247, 225, 55, 51);
+    private static final Rectangle rewardBox4 = new Rectangle(304, 225, 55, 51);
+    private static final Rectangle rewardBox5 = new Rectangle(361, 225, 55, 51);
+    private static final Rectangle rewardBox6 = new Rectangle(418, 225, 55, 51);
+    private static final Rectangle rewardBox7 = new Rectangle(475, 225, 55, 51);
 
     @Override
     public boolean activate() {
@@ -48,22 +78,91 @@ public class PortRewards extends Task {
 
     private void resetGameParametersIfNeeded() {
         if (inPosition) {
+            Paint.setStatus("Reset game parameters");
             inPosition = false;
             Logger.debugLog("Reset game parameters successful");
         }
     }
 
     private void moveToRewardTileAndCollectRewards() {
+        Paint.setStatus("Collect rewards");
         Walker.step(rewardTile);
         Condition.wait(() -> Player.tileEquals(currentPos, rewardTile), 200, 20);
 
         tapAndSleep(rewardsTap);
         tapAndSleep(depositBank);
+
+        if (stopAfterXPieces) {
+            Logger.debugLog("Current angler pieces obtained: " + anglerpieceCount + "/" + stopAfter);
+
+            if (anglerpieceCount == stopAfter || anglerpieceCount > stopAfter) {
+                Logger.log("Reached the angler piece outfit goal, logging out and stopping script!");
+
+                // Add call to close interface here first
+
+                Logout.logout();
+                Script.stop();
+            }
+        }
     }
 
     private void tapAndSleep(Rectangle tapArea) {
         Client.tap(tapArea);
-        Condition.sleep(1300 + random.nextInt(500));
+        Condition.sleep(generateRandomDelay(1300, 1800));
+    }
+
+    private void updatePaintBar() {
+        Paint.setStatus("Update paint bar");
+        // List of reward boxes
+        List<Rectangle> rewardBoxes = Arrays.asList(
+                rewardBox1, rewardBox2, rewardBox3, rewardBox4,
+                rewardBox5, rewardBox6, rewardBox7
+        );
+
+        // List of colors to check
+        List<Color> fishColors = Arrays.asList(
+                mantaColor, seaturtleColor, sharkColor,
+                swordfishColor, lobsterColor, tunaColor,
+                anchoviesColor
+        );
+
+        // Iterate through each reward box
+        for (int i = 0; i < rewardBoxes.size(); i++) {
+            Rectangle box = rewardBoxes.get(i);
+            boolean colorFound = false;
+
+            // Check each color in the current box
+            for (Color color : fishColors) {
+                if (Client.isColorInRect(color, box, 5)) { // Threshold of 5
+                    colorFound = true;
+
+                    // Execute code for the found color
+                    Logger.debugLog("Color " + color + " found in rewardBox" + (i + 1));
+                    executeActionForColor(color, i + 1); // Custom method for specific color actions
+                    Condition.sleep(generateRandomDelay(150, 300));
+
+                    break; // Exit color loop if a color is found
+                }
+            }
+
+            // Check for angler outfit colors
+            if (!colorFound) {
+                for (Color anglerColor : anglerOutfitColors) {
+                    if (Client.isColorInRect(anglerColor, box, 5)) {
+                        colorFound = true;
+                        Logger.debugLog("Angler outfit piece detected in rewardBox" + (i + 1));
+                        executeActionForAnglerPiece(i + 1);
+                        Condition.sleep(generateRandomDelay(150, 300));
+                        break;
+                    }
+                }
+            }
+
+            // If no color is found in the current box
+            if (!colorFound) {
+                Logger.debugLog("No matching color found in rewardBox" + (i + 1));
+            }
+        }
     }
 
     private void handleBreaksIfNeeded() {
@@ -75,17 +174,12 @@ public class PortRewards extends Task {
                 randomizeGameAmount();
 
                 Logout.logout();
-                sleepRandomDuration(); // Sleep between 2 and 6 minutes
+                Condition.sleep(generateRandomDelay(120000, 360000)); // Sleep between 2 and 6 minutes
                 Login.login();
             } else {
                 Logger.log("Continuing without a break. Current break counter: " + breakCounter);
             }
         }
-    }
-
-    private void sleepRandomDuration() {
-        int randomDuration = ThreadLocalRandom.current().nextInt(120000, 360000 + 1);
-        Condition.sleep(randomDuration);
     }
 
     private void randomizeGameAmount() {
@@ -101,5 +195,74 @@ public class PortRewards extends Task {
         }
 
         Logger.debugLog("Game amount randomized for the next cycle: " + gameAmount);
+    }
+
+    private void executeActionForColor(Color color, int boxIndex) {
+        Logger.debugLog(getFishName(color) + " detected in box " + boxIndex);
+        tempCountHolder = interfaces.readStackSize(getRewardBox(boxIndex));
+        int currentCount = (tempCountHolder == -1 || tempCountHolder == 0) ? 1 : tempCountHolder;
+
+        updateFishCount(color, currentCount);
+    }
+
+    private void executeActionForAnglerPiece(int boxIndex) {
+        Logger.debugLog("Angler outfit piece detected in box " + boxIndex);
+        anglerpieceCount++;
+        Paint.updateBox(anglerpieceIndex, anglerpieceCount);
+
+    }
+
+    private Rectangle getRewardBox(int boxIndex) {
+        if (boxIndex == 1) {
+            return rewardBox1;
+        } else if (boxIndex == 2) {
+            return rewardBox2;
+        } else if (boxIndex == 3) {
+            return rewardBox3;
+        } else if (boxIndex == 4) {
+            return rewardBox4;
+        } else if (boxIndex == 5) {
+            return rewardBox5;
+        } else if (boxIndex == 6) {
+            return rewardBox6;
+        } else if (boxIndex == 7) {
+            return rewardBox7;
+        } else return new Rectangle(1, 1, 1, 1);
+    }
+
+    private String getFishName(Color color) {
+        if (color.equals(mantaColor)) return "Manta Ray";
+        if (color.equals(seaturtleColor)) return "Sea Turtle";
+        if (color.equals(sharkColor)) return "Shark";
+        if (color.equals(swordfishColor)) return "Swordfish";
+        if (color.equals(lobsterColor)) return "Lobster";
+        if (color.equals(tunaColor)) return "Tuna";
+        if (color.equals(anchoviesColor)) return "Anchovies";
+        return "Unknown Fish";
+    }
+
+    private void updateFishCount(Color color, int count) {
+        if (color.equals(mantaColor)) {
+            mantarayCount += count;
+            Paint.updateBox(mantarayIndex, mantarayCount);
+        } else if (color.equals(seaturtleColor)) {
+            seaturtleCount += count;
+            Paint.updateBox(seaturtleIndex, seaturtleCount);
+        } else if (color.equals(sharkColor)) {
+            sharkCount += count;
+            Paint.updateBox(sharkIndex, sharkCount);
+        } else if (color.equals(swordfishColor)) {
+            swordfishCount += count;
+            Paint.updateBox(swordfishIndex, swordfishCount);
+        } else if (color.equals(lobsterColor)) {
+            lobsterCount += count;
+            Paint.updateBox(lobsterIndex, lobsterCount);
+        } else if (color.equals(tunaColor)) {
+            tunaCount += count;
+            Paint.updateBox(tunaIndex, tunaCount);
+        } else if (color.equals(anchoviesColor)) {
+            anchoviesCount += count;
+            Paint.updateBox(anchoviesIndex, anchoviesCount);
+        }
     }
 }

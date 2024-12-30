@@ -9,8 +9,8 @@ import static mTrawler.PublicTrawler.*;
 
 public class Boat extends Task {
     Area boatArea = new Area(
-            new Tile(10677, 12416, 0),
-            new Tile(10694, 12463, 0)
+            new Tile(10664, 12486, 1),
+            new Tile(10741, 12395, 1)
     );
 
     @Override

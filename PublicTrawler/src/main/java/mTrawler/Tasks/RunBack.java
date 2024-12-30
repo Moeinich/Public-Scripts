@@ -42,6 +42,8 @@ public class RunBack extends Task {
 
     @Override //the code to execute if criteria met
     public boolean execute() {
+        Paint.setStatus("Run back to port");
+        Logger.debugLog("Running back to port after a failed game.");
         Walker.walkPath(runBackPath);
         GAME_FLAG = 0;
         return true;
