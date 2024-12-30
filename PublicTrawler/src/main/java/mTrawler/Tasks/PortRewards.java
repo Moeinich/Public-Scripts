@@ -89,7 +89,13 @@ public class PortRewards extends Task {
         Walker.step(rewardTile);
         Condition.wait(() -> Player.tileEquals(currentPos, rewardTile), 200, 20);
 
+        // Open rewards interface
         tapAndSleep(rewardsTap);
+
+        // Update the paintBar / rewards
+        updatePaintBar();
+
+        // Deposit all rewards to the bank
         tapAndSleep(depositBank);
 
         if (stopAfterXPieces) {
@@ -97,8 +103,6 @@ public class PortRewards extends Task {
 
             if (anglerpieceCount == stopAfter || anglerpieceCount > stopAfter) {
                 Logger.log("Reached the angler piece outfit goal, logging out and stopping script!");
-
-                // Add call to close interface here first
 
                 Logout.logout();
                 Script.stop();

@@ -23,6 +23,12 @@ public class Boat extends Task {
     public boolean execute() {
         Logger.log("Player in boat area - waiting for game to start.");
 
+        // Close the already someone on a fishing trip message if visible
+        if (Chatbox.isMakeMenuVisible()) {
+            Client.sendKeystroke("space");
+            Condition.wait(() -> !Chatbox.isMakeMenuVisible(), 100, 30);
+        }
+
         // Check for inactivity
         Game.antiAFK();
 

@@ -47,10 +47,6 @@ public class Port extends Task {
                 currentPos = Walker.getPlayerPosition(); // Update location after moving
                 return Player.isTileWithinArea(currentPos, boatArea);
             }, 200, 10);
-            if (Chatbox.isMakeMenuVisible()) {
-                Client.sendKeystroke("space");
-                Condition.wait(() -> !Chatbox.isMakeMenuVisible(), 100, 30);
-            }
             return true;
         }
         return false;

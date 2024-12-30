@@ -84,7 +84,7 @@ public class Minigame extends Task {
             Paint.setStatus("Repair hole");
             Logger.log("Getting contribution");
             Client.tap(tapRect);
-            sleepRandom(generateRandomDelay(100, 200));
+            sleepRandom(generateRandomDelay(250, 500));
         }
     }
 

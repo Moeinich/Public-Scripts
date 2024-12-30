@@ -14,7 +14,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "PublicTrawler",
         description = "Completes fishing trawler using swamp paste.",
-        version = "1.16",
+        version = "1.17",
         categories = {ScriptCategory.Minigames, ScriptCategory.Fishing},
         guideLink = "https://wiki.mufasaclient.com/docs/public-trawler/"
 )
@@ -25,7 +25,7 @@ import static helpers.Interfaces.*;
                         description = "After how many angler pieces would you like to stop the script? 4 by default (full outfit), 1-3 for if you need only a partial outfit, set to 0 to never stop.",
                         defaultValue = "4",
                         minMaxIntValues = {0, 4},
-                        optionType = OptionType.INTEGER
+                        optionType = OptionType.INTEGER_SLIDER
                 ),
                 @ScriptConfiguration(
                         name =  "Breaks",
@@ -140,6 +140,10 @@ public class PublicTrawler extends AbstractScript {
     public void poll() {
         Logger.debugLog("GAME FLAG: " + GAME_FLAG);
         currentPos = Walker.getPlayerPosition();
+
+        if (!GameTabs.isTabOpen(UITabs.INVENTORY)) {
+            GameTabs.openTab(UITabs.INVENTORY);
+        }
 
         // Looped tasks go here.
         for (Task task : taskList) {
