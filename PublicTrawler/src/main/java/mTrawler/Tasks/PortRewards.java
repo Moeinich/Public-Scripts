@@ -43,8 +43,8 @@ public class PortRewards extends Task {
             // Top and bottom
             Color.decode("#5a5a39"),
             Color.decode("#37371c")
-            // Hat
-            // Not yet obtained
+
+            // Hat also falls under these four.
     );
 
     // Reward boxes
