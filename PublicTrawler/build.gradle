@@ -23,7 +23,7 @@ dependencies {
 }
 
 jar {
-    archiveFileName = 'mTrawler.jar'
+    archiveFileName = 'PublicTrawler.jar'
     destinationDirectory = file('jar/')
 
     manifest {
