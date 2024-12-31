@@ -29,7 +29,7 @@ public class PortRewards extends Task {
 
 
     // Fish colors
-    private static final Color mantaColor = Color.decode("#525c36");
+    private static final Color mantaColor = Color.decode("#414566");
     private static final Color seaturtleColor = Color.decode("#736423");
     private static final Color sharkColor = Color.decode("#6a6160");
     private static final Color swordfishColor = Color.decode("#b47bbf");
@@ -103,6 +103,7 @@ public class PortRewards extends Task {
 
             if (anglerpieceCount == stopAfter || anglerpieceCount > stopAfter) {
                 Logger.log("Reached the angler piece outfit goal, logging out and stopping script!");
+                Logger.debugLog("Reached the angler piece outfit goal, logging out and stopping script!");
 
                 Logout.logout();
                 Script.stop();
