@@ -14,7 +14,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "PublicTrawler",
         description = "Completes fishing trawler using swamp paste.",
-        version = "2.01",
+        version = "2.02",
         categories = {ScriptCategory.Minigames, ScriptCategory.Fishing},
         guideLink = "https://wiki.mufasaclient.com/docs/public-trawler/"
 )

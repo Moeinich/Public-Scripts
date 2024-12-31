@@ -153,7 +153,7 @@ public class PortRewards extends Task {
             // Check for angler outfit colors
             if (!colorFound) {
                 for (Color anglerColor : anglerOutfitColors) {
-                    if (Client.isColorInRect(anglerColor, box, 5)) {
+                    if (Client.isColorInRect(anglerColor, box, 3)) {
                         colorFound = true;
                         Logger.debugLog("Angler outfit piece detected in rewardBox" + (i + 1));
                         executeActionForAnglerPiece(i + 1);
