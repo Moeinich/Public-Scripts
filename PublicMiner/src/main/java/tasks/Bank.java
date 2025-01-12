@@ -89,11 +89,11 @@ public class Bank extends Task {
                 ItemList.UNCUT_RUBY_1619,
                 ItemList.UNCUT_DIAMOND_1617,
                 // Clues
-                ItemList.CLUE_GEODE__BEGINNER__23442,
-                ItemList.CLUE_GEODE__EASY__20358,
-                ItemList.CLUE_GEODE__MEDIUM__20360,
-                ItemList.CLUE_GEODE__HARD__20362,
-                ItemList.CLUE_GEODE__ELITE__20364});
+                ItemList.CLUE_GEODE_BEGINNER_23442,
+                ItemList.CLUE_GEODE_EASY_20358,
+                ItemList.CLUE_GEODE_MEDIUM_20360,
+                ItemList.CLUE_GEODE_HARD_20362,
+                ItemList.CLUE_GEODE_ELITE_20364});
     }
 
     private void tapAllItems(int[] itemIds) {

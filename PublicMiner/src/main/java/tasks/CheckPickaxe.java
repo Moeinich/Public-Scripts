@@ -26,25 +26,25 @@ public class CheckPickaxe extends Task {
             ItemList._3RD_AGE_PICKAXE_20014,
             ItemList.INFERNAL_PICKAXE_13243,
             ItemList.CRYSTAL_PICKAXE_23680,
-            ItemList.DRAGON_PICKAXE__OR__23677,
-            ItemList.DRAGON_PICKAXE__OR__25376,
+            ItemList.DRAGON_PICKAXE_OR_23677,
+            ItemList.DRAGON_PICKAXE_OR_25376,
             ItemList.DRAGON_PICKAXE_12797,
-            ItemList.INFERNAL_PICKAXE__UNCHARGED__13244,
-            ItemList.INFERNAL_PICKAXE__OR__25063,
-            ItemList.CRYSTAL_PICKAXE__INACTIVE__23682,
+            ItemList.INFERNAL_PICKAXE_UNCHARGED_13244,
+            ItemList.INFERNAL_PICKAXE_OR_25063,
+            ItemList.CRYSTAL_PICKAXE_INACTIVE_23682,
             ItemList.GILDED_PICKAXE_23276,
     };
 
     int[] specialPickaxes = {
             ItemList._3RD_AGE_PICKAXE_20014,
             ItemList.INFERNAL_PICKAXE_13243,
-            ItemList.INFERNAL_PICKAXE__UNCHARGED__13244,
-            ItemList.INFERNAL_PICKAXE__OR__25063,
+            ItemList.INFERNAL_PICKAXE_UNCHARGED_13244,
+            ItemList.INFERNAL_PICKAXE_OR_25063,
             ItemList.CRYSTAL_PICKAXE_23680,
-            ItemList.CRYSTAL_PICKAXE__INACTIVE__23682,
+            ItemList.CRYSTAL_PICKAXE_INACTIVE_23682,
             ItemList.DRAGON_PICKAXE_11920,
-            ItemList.DRAGON_PICKAXE__OR__23677,
-            ItemList.DRAGON_PICKAXE__OR__25376,
+            ItemList.DRAGON_PICKAXE_OR_23677,
+            ItemList.DRAGON_PICKAXE_OR_25376,
             ItemList.DRAGON_PICKAXE_12797
     };
 

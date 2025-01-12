@@ -13,7 +13,7 @@ import static tasks.CheckPickaxe.useSpecial;
 
 public class MiningHelper {
     public boolean performMining(LocationInfo locationInfo, VeinColors veinColors) {
-        while (!Inventory.isFull() && !Script.isScriptStopping() && !Script.isTimeForBreak() && !Script.isPaused() && isAtStepLocation()) {
+        while (!Inventory.isFull() && !Script.isScriptStopping() && !Client.isTimeForBreak() && !Script.isPaused() && isAtStepLocation()) {
 
             if (!GameTabs.isInventoryTabOpen()) {
                 Logger.log("Opening inventory");
