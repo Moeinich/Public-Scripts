@@ -14,7 +14,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "PublicTrawler",
         description = "Completes fishing trawler using swamp paste.",
-        version = "2.02",
+        version = "2.03",
         categories = {ScriptCategory.Minigames, ScriptCategory.Fishing},
         guideLink = "https://wiki.mufasaclient.com/docs/public-trawler/"
 )
@@ -39,6 +39,18 @@ import static helpers.Interfaces.*;
                         defaultValue = "5",
                         minMaxIntValues = {1, 43},
                         optionType = OptionType.INTEGER
+                ),
+                @ScriptConfiguration(
+                        name = "Run anti-ban",
+                        description = "Would you like to run anti-ban features?",
+                        defaultValue = "true",
+                        optionType = OptionType.BOOLEAN
+                ),
+                @ScriptConfiguration(
+                        name = "Run extended anti-ban",
+                        description = "Would you like to run additional, extended anti-ban like some additional AFK patterns, on TOP of the regular anti-ban?",
+                        defaultValue = "false",
+                        optionType = OptionType.BOOLEAN
                 )
         }
 )
@@ -58,6 +70,8 @@ public class PublicTrawler extends AbstractScript {
     public static Tile currentPos;
     public static int stopAfter;
     public static boolean stopAfterXPieces = false;
+    private boolean antiBan;
+    private boolean extendedAntiBan;
 
     // Paint indexes
     public static int anchoviesIndex;
@@ -91,6 +105,8 @@ public class PublicTrawler extends AbstractScript {
         useBreaks = Boolean.parseBoolean((configs.get("Breaks")));
         gameAmount = Integer.parseInt((configs.get("Break after")));
         stopAfter = Integer.parseInt((configs.get("Stop after")));
+        antiBan = Boolean.valueOf(configs.get("Run anti-ban"));
+        extendedAntiBan = Boolean.valueOf(configs.get("Run extended anti-ban"));
 
         // Disable automatic breaks
         Client.disableBreakHandler();
@@ -107,6 +123,16 @@ public class PublicTrawler extends AbstractScript {
         } else {
             Logger.debugLog("stopAfter is set to " + stopAfter + ", we still stop after getting " + stopAfter + " angler outfit pieces.");
             stopAfterXPieces = true;
+        }
+
+        if (antiBan) {
+            Logger.debugLog("Initializing anti-ban timer");
+            Game.antiBan();
+            if (extendedAntiBan) {
+                Logger.debugLog("Initializing extended anti-ban timer");
+                Game.enableOptionalAntiBan(AntiBan.EXTENDED_AFK);
+                Game.antiBan();
+            }
         }
 
         // Set up paint bar
@@ -138,6 +164,9 @@ public class PublicTrawler extends AbstractScript {
 
     @Override
     public void poll() {
+        if (antiBan) {
+            Game.antiBan();
+        }
         Logger.debugLog("GAME FLAG: " + GAME_FLAG);
         currentPos = Walker.getPlayerPosition();
 
