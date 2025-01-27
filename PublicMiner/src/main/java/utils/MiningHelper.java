@@ -49,7 +49,7 @@ public class MiningHelper {
                 );
 
                 if (!objects.isEmpty()) {  // Check if the list is not empty
-                    Logger.log("Clicking vein!");
+                    Logger.log("Clicking vein at: " + direction.name());
                     clickPositions(checkRect, veinColors);
                     break;
                 } else {
@@ -69,7 +69,6 @@ public class MiningHelper {
 
     private void clickPositions(Rectangle position, VeinColors veinColors) {
         if (isValidRect(position)) {
-            Logger.log("Tapping vein");
             Client.tap(position);
             Condition.wait(() -> !Client.isAnyColorInRect(veinColors.getActiveColor(), position, locationInfo.getTolerance()) || shouldHop() || Inventory.isFull(), 50, 145);
             Logger.debugLog("Successfully mined vein");
