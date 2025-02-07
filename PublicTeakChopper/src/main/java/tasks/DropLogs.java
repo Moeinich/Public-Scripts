@@ -1,6 +1,6 @@
 package tasks;
 
-import helpers.utils.ItemList;
+import helpers.utils.UITabs;
 import utils.Task;
 
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ public class DropLogs extends Task {
 
     @Override
     public boolean execute() {
-        if (!GameTabs.isInventoryTabOpen()) {
+        if (!GameTabs.isTabOpen(UITabs.INVENTORY)) {
             Logger.log("Opening inventory");
-            GameTabs.openInventoryTab();
+            GameTabs.openTab(UITabs.INVENTORY);
         }
 
         if (!Game.isTapToDropEnabled()) {

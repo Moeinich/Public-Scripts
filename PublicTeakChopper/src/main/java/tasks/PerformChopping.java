@@ -2,6 +2,7 @@ package tasks;
 
 import helpers.utils.Area;
 import helpers.utils.Tile;
+import helpers.utils.UITabs;
 import utils.Task;
 
 import java.awt.*;
@@ -37,13 +38,13 @@ public class PerformChopping extends Task {
 
     @Override
     public boolean execute() {
-        if (useWDH) {
-            Game.hop(hopProfile, useWDH, false); // Check if we should worldhop
+        if (useWDH && Game.isPlayersAround()) {
+            Game.instantHop(hopProfile);
         }
 
-        if (!GameTabs.isInventoryTabOpen()) {
-            GameTabs.openInventoryTab();
-            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 10);
+        if (!GameTabs.isTabOpen(UITabs.INVENTORY)) {
+            GameTabs.openTab(UITabs.INVENTORY);
+            Condition.wait(() -> GameTabs.isTabOpen(UITabs.INVENTORY), 100, 10);
         }
 
         if (shouldSpecialAttack()) {
@@ -81,9 +82,7 @@ public class PerformChopping extends Task {
 
     private boolean shouldSpecialAttack() {
         if (useSpecial) {
-            if (Player.getSpec() >= 100) {
-                return true;
-            }
+            return Player.getSpec() >= 100;
         }
         return false;
     }

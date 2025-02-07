@@ -21,7 +21,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Teak Chopper",
         description = "An easy to use Teak Chopper. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.14",
+        version = "1.15",
         guideLink = "https://wiki.mufasaclient.com/docs/public-teak-chopper/",
         categories = {ScriptCategory.Woodcutting}
 )
@@ -64,7 +64,6 @@ public class PublicTeakChopper extends AbstractScript {
     public static Boolean useWDH;
     public static String Location;
     public static Boolean axeEquipped = false;
-    public static int axeInventorySlotNumber = 0;
     public static Boolean randomDropping;
     public static int slotsToSafeConfig = 0;
 
@@ -80,6 +79,8 @@ public class PublicTeakChopper extends AbstractScript {
         slotsToSafeConfig = Integer.parseInt(configs.get("Amount of safe slots"));
         randomDropping = Boolean.valueOf(configs.get("Randomize dropping"));
 
+        Logger.log("Use worldhops? " + useWDH);
+
         Walker.setup(new MapChunk(new String[]{"33-46", "35-44"}, "0"));
     }
 
@@ -92,6 +93,10 @@ public class PublicTeakChopper extends AbstractScript {
 
     @Override
     public void poll() {
+        if (useWDH) {
+            Game.hop(hopProfile, useWDH, false); // Check if we should worldhop
+        }
+
         //Run tasks
         for (Task task : chopTasks) {
             if (task.activate()) {

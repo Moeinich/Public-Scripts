@@ -2,11 +2,10 @@ package tasks;
 
 import helpers.utils.EquipmentSlot;
 import helpers.utils.ItemList;
-import main.PublicTeakChopper;
+import helpers.utils.UITabs;
 import utils.Task;
 
 import static helpers.Interfaces.*;
-import static main.PublicTeakChopper.axeInventorySlotNumber;
 import static main.PublicTeakChopper.axeEquipped;
 
 public class CheckEquipment extends Task {
@@ -27,11 +26,11 @@ public class CheckEquipment extends Task {
             ItemList.IRON_AXE_1349,
             ItemList.BRONZE_AXE_1351,
             ItemList.CRYSTAL_AXE_23673,
-            ItemList.CRYSTAL_AXE__INACTIVE__23675,
+            ItemList.CRYSTAL_AXE_INACTIVE_23675,
             ItemList.CRYSTAL_FELLING_AXE_28220,
-            ItemList.CRYSTAL_FELLING_AXE__INACTIVE__28223,
+            ItemList.CRYSTAL_FELLING_AXE_INACTIVE_28223,
             ItemList.INFERNAL_AXE_13241,
-            ItemList.INFERNAL_AXE__UNCHARGED__13242,
+            ItemList.INFERNAL_AXE_UNCHARGED_13242,
             ItemList._3RD_AGE_AXE_20011,
             ItemList._3RD_AGE_FELLING_AXE_28226,
             ItemList.DRAGON_FELLING_AXE_28217,
@@ -46,11 +45,11 @@ public class CheckEquipment extends Task {
 
     int[] specialAxes = {
             ItemList.CRYSTAL_AXE_23673,
-            ItemList.CRYSTAL_AXE__INACTIVE__23675,
+            ItemList.CRYSTAL_AXE_INACTIVE_23675,
             ItemList.CRYSTAL_FELLING_AXE_28220,
-            ItemList.CRYSTAL_FELLING_AXE__INACTIVE__28223,
+            ItemList.CRYSTAL_FELLING_AXE_INACTIVE_28223,
             ItemList.INFERNAL_AXE_13241,
-            ItemList.INFERNAL_AXE__UNCHARGED__13242,
+            ItemList.INFERNAL_AXE_UNCHARGED_13242,
             ItemList._3RD_AGE_AXE_20011,
             ItemList._3RD_AGE_FELLING_AXE_28226,
             ItemList.DRAGON_AXE_6739,
@@ -65,12 +64,12 @@ public class CheckEquipment extends Task {
     public boolean execute() {
         Logger.log("Checking for axe");
         if (!checkedInventory) {
-            if (!GameTabs.isInventoryTabOpen()) {
-                GameTabs.openInventoryTab();
-                Condition.wait(() -> GameTabs.isInventoryTabOpen(), 50, 10);
+            if (!GameTabs.isTabOpen(UITabs.INVENTORY)) {
+                GameTabs.openTab(UITabs.INVENTORY);
+                Condition.wait(() -> GameTabs.isTabOpen(UITabs.INVENTORY), 50, 10);
             }
 
-            if (GameTabs.isInventoryTabOpen()) {
+            if (GameTabs.isTabOpen(UITabs.INVENTORY)) {
                 for (int axeID : axeIDs) {
                     if (Inventory.contains(axeID, 0.75)) {
                         hasAxe = true;
@@ -84,12 +83,12 @@ public class CheckEquipment extends Task {
         }
 
         if (!checkedEquipment) {
-            if (!GameTabs.isEquipTabOpen()) {
-                GameTabs.openEquipTab();
-                Condition.wait(() -> GameTabs.isEquipTabOpen(), 50, 10);
+            if (!GameTabs.isTabOpen(UITabs.EQUIP)) {
+                GameTabs.openTab(UITabs.EQUIP);
+                Condition.wait(() -> GameTabs.isTabOpen(UITabs.EQUIP), 50, 10);
             }
 
-            if (GameTabs.isEquipTabOpen()) {
+            if (GameTabs.isTabOpen(UITabs.EQUIP)) {
                 for (int axeID : axeIDs) {
                     if (Equipment.itemAt(EquipmentSlot.WEAPON, axeID)) {
                         if (isUseSpecialAxe(axeID)) {
