@@ -1,6 +1,7 @@
 package tasks;
 
 import helpers.utils.ItemList;
+import helpers.utils.UITabs;
 import utils.Task;
 
 import static helpers.Interfaces.*;
@@ -19,9 +20,9 @@ public class CheckForItems extends Task {
     public boolean execute() {
         Logger.log("Checking your inventory for required items");
 
-        if (!GameTabs.isInventoryTabOpen()) {
-            GameTabs.openInventoryTab();
-            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 50, 10);
+        if (!GameTabs.isTabOpen(UITabs.INVENTORY)) {
+            GameTabs.openTab(UITabs.INVENTORY);
+            Condition.wait(() -> GameTabs.isTabOpen(UITabs.INVENTORY), 50, 10);
         }
 
         boolean hasNats = Inventory.contains(ItemList.NATURE_RUNE_561, 0.69);

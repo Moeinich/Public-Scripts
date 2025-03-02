@@ -36,7 +36,7 @@ import static helpers.Interfaces.*;
 public class PublicPumper extends AbstractScript {
     public static String hopProfile;
     public static Boolean hopEnabled;
-    public static Boolean useWDH;
+    public static Boolean useWDH = false;
 
     @Override
     public void onStart(){
@@ -54,7 +54,7 @@ public class PublicPumper extends AbstractScript {
     }
 
     // Task list!
-    List<Task> cannonTasks = Arrays.asList(
+    List<Task> cannonTasks = List.of(
             new PerformPumping()
     );
 

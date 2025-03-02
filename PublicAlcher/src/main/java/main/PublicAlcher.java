@@ -6,6 +6,7 @@ import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.OptionType;
 import helpers.utils.Skills;
+import helpers.utils.UITabs;
 import tasks.CheckForItems;
 import tasks.PerformAlching;
 import utils.Task;
@@ -20,7 +21,7 @@ import static helpers.Interfaces.*;
 @ScriptManifest(
         name = "Public Alcher",
         description = "An easy to use Alcher. Feel free to contribute: https://github.com/Moeinich/Public-Scripts",
-        version = "1.21",
+        version = "1.22",
         guideLink = "",
         categories = {ScriptCategory.Magic}
 )
@@ -72,14 +73,14 @@ public class PublicAlcher extends AbstractScript {
         alchemySpell = configs.get("Alchemy spell");
 
         // Check our levels here to decide which spell to use.
-        GameTabs.openStatsTab();
+        GameTabs.openTab(UITabs.STATS);
         Condition.sleep(600);
         magicLevel = Stats.getRealLevel(Skills.MAGIC);
 
         Logger.log("Magic level is: " + magicLevel);
 
         // Open the inventory again.
-        GameTabs.openInventoryTab();
+        GameTabs.openTab(UITabs.INVENTORY);
     }
 
     List<Task> alchTasks = Arrays.asList(

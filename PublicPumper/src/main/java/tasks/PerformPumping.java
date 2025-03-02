@@ -32,7 +32,7 @@ public class PerformPumping extends Task {
         }
 
         if (Player.tileEquals(location, pumping)) {
-            Logger.log("We already pumpin!");
+            Logger.debugLog("We already pumpin!");
             XpBar.getXP();
             Condition.sleep(2000);
             return true;
