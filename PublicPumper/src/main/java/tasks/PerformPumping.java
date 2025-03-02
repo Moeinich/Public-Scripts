@@ -7,11 +7,9 @@ import utils.Task;
 import java.awt.*;
 
 import static helpers.Interfaces.*;
-import static main.PublicPumper.hopProfile;
-import static main.PublicPumper.useWDH;
 
 public class PerformPumping extends Task {
-    Rectangle pumpRect = new Rectangle(384, 249, 13, 27);
+    Rectangle pumpRect = new Rectangle(381, 268, 7, 15);
     Area BFArea = new Area(
             new Tile(7734, 19562, 0),
             new Tile(7838, 19652, 0)
@@ -19,6 +17,7 @@ public class PerformPumping extends Task {
     Tile pumping = new Tile(7799, 19593, 0);
     Tile nextToPump = new Tile(7803, 19593, 0);
     Tile location;
+    int currentXp;
 
     public boolean activate() {
         location = Walker.getPlayerPosition();
@@ -27,13 +26,9 @@ public class PerformPumping extends Task {
 
     @Override
     public boolean execute() {
-        if (useWDH) {
-            Game.hop(hopProfile, useWDH, true); // Check if we should worldhop
-        }
-
         if (Player.tileEquals(location, pumping)) {
             Logger.debugLog("We already pumpin!");
-            XpBar.getXP();
+            currentXp = XpBar.getXP();
             Condition.sleep(2000);
             return true;
         } else {
