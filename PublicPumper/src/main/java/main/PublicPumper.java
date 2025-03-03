@@ -23,6 +23,17 @@ import static helpers.Interfaces.*;
         categories = {ScriptCategory.Combat}
 )
 
+@ScriptConfiguration.List(
+        value = {
+                @ScriptConfiguration(
+                        name =  "Use world hopper?",
+                        description = "Would you like to hop worlds based on your hop profile settings? The script will only worldhop during mining",
+                        defaultValue = "false",
+                        optionType = OptionType.WORLDHOPPER
+                )
+        }
+)
+
 public class PublicPumper extends AbstractScript {
 
     @Override
