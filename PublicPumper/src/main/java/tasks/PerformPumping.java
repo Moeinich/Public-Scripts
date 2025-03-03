@@ -9,7 +9,9 @@ import java.awt.*;
 import static helpers.Interfaces.*;
 
 public class PerformPumping extends Task {
-    Rectangle pumpRect = new Rectangle(381, 268, 7, 15);
+    Rectangle pumpRect = new Rectangle(381, 258, 6, 13);
+    Rectangle pumpingPumpRect = new Rectangle(423, 260, 5, 15);
+
     Area BFArea = new Area(
             new Tile(7734, 19562, 0),
             new Tile(7838, 19652, 0)
@@ -17,7 +19,9 @@ public class PerformPumping extends Task {
     Tile pumping = new Tile(7799, 19593, 0);
     Tile nextToPump = new Tile(7803, 19593, 0);
     Tile location;
+
     int currentXp;
+    long lastXpCheckTime = System.currentTimeMillis();
 
     public boolean activate() {
         location = Walker.getPlayerPosition();
@@ -26,24 +30,29 @@ public class PerformPumping extends Task {
 
     @Override
     public boolean execute() {
+        int newXp = XpBar.getXP();
+        if (newXp == currentXp && (System.currentTimeMillis() - lastXpCheckTime) >= 5000) {
+            Logger.log("XP hasn't changed in 5 seconds, re-clicking pump!");
+            Client.tap(pumpingPumpRect);
+            lastXpCheckTime = System.currentTimeMillis();
+        } else if (newXp != currentXp) {
+            currentXp = newXp;
+            lastXpCheckTime = System.currentTimeMillis();
+        }
+
         if (Player.tileEquals(location, pumping)) {
             Logger.debugLog("We already pumpin!");
-            currentXp = XpBar.getXP();
             Condition.sleep(2000);
             return true;
         } else {
-            if (!Player.tileEquals(location, pumping)) {
-                Logger.log("Stepping next to the pump");
-                Walker.step(nextToPump);
-                Condition.wait(() -> Player.atTile(nextToPump), 100, 40);
+            Logger.log("Stepping next to the pump");
+            Walker.step(nextToPump);
+            Condition.wait(() -> Player.atTile(nextToPump), 100, 40);
 
-                Logger.log("Starting to pump!");
-                Client.tap(pumpRect);
-                Condition.wait(() -> Player.atTile(pumping), 100, 40);
-                return true;
-            }
+            Logger.log("Starting to pump!");
+            Client.tap(pumpRect);
+            Condition.wait(() -> Player.atTile(pumping), 100, 40);
+            return true;
         }
-
-        return false; // Return false if the delay has not yet passed
     }
 }
