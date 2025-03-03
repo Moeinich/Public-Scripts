@@ -4,6 +4,7 @@ import helpers.*;
 import helpers.annotations.ScriptConfiguration;
 import helpers.annotations.ScriptManifest;
 import helpers.utils.OptionType;
+import helpers.utils.UITabs;
 import tasks.BreakManager;
 import tasks.CheckForItems;
 import tasks.PerformCannoning;
@@ -68,6 +69,11 @@ public class PublicCannoneer extends AbstractScript {
 
     @Override
     public void poll() {
+        if (!GameTabs.isTabOpen(UITabs.INVENTORY)) {
+            GameTabs.openTab(UITabs.INVENTORY);
+            Condition.wait(() -> GameTabs.isTabOpen(UITabs.INVENTORY), 50, 10);
+        }
+
         //Run tasks
         for (Task task : cannonTasks) {
             if (task.activate()) {

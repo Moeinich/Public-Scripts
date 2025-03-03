@@ -9,9 +9,9 @@ import static main.PublicCannoneer.breakEvery;
 import static main.PublicCannoneer.generateRandomDelay;
 
 public class BreakManager extends Task {
+    private static final Random random = new Random(System.nanoTime());
     public static int shouldBreakAt = 0;
     public static boolean shouldBreakNow = false;
-    private static final Random random = new Random(System.nanoTime());
 
     private static void generateRandomNextBreakCount() {
         int variability = random.nextInt(11) - 5;  // Range [-5, 5]

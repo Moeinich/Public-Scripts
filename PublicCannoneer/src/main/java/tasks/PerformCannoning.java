@@ -13,11 +13,8 @@ import static main.PublicCannoneer.waitTime;
 import static tasks.CheckForItems.checkedForItems;
 
 public class PerformCannoning extends Task {
-    private long lastExecutionTime = 0; // Tracks the last execution time
-    private int delayMilliseconds = 0; // Holds the random delay in milliseconds
     private final int minWaitTime = 15; // Minimum wait time as defined in @ScriptConfiguration minMaxIntValues
-    private Random random = new Random();
-
+    private final Random random = new Random();
     // Array of cannon colors
     List<Color> cannonColors =
             Arrays.asList(
@@ -27,10 +24,11 @@ public class PerformCannoning extends Task {
                     Color.decode("#6e6e77"),
                     Color.decode("#57575f")
             );
-
     // Areas to look for
     Rectangle searchRect = new Rectangle(423, 206, 44, 89);
     Rectangle clickRect = new Rectangle(426, 221, 32, 35);
+    private long lastExecutionTime = 0; // Tracks the last execution time
+    private int delayMilliseconds = 0; // Holds the random delay in milliseconds
 
     public boolean activate() {
         return checkedForItems;
@@ -38,11 +36,6 @@ public class PerformCannoning extends Task {
 
     @Override
     public boolean execute() {
-        if (!GameTabs.isInventoryTabOpen()) {
-            GameTabs.openInventoryTab();
-            Condition.wait(() -> GameTabs.isInventoryTabOpen(), 100, 10);
-        }
-
         boolean isCannonActive = Client.isAnyColorInRect(cannonColors, searchRect, 2);
         boolean hasCannonballs = Inventory.stackSize(ItemList.CANNONBALL_2) >= 1;
 
@@ -96,7 +89,6 @@ public class PerformCannoning extends Task {
             lowerBound = upperBound;
             upperBound = temp;
         }
-        int delay = lowerBound + random.nextInt(upperBound - lowerBound + 1);
-        return delay;
+        return lowerBound + random.nextInt(upperBound - lowerBound + 1);
     }
 }
