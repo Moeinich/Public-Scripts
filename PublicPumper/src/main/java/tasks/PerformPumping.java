@@ -42,6 +42,7 @@ public class PerformPumping extends Task {
 
         if (Player.tileEquals(location, pumping)) {
             Logger.debugLog("We already pumpin!");
+            Game.antiAFK();
             Condition.sleep(2000);
             return true;
         } else {
