@@ -16,7 +16,7 @@ public class PerformPumping extends Task {
             new Tile(7734, 19562, 0),
             new Tile(7838, 19652, 0)
     );
-    Tile pumping = new Tile(7799, 19593, 0);
+    Tile pumpingTile = new Tile(7799, 19593, 0);
     Tile nextToPump = new Tile(7803, 19593, 0);
     Tile location;
 
@@ -33,14 +33,18 @@ public class PerformPumping extends Task {
         int newXp = XpBar.getXP();
         if (newXp == currentXp && (System.currentTimeMillis() - lastXpCheckTime) >= 5000) {
             Logger.log("XP hasn't changed in 5 seconds, re-clicking pump!");
-            Client.tap(pumpingPumpRect);
-            lastXpCheckTime = System.currentTimeMillis();
+            if (Player.tileEquals(location, pumpingTile)) {
+                Client.tap(pumpingPumpRect);
+                lastXpCheckTime = System.currentTimeMillis();
+            } else {
+                return false;
+            }
         } else if (newXp != currentXp) {
             currentXp = newXp;
             lastXpCheckTime = System.currentTimeMillis();
         }
 
-        if (Player.tileEquals(location, pumping)) {
+        if (Player.tileEquals(location, pumpingTile)) {
             Logger.debugLog("We already pumpin!");
             Game.antiAFK();
             Condition.sleep(2000);
@@ -52,7 +56,7 @@ public class PerformPumping extends Task {
 
             Logger.log("Starting to pump!");
             Client.tap(pumpRect);
-            Condition.wait(() -> Player.atTile(pumping), 100, 40);
+            Condition.wait(() -> Player.atTile(pumpingTile), 100, 40);
             return true;
         }
     }
