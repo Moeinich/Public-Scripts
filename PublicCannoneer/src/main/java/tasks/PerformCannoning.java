@@ -14,8 +14,7 @@ import static tasks.CheckForItems.checkedForItems;
 
 public class PerformCannoning extends Task {
     private final int minWaitTime = 15; // Minimum wait time as defined in @ScriptConfiguration minMaxIntValues
-    private final Random random = new Random();
-    // Array of cannon colors
+
     List<Color> cannonColors =
             Arrays.asList(
                     Color.decode("#57575f"),
@@ -37,13 +36,13 @@ public class PerformCannoning extends Task {
     @Override
     public boolean execute() {
         boolean isCannonActive = Client.isAnyColorInRect(cannonColors, searchRect, 2);
-        boolean hasCannonballs = Inventory.stackSize(ItemList.CANNONBALL_2) >= 1;
+        boolean hasCannonballs = Inventory.contains(ItemList.CANNONBALL_2, 0.80);
 
         if (Player.leveledUp()) {
-            Condition.sleep(generateRandomDelay(200, 3000));
+            Condition.sleep(200, 3000);
             Logger.log("We leveled up! clicking cannon again");
             clickCannon();
-            Condition.sleep(generateRandomDelay(400, 800));
+            Condition.sleep(400, 800);
         }
 
         if (isCannonActive && hasCannonballs) {
@@ -80,15 +79,5 @@ public class PerformCannoning extends Task {
     private void clickCannon() {
         Client.tap(clickRect);
         Logger.log("Clicking the cannon!.");
-    }
-
-    private int generateRandomDelay(int lowerBound, int upperBound) {
-        // Swap if lowerBound is greater than upperBound
-        if (lowerBound > upperBound) {
-            int temp = lowerBound;
-            lowerBound = upperBound;
-            upperBound = temp;
-        }
-        return lowerBound + random.nextInt(upperBound - lowerBound + 1);
     }
 }
