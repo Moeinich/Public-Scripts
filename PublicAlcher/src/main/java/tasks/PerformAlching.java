@@ -24,8 +24,8 @@ public class PerformAlching extends Task {
                 Condition.wait(() -> GameTabs.isTabOpen(UITabs.INVENTORY), 100, 10);
             }
 
-            cachedItemAmount = Inventory.count(itemID, 0.69);
-
+            cachedItemAmount = Inventory.stackSize(itemID);
+            Logger.log("Amount of items: " + cachedItemAmount);
             if (cachedItemAmount <= 0) {
                 Logger.log("Ran out of items to alch, stopping script");
                 Logout.logout();
