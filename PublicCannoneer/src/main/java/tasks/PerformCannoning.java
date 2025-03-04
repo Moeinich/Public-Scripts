@@ -1,6 +1,7 @@
 package tasks;
 
 import helpers.utils.ItemList;
+import helpers.utils.Tile;
 import utils.Task;
 
 import java.awt.*;
@@ -29,12 +30,21 @@ public class PerformCannoning extends Task {
     private long lastExecutionTime = 0; // Tracks the last execution time
     private int delayMilliseconds = 0; // Holds the random delay in milliseconds
 
+    private Tile startingPosition = null;
+
     public boolean activate() {
         return checkedForItems;
     }
 
     @Override
     public boolean execute() {
+        if (startingPosition != null) {
+            if (Walker.getPlayerPosition() != startingPosition) {
+                Walker.step(startingPosition);
+                Condition.wait(() -> Player.atTile(startingPosition), 100, 50);
+            }
+        }
+
         boolean isCannonActive = Client.isAnyColorInRect(cannonColors, searchRect, 2);
         boolean hasCannonballs = Inventory.contains(ItemList.CANNONBALL_2, 0.80);
 
@@ -46,6 +56,10 @@ public class PerformCannoning extends Task {
         }
 
         if (isCannonActive && hasCannonballs) {
+            if (startingPosition == null) {
+                startingPosition = Walker.getPlayerPosition();
+            }
+
             long currentTime = System.currentTimeMillis();
 
             // Generate a random delay between minWaitTime and y seconds if not already set
