@@ -33,11 +33,20 @@ public class PerformPumping extends Task {
         int newXp = XpBar.getXP();
         if (newXp == currentXp && (System.currentTimeMillis() - lastXpCheckTime) >= 5000) {
             Logger.log("XP hasn't changed in 5 seconds, re-clicking pump!");
+
+            Rectangle targetRect = null;
+
             if (Player.tileEquals(location, pumpingTile)) {
-                Client.tap(pumpingPumpRect);
+                Logger.log("Clicking the pump while on pump tile");
+                targetRect = pumpingPumpRect;
+            } else if (Player.tileEquals(location, nextToPump)) {
+                Logger.log("Clicking the pump while next to the pump");
+                targetRect = pumpRect;
+            }
+
+            if (targetRect != null) {
+                Client.tap(targetRect);
                 lastXpCheckTime = System.currentTimeMillis();
-            } else {
-                return false;
             }
         } else if (newXp != currentXp) {
             currentXp = newXp;
